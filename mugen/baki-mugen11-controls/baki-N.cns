@@ -156,6 +156,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 231
 value = 231
 
+[State 206, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 231)
+value = 231
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -302,6 +308,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 211
 value = 211
 
+[State 210, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 211)
+value = 211
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -315,7 +327,7 @@ IgnoreHitPause = 1
 
 [State 210, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -476,6 +488,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 246
 value = 246
 
+[State 215, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 246)
+value = 246
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -634,6 +652,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 252
 value = 252
 
+[State 218, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 252)
+value = 252
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -647,7 +671,7 @@ IgnoreHitPause = 1
 
 [State 218, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -792,6 +816,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 241
 value = 241
 
+[State 220, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 241)
+value = 241
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -805,7 +835,7 @@ IgnoreHitPause = 1
 
 [State 220, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -945,6 +975,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 2322
 value = 2322
 
+[State 225, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 2322)
+value = 2322
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -958,7 +994,7 @@ IgnoreHitPause = 1
 
 [State 225, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -1117,6 +1153,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 253
 value = 253
 
+[State 300, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 253)
+value = 253
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -1130,7 +1172,7 @@ IgnoreHitPause = 1
 
 [State 300, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -1276,6 +1318,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 291
 value = 291
 
+[State 330, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 291)
+value = 291
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -1289,7 +1337,7 @@ IgnoreHitPause = 1
 
 [State 330, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -1533,6 +1581,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 401
 value = 401
 
+[State 400, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 401)
+value = 401
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -1665,6 +1719,12 @@ sprpriority = 2
 type = changeanim
 trigger1 = (palno = [11,12])
 trigger1 = anim != 431
+value = 431
+
+[State 430, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 431)
 value = 431
 
 [State 200, 食らい上書き]
@@ -1803,6 +1863,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 411
 value = 411
 
+[State 410, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 411)
+value = 411
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -1816,7 +1882,7 @@ IgnoreHitPause = 1
 
 [State 410, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -1966,6 +2032,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 441
 value = 441
 
+[State 420, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 441)
+value = 441
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -1979,7 +2051,7 @@ IgnoreHitPause = 1
 
 [State 420, Boss hyper armor]
 type = HitOverride
-triggerall = (var(56) = 1) && (var(25) != 1)
+triggerall = (var(51) = 1) && (var(25) != 1)
 trigger1 = Alive
 time = 1
 slot = 1
@@ -2406,6 +2478,12 @@ trigger1 = (palno = [11,12])
 trigger1 = anim != 611
 value = 611
 
+[State 630, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 611)
+value = 611
+
 [State 200, 食らい上書き]
 type = HitOverRide
 triggerall = palno = 12
@@ -2537,6 +2615,12 @@ juggle = 0
 type = changeanim
 trigger1 = (palno = [11,12])
 trigger1 = anim != 641
+value = 641
+
+[State 620, Awakening: faster animation]
+type = ChangeAnim
+trigger1 = (var(53) > 0) && (var(51) = 1) && (Time = 0)
+trigger1 = (palno != [11,12]) && (anim != 641)
 value = 641
 
 [State 200, 食らい上書き]
@@ -3782,3 +3866,52 @@ ctrl = 1
 
 
 
+
+
+;---------------------------------------------------------------------------
+; Awakening armor when he is not attacking (added for the boss version):
+; take the damage, flash red and carry on without being knocked back.
+[Statedef 1009]
+type     = U
+movetype = I
+physics  = U
+ctrl     = 0
+poweradd = 0
+sprpriority = 2
+
+[State 1009, damage]
+type = LifeAdd
+trigger1 = Time = 0
+value = -GetHitVar(Damage)
+IgnoreHitPause = 1
+
+[State 1009, flash]
+type = PalFX
+trigger1 = Time = 0
+time = 12
+add = 250,20,40
+sinadd = 22,5,364,3
+IgnoreHitPause = 1
+
+[State 1009, stand still]
+type = VelSet
+trigger1 = (statetype != A)
+x = 0
+
+[State 1009, knocked out]
+type = ChangeState
+trigger1 = (Life <= 0) || (Lose)
+value = 5030
+IgnoreHitPause = 1
+
+[State 1009, back to standing]
+type = ChangeState
+trigger1 = (Time >= 6) && (statetype != A)
+value = 0
+ctrl = 1
+
+[State 1009, back to falling]
+type = ChangeState
+trigger1 = (Time >= 6) && (statetype = A)
+value = 50
+ctrl = 1

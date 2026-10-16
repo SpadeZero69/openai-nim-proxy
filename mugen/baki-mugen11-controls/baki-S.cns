@@ -16,7 +16,7 @@ sprpriority = 1
 
 [State 1644, Boss invincible startup]
 type = NotHitBy
-trigger1 = (var(56) = 1) && (AnimElemTime(4) < 0)
+trigger1 = (var(51) = 1) && (AnimElemTime(4) < 0)
 value = SCA,NA,SA,HA,NP,SP,HP
 time = 1
 ignorehitpause = 1
@@ -1109,7 +1109,7 @@ time = 1
 
 [State 1340, Boss invincible cancel]
 type = NotHitBy
-trigger1 = var(56) = 1
+trigger1 = var(51) = 1
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time = 1
 
@@ -1215,7 +1215,7 @@ time = 1
 
 [State 1550, Boss invincible startup]
 type = NotHitBy
-trigger1 = (var(56) = 1) && (time < 21)
+trigger1 = (var(51) = 1) && (time < 21)
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time = 1
 

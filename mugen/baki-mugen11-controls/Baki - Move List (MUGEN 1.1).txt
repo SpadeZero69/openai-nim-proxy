@@ -1,8 +1,8 @@
 ==========================================================================
  BAKI HANMA - BOSS VERSION - MOVE LIST (PC keyboard)
  Original character by tokage (WinMUGEN, 2014). Converted to the MUGEN 1.1
- six-button layout, and turned into a boss: harder AI, automatic meter,
- hyper armor and invincible moves.
+ six-button layout, and turned into a boss: smart combo AI, automatic
+ meter, slow healing, hyper armor, invincible moves and an awakening.
 ==========================================================================
 
 --------------------------------------------------------------------------
@@ -31,7 +31,7 @@
  the button also works.
 
  1 bar = 1000 power. The bar now fills by itself (about 1 bar every
- 8 seconds), so you don't need to hit anyone to build it.
+ 5 seconds), so you don't need to hit anyone to build it.
 
 --------------------------------------------------------------------------
  BASIC ATTACKS
@@ -131,28 +131,68 @@
 --------------------------------------------------------------------------
  BOSS FEATURES
 --------------------------------------------------------------------------
+ Automatic meter: the bar fills by itself, about 1 bar every 5 seconds.
+
+ Slow healing: Baki gets back 3 life per second (full life is 1000)
+ while he isn't being hit.
+
  Hyper armor: the attacks marked "(hyper armor)" absorb one hit. Baki
  flashes red, takes the damage and keeps attacking. Throws beat armor.
 
- Automatic meter: the bar fills by itself, about 1 bar every 8 seconds.
+ AWAKENING: the first time his life drops to 35% in a round, Baki
+ awakens (flash, sound, red after-image trail). Until the round ends:
+   - his meter jumps to full and stays full
+   - his normal attacks use faster animations
+   - constant hyper armor: hits don't knock him back while he attacks,
+     moves or stands (he still takes the damage; throws still work)
+   - the AI goes all-out
 
  Boss AI (when the computer controls Baki):
-   - blocks almost everything, standing or crouching as needed
-   - answers your attacks with invincible moves (Breathless Rush,
-     Trigger Counter, Tiger King, Heel Drop, Mach Punch)
-   - always finishes his combos, ending in a super when he has meter
-   - kicks jumping opponents out of the air and dashes in on you
-   - uses guard cancels, and takes 20% less damage
+   - Gets more aggressive the lower his life is: blocks 95% of attacks
+     at full life, but at low life he swings through your attacks with
+     armored punches instead.
+   - Picks one of 8 combo routes every time he attacks, so his combos
+     change, and every link is timed to connect:
+       1. crouch jab, straight, strong kick, then Breathless Rush,
+          Goutaijutsu or Mach Punch
+       2. jab, elbow, back kick, then Trigger Counter, Cockroach Tackle
+          or Mach Punch
+       3. low kick, middle kick, then Triceratops Fist, Himokiri or
+          Whip Strike
+       4. crouch jab, straight, uppercut (launch) into an air combo, or
+          a sweep
+       5. low kick, straight, sweep
+       6. kick, knee, elbow, middle kick, then Goutaijutsu or Whip Strike
+       7. jab, straight, then Cockroach Tackle or Mach Punch
+       8. crouch jab, straight, back kick, then Breathless Rush, Heel Drop
+          (in the corner) or Whip Strike
+     He uses supers to end combos whenever he has the meter.
+   - Counters when he can't block: if you attack while he is stuck in
+     his own attack, he cancels it into an invincible move; he escapes
+     throws with the Heel Drop.
+   - Reversals: Breathless Rush, Trigger Counter, Tiger King, Heel Drop
+     and Mach Punch against attacks started close to him.
+   - Moves around: runs and walks in, jumps in, backs off, and closes in
+     on you when you're knocked down.
+   - Uses his specials in neutral (Mach Punch pokes, Heel Drop, Whip
+     Strike, Himokiri), overheads against crouching guards, throws,
+     anti-airs, guard cancels and long-range supers.
+   - Takes 20% less damage.
 
 --------------------------------------------------------------------------
  TUNING THE BOSS
 --------------------------------------------------------------------------
  Open baki-2.cns in Notepad. The BOSS SETTINGS are at the top:
-   var(56) = 1 ...... hyper armor and extra invincibility (0 = off)
+   var(56) = 1 ...... who gets the boss powers (meter, healing, armor,
+                      invincibility, awakening): 1 = Baki always,
+                      2 = only the computer's Baki, 0 = nobody
    var(57) = 1 ...... boss AI (0 = the original, easier AI)
-   value = 2 ........ (under "automatic meter") meter per frame:
-                      1 = slower, 3 = faster, 0 = off
+   value = 10 ....... (under "automatic meter") power every 3 frames:
+                      bigger = faster, 0 = off
+   % 20 ............. (under "passive healing") heal once every 20
+                      frames: bigger = slower
    value = 1.25 ..... (under "CPU toughness") 1 = normal damage
+   * 35 / 100 ....... (under "Awakening: start") awaken at 35% life
  Save the file in the same encoding it opened with (ANSI). Don't save it
  as UTF-8.
 

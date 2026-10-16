@@ -19,30 +19,49 @@ keyboard players, is in `Baki - Move List (MUGEN 1.1).txt`.
 
 ## Boss features
 
-- **Automatic meter:** about 1 bar every 8 seconds, for the player and the CPU.
+- **Automatic meter:** 10 power every 3 frames, one bar every 5 seconds.
+- **Slow healing:** 1 life every 20 frames (3 per second) while not being hit.
 - **Hyper armor** on the heavy normals: absorbs one hit (Baki takes the damage
   and keeps attacking). It reuses the armor state the original author built
   for palette 12. Throws beat it.
 - **Invincible startup** on Mach Punch and Himokiri, and on the Whip Strike
   charge cancel. Most supers were already invincible.
-- **Boss AI** (CPU only): sits in front of the original AI. Combos always go
-  through and end in supers when there's meter. It also reverses with
-  invincible moves, blocks with a 95% chance, anti-airs, guard cancels and
-  dashes in. The CPU takes 20% less damage.
+- **Awakening** at 35% life (once per round): meter locked at full, the faster
+  animations the author made for palettes 11/12, and hyper armor on everything
+  he does. Attack states reuse the armor state 1008; when not attacking, the
+  new state 1009 takes the hit without knockback. Comes with a flash, a sound
+  and an after-image trail.
+- **Boss AI** (CPU only), in front of the original AI:
+  - aggression rises as his life drops: guard 95% at full life down to 40%
+    when awakened, and at low life he swings armored punches through attacks
+    instead of blocking;
+  - 8 combo routes, one picked at random per attack. Every link is checked
+    against the frame data (startup vs. hitstun, reach vs. pushback). The
+    routes end in supers when there's meter, otherwise in specials, so every
+    move of the character gets used;
+  - counters when he can't block (cancels his own whiffed attack into an
+    invincible move, escapes throws with the Heel Drop), invincible reversals,
+    anti-airs, air counters, guard cancels;
+  - more movement (runs, walks, jumps in, backs off, closes in on knockdowns),
+    specials in neutral, overheads against crouching guards, throws;
+  - the CPU takes 20% less damage.
 - Input windows: specials 20 ticks (was 10), supers 30 ticks (was 20/25).
 
-All boss settings are at the top of `baki-2.cns` (on/off switches, meter speed,
-CPU toughness). Only MUGEN-1.0-free (WinMUGEN) triggers are used, because
-Baki runs in MUGEN 1.1's pre-1.0 compatible mode.
+All boss settings are at the top of `baki-2.cns`: who gets the boss powers
+(always / CPU only / nobody), boss AI on/off, meter speed, healing speed, CPU
+toughness and the awakening threshold. Only WinMUGEN-era triggers are used,
+because Baki runs in MUGEN 1.1's pre-1.0 compatible mode.
 
 ## Files
 
 - `baki.cmd.cns`: command file. Keeps every original command definition
   (including the Japanese names and unused ones such as `up`, which a custom
   `common1.cns` may need), plus the z/c variants.
-- `baki-2.cns`: boss settings, automatic meter, CPU toughness.
+- `baki-2.cns`: boss settings, automatic meter, healing, CPU toughness,
+  awakening.
 - `bakiAI.cns`: boss AI block added before the original AI.
-- `baki-N.cns`: hyper armor on the heavy normals.
+- `baki-N.cns`: hyper armor on the heavy normals, faster animations while
+  awakened, armor state 1009.
 - `baki-S.cns`: invincible startup on Mach Punch, Himokiri, Whip cancel.
 - `Baki - Move List (MUGEN 1.1).txt`: move list for PC keyboard players.
 
@@ -62,6 +81,9 @@ mugenversion of character".
 
 ## Changes
 
+- v5: rebuilt boss AI (life-based aggression, 8 frame-checked combo routes
+  using every move, counters when he can't block, more movement and
+  specials), slow healing, meter one bar per 5 seconds, awakening at 35% life.
 - v4: boss version (boss AI, automatic meter, hyper armor, invincible
   startups, CPU toughness), special-move windows 10 -> 20 ticks, move list
   rewritten for PC keyboard players.

@@ -107,19 +107,41 @@ range = 1,999
 IgnoreHitPause = 1
 Persistent = 1
 
-
 ;==============================================================================
-; BOSS AI (added for the boss version)
+; BOSS AI v5 (added for the boss version)
 ; Runs before the original AI below when the computer controls Baki
 ; (var(59) = 1) and the boss AI setting at the top of baki-2.cns is on
-; (var(57) = 1). Chances use var(55), a random number from 1 to 999 rolled
-; every frame, so [0,20] means about 2% per frame.
+; (var(57) = 1). Everything here only uses WinMUGEN triggers.
+;
+;   var(52) = aggression 0-3 (rises as his life drops, 3 when awakened)
+;   var(53) = awakened (set in baki-2.cns)
+;   var(54) = combo route 1-8, picked at random while he is in neutral
+;   var(51) = boss powers active (set in baki-2.cns)
 ;==============================================================================
 
 ;------------------------------------------------------------------------------
-; Combo engine: while one of Baki's attacks is touching the opponent, pin the
-; roll to 1 so the original AI's combo routes below are always followed.
-; They end in supers whenever Baki has the meter.
+; Setup: aggression level (0 above 75% life, 1 above 50%, 2 above 25%,
+; 3 below that or when awakened). Higher = attacks, counters and moves more.
+[State -3, Boss: aggression from life]
+type = VarSet
+triggerall = (var(59) = 1) && (var(57) = 1)
+trigger1 = 1
+var(52) = ifelse(var(53) > 0, 3, ifelse(Life * 4 <= LifeMax, 3, ifelse(Life * 2 <= LifeMax, 2, ifelse(Life * 4 <= LifeMax * 3, 1, 0))))
+ignorehitpause = 1
+
+;------------------------------------------------------------------------------
+; A new combo route is rolled every frame while he is in neutral, so the
+; route is locked in as soon as he starts attacking.
+[State -3, Boss: pick a combo route]
+type = VarRandom
+triggerall = (var(59) = 1) && (var(57) = 1)
+trigger1 = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+v = 54
+range = 1,8
+
+;------------------------------------------------------------------------------
+; While one of his attacks is touching the opponent, pin the original AI's
+; random roll to 1 so its own combo routes are always followed too.
 [State -3, Boss: always continue combos]
 type = VarSet
 triggerall = (var(59) = 1) && (var(57) = 1)
@@ -127,89 +149,709 @@ trigger1 = (movetype = A) && (movecontact)
 var(55) = 1
 
 ;------------------------------------------------------------------------------
+; Counters when he can't block.
+; Throws can't be blocked: answer a throw attempt with the Heel Drop,
+; which is throw-invincible while it starts.
+[State -3, Boss: escape a throw]
+type = ChangeState
+value = 1000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (var(25) != 1)
+triggerall = (stateno = [0,699]) || (stateno = [1333,1336])
+triggerall = (movetype != H)
+triggerall = (enemynear,movetype = A)
+triggerall = (enemynear,hitdefattr = SCA,NT,ST,HT)
+trigger1 = (P2BodyDist X = [-10,30])
+trigger1 = (Random < 600)
+
+;------------------------------------------------------------------------------
+; Caught in the start-up or recovery of his own attack (so he can't
+; block) while the opponent attacks: cancel into an invincible move.
+[State -3, Boss: counter out of recovery (Breathless Rush)]
+type = ChangeState
+value = 3000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (power >= 3000)
+triggerall = (movetype = A) && (!movehit)
+triggerall = (stateno = [200,699])
+triggerall = (enemynear,movetype = A)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,time <= 8)
+trigger1 = (P2BodyDist X = [0,70])
+trigger1 = (Random < (30 + 30 * var(52)))
+
+[State -3, Boss: counter out of recovery (Trigger Counter)]
+type = ChangeState
+value = 2700
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (power >= 2000)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype = S)
+triggerall = (movetype = A) && (!movehit)
+triggerall = (stateno = [200,699])
+triggerall = (enemynear,movetype = A)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,time <= 8)
+trigger1 = (P2BodyDist X = [0,60])
+trigger1 = (Random < (25 + 25 * var(52)))
+
+[State -3, Boss: counter out of recovery (Goutaijutsu)]
+type = ChangeState
+value = 2100
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (power >= 1000)
+triggerall = (var(25) != 1)
+triggerall = (movetype = A) && (!movehit)
+triggerall = (stateno = [200,699])
+triggerall = (enemynear,movetype = A)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,time <= 8)
+trigger1 = (P2BodyDist X = [0,60])
+trigger1 = (Random < (25 + 25 * var(52)))
+
+[State -3, Boss: counter out of recovery (Heel Drop)]
+type = ChangeState
+value = 1000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A)
+triggerall = (movetype = A) && (!movehit)
+triggerall = (stateno = [200,699])
+triggerall = (enemynear,movetype = A)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,time <= 8)
+trigger1 = (P2BodyDist X = [-50,60])
+trigger1 = (Random < (25 + 20 * var(52)))
+
+[State -3, Boss: counter out of recovery (Mach Punch)]
+type = ChangeState
+value = 1644
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (var(25) != 1)
+triggerall = (var(51) = 1)
+triggerall = (enemynear,statetype != A)
+triggerall = (movetype = A) && (!movehit)
+triggerall = (stateno = [200,699])
+triggerall = (enemynear,movetype = A)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,time <= 8)
+trigger1 = (P2BodyDist X = [0,45])
+trigger1 = (Random < (20 + 20 * var(52)))
+
+;==============================================================================
+; COMBO ROUTES. Each link fires right after the previous hit's hit pause,
+; only on a hit (not on block) and only at distances where the next move
+; still connects (checked against the moves' frame data).
+;   1: crouch jab, straight, strong kick, super/Mach Punch
+;   2: jab, elbow, back kick, Trigger Counter/Tackle/Mach Punch
+;   3: low kick, middle kick, Triceratops/Himokiri/Whip Strike
+;   4: crouch jab, straight, uppercut (launch, air combo) or sweep
+;   5: low kick, straight, sweep
+;   6: kick, knee, elbow, middle kick, Goutaijutsu/Whip Strike
+;   7: jab, straight, Cockroach Tackle/Mach Punch
+;   8: crouch jab, straight, back kick, Breathless Rush/Heel Drop/Whip
+;==============================================================================
+
+[State -3, Boss: crouch jab > straight]
+type = ChangeState
+value = 210
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 400)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1) || (var(54) = 4) || (var(54) = 8)
+trigger1 = (P2BodyDist X = [-20,40])
+
+[State -3, Boss: low kick > straight]
+type = ChangeState
+value = 210
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 430)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 5)
+trigger1 = (P2BodyDist X = [-20,30])
+
+[State -3, Boss: jab > straight]
+type = ChangeState
+value = 210
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 200)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 7)
+trigger1 = (P2BodyDist X = [-20,40])
+
+[State -3, Boss: jab > elbow]
+type = ChangeState
+value = 218
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 200)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 2)
+trigger1 = (P2BodyDist X = [-20,20])
+
+[State -3, Boss: low kick > middle kick]
+type = ChangeState
+value = 300
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 430)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 3)
+trigger1 = (P2BodyDist X = [-20,40])
+
+[State -3, Boss: kick > knee]
+type = ChangeState
+value = 215
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 206)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+trigger1 = (P2BodyDist X = [-20,10])
+
+[State -3, Boss: kick > straight (knee out of range)]
+type = ChangeState
+value = 210
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 206)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+trigger1 = (P2BodyDist X = [-20,36])
+
+[State -3, Boss: knee > elbow]
+type = ChangeState
+value = 218
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 215)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+trigger1 = (P2BodyDist X = [-20,16])
+
+[State -3, Boss: elbow > middle kick]
+type = ChangeState
+value = 300
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 218)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+trigger1 = (P2BodyDist X = [-20,40])
+
+[State -3, Boss: straight > middle kick]
+type = ChangeState
+value = 300
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+trigger1 = (P2BodyDist X = [-20,34])
+
+[State -3, Boss: straight > strong kick]
+type = ChangeState
+value = 220
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1)
+trigger1 = (P2BodyDist X = [-20,13])
+
+[State -3, Boss: straight > back kick]
+type = ChangeState
+value = 225
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1) || (var(54) = 8)
+trigger1 = (P2BodyDist X = [-20,34])
+
+[State -3, Boss: straight > uppercut (launcher)]
+type = ChangeState
+value = 410
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 4)
+trigger1 = (P2BodyDist X = [-20,6])
+
+[State -3, Boss: straight > sweep]
+type = ChangeState
+value = 420
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 4) || (var(54) = 5)
+trigger1 = (P2BodyDist X = [-20,45])
+
+[State -3, Boss: elbow > back kick]
+type = ChangeState
+value = 225
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 218)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 2)
+trigger1 = (P2BodyDist X = [-20,50])
+
+;------------------------------------------------------------------------------
+; Combo enders: supers when he has the meter, specials otherwise.
+[State -3, Boss: strong kick > Breathless Rush]
+type = ChangeState
+value = 3000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 220)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1)
+triggerall = (power >= 3000)
+trigger1 = (P2BodyDist X = [-20,60])
+
+[State -3, Boss: strong kick > Goutaijutsu]
+type = ChangeState
+value = 2100
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 220)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1)
+triggerall = (power >= 1000)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,30])
+
+[State -3, Boss: strong kick > Mach Punch]
+type = ChangeState
+value = 1644
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 220)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,42])
+
+[State -3, Boss: back kick > Trigger Counter]
+type = ChangeState
+value = 2700
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 225)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 2)
+triggerall = (power >= 2000)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype = S)
+trigger1 = (P2BodyDist X = [-20,60])
+
+[State -3, Boss: back kick > Cockroach Tackle]
+type = ChangeState
+value = 2180
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 225)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 2)
+triggerall = (power >= 1000)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,120])
+
+[State -3, Boss: back kick > Breathless Rush]
+type = ChangeState
+value = 3000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 225)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1) || (var(54) = 8)
+triggerall = (power >= 3000)
+trigger1 = (P2BodyDist X = [-20,50])
+
+[State -3, Boss: back kick > Heel Drop (corner)]
+type = ChangeState
+value = 1000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (var(25) != 1)
+triggerall = (stateno = 225)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 8)
+triggerall = (enemynear,backedgebodydist <= 60) && (backedgebodydist > 60)
+trigger1 = (P2BodyDist X = [-20,45])
+
+[State -3, Boss: back kick > Whip Strike]
+type = ChangeState
+value = 1335
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 225)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 1) || (var(54) = 8)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,49])
+
+[State -3, Boss: back kick > Mach Punch]
+type = ChangeState
+value = 1644
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 225)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 2)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,31])
+
+[State -3, Boss: middle kick > Triceratops Fist]
+type = ChangeState
+value = 2300
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 300)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 3)
+triggerall = (power >= 2000)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,100])
+
+[State -3, Boss: middle kick > Himokiri]
+type = ChangeState
+value = 1550
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 300)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 3)
+triggerall = (var(25) != 1)
+triggerall = (var(12) <= 0)
+trigger1 = (P2BodyDist X = [-20,27])
+
+[State -3, Boss: middle kick > Goutaijutsu]
+type = ChangeState
+value = 2100
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 300)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+triggerall = (power >= 1000)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,30])
+
+[State -3, Boss: middle kick > Whip Strike (punch)]
+type = ChangeState
+value = 1333
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 300)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 6)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,46])
+
+[State -3, Boss: middle kick > Whip Strike (kick)]
+type = ChangeState
+value = 1335
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 300)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 3) || (var(54) = 6)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,49])
+
+[State -3, Boss: straight > Cockroach Tackle]
+type = ChangeState
+value = 2180
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 7)
+triggerall = (power >= 1000)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,120])
+
+[State -3, Boss: straight > Mach Punch]
+type = ChangeState
+value = 1644
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (stateno = 210)
+triggerall = (movehit) && (enemynear,movetype = H)
+triggerall = (var(54) = 7)
+triggerall = (var(25) != 1)
+trigger1 = (P2BodyDist X = [-20,28])
+
+;------------------------------------------------------------------------------
+; Pressure when an attack is blocked: overhead against a crouching guard,
+; low kick or sweep against a standing guard.
+[State -3, Boss: blocked jab > overhead]
+type = ChangeState
+value = 330
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (moveguarded)
+triggerall = (stateno = 200) || (stateno = 400)
+triggerall = (enemynear,statetype = C)
+trigger1 = (P2BodyDist X = [-20,35])
+trigger1 = (Random < (400 + 100 * var(52)))
+
+[State -3, Boss: blocked jab > low kick]
+type = ChangeState
+value = 430
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (moveguarded)
+triggerall = (stateno = 200) || (stateno = 400) || (stateno = 206)
+triggerall = (enemynear,statetype = S)
+trigger1 = (P2BodyDist X = [-20,40])
+trigger1 = (Random < (400 + 100 * var(52)))
+
+[State -3, Boss: blocked low kick > sweep]
+type = ChangeState
+value = 420
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (moveguarded)
+triggerall = (stateno = 430)
+trigger1 = (P2BodyDist X = [-20,60])
+trigger1 = (Random < (300 + 100 * var(52)))
+
+;------------------------------------------------------------------------------
 ; Reversals: early in an opponent's attack close by, answer with an
 ; invincible move instead of blocking.
 [State -3, Boss: reversal Breathless Rush]
 type = ChangeState
 value = 3000
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
-triggerall = (power >= 3000)
-triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
 triggerall = (enemynear,statetype != L)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (power >= 3000)
 triggerall = (enemynear,movetype = A)
 triggerall = (enemynear,time <= 10)
-triggerall = (P2BodyDist X = [0,80])
-triggerall = (P2Dist Y = [-80,20])
-trigger1 = (var(55) = [0,20])
+trigger1 = (P2BodyDist X = [0,80])
+trigger1 = (P2Dist Y = [-80,20])
+trigger1 = (Random < (25 + 15 * var(52)))
 
 [State -3, Boss: reversal Trigger Counter]
 type = ChangeState
 value = 2700
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
 triggerall = (power >= 2000)
 triggerall = (var(25) != 1)
-triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
 triggerall = (enemynear,statetype = S)
 triggerall = (enemynear,movetype = A)
 triggerall = (enemynear,time <= 10)
-triggerall = (P2BodyDist X = [0,60])
-trigger1 = (var(55) = [21,40])
+trigger1 = (P2BodyDist X = [0,60])
+trigger1 = (Random < (25 + 15 * var(52)))
 
 [State -3, Boss: reversal Tiger King]
 type = ChangeState
 value = 2310
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
+triggerall = (enemynear,statetype != L)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
 triggerall = (power >= 1000)
 triggerall = (var(25) != 1)
-triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
-triggerall = (enemynear,statetype != L)
 triggerall = (enemynear,hitdefattr = SCA,NA,SA,HA)
 triggerall = (enemynear,time < 30)
-triggerall = (P2BodyDist X = [0,70])
-triggerall = (P2Dist Y = [-120,20])
-trigger1 = (var(55) = [41,80])
+trigger1 = (P2BodyDist X = [0,70])
+trigger1 = (P2Dist Y = [-120,20])
+trigger1 = (Random < (35 + 20 * var(52)))
 
 [State -3, Boss: reversal Heel Drop]
 type = ChangeState
 value = 1000
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
-triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != L)
 triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (var(25) != 1)
 triggerall = (enemynear,statetype != A)
 triggerall = (enemynear,movetype = A)
 triggerall = (enemynear,time <= 10)
-triggerall = (P2BodyDist X = [-60,60])
-trigger1 = (var(55) = [81,100])
+trigger1 = (P2BodyDist X = [-60,60])
+trigger1 = (Random < (25 + 15 * var(52)))
 
 [State -3, Boss: reversal Mach Punch]
 type = ChangeState
 value = 1644
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
-triggerall = (var(25) != 1)
-triggerall = (var(56) = 1)
+triggerall = (enemynear,statetype != L)
 triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (var(25) != 1)
+triggerall = (var(51) = 1)
 triggerall = (enemynear,statetype != A)
 triggerall = (enemynear,movetype = A)
 triggerall = (enemynear,time <= 10)
-triggerall = (P2BodyDist X = [0,45])
-trigger1 = (var(55) = [101,115])
+trigger1 = (P2BodyDist X = [0,45])
+trigger1 = (Random < (20 + 15 * var(52)))
+
+;------------------------------------------------------------------------------
+; He can't block in the air: hit first when the opponent is next to him.
+[State -3, Boss: air counter]
+type = ChangeState
+value = 630
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType = A) && (ctrl)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,movetype = A) || (enemynear,statetype = A)
+trigger1 = (P2BodyDist X = [-10,35])
+trigger1 = (P2Dist Y = [-40,40])
+trigger1 = (Random < (250 + 100 * var(52)))
 
 ;------------------------------------------------------------------------------
 ; Anti-air: kick jumping opponents out of the air (the kick has armor).
 [State -3, Boss: anti-air kick]
 type = ChangeState
 value = 220
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
 triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
@@ -218,7 +860,73 @@ triggerall = (enemynear,movetype != H)
 trigger1 = ((enemynear,vel x > 0) && (P2BodyDist X = [40,60])) || ((enemynear,vel x = 0) && (P2BodyDist X = [0,20]))
 trigger1 = (enemynear,vel y > 0)
 trigger1 = (P2Dist Y = [-120,-80])
-trigger1 = (var(55) = [0,600])
+trigger1 = (Random < (600 + 100 * var(52)))
+
+[State -3, Boss: anti-air uppercut]
+type = ChangeState
+value = 410
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype = A)
+triggerall = (enemynear,movetype != H)
+trigger1 = (P2BodyDist X = [0,30])
+trigger1 = (P2Dist Y = [-90,-40])
+trigger1 = (enemynear,vel y > 0)
+trigger1 = (Random < (300 + 100 * var(52)))
+
+;------------------------------------------------------------------------------
+; Low on life (or awakened): instead of blocking, swing back with the armored
+; strong kick and take the hit.
+[State -3, Boss: armored trade]
+type = ChangeState
+value = 220
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (var(51) = 1)
+triggerall = (var(52) >= 2)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,movetype = A) && (enemynear,statetype != A)
+triggerall = (enemynear,time <= 6)
+trigger1 = (P2BodyDist X = [0,45])
+trigger1 = (Random < (150 + 150 * (var(53) > 0)))
+
+;------------------------------------------------------------------------------
+; Block: 95% at full life, less as he gets more aggressive (40% when
+; awakened). The guard states pick standing or crouching guard themselves.
+[State -3, Boss: guard]
+type = ChangeState
+value = 120
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (Alive) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (stateno != [105,106])
+triggerall = (stateno != [120,131])
+triggerall = (stateno != [150,155])
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (p2movetype = A)
+triggerall = (InGuardDist)
+triggerall = (var(25) != 1) || (P2BodyDist X != [-90,90])
+trigger1 = (Random < (950 - 150 * var(52) - 100 * (var(53) > 0)))
+
+;------------------------------------------------------------------------------
+; Low on life and decided not to block: swing the armored straight punch
+; through the attack instead of letting the original AI block.
+[State -3, Boss: attack through]
+type = ChangeState
+value = 210
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (var(51) = 1) && (var(52) >= 2)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (p2movetype = A) && (InGuardDist)
+trigger1 = (P2BodyDist X = [-5,55])
 
 ;------------------------------------------------------------------------------
 ; Guard cancel (1 bar) out of blocked attacks.
@@ -232,41 +940,342 @@ triggerall = (StateNo = [150,153])
 triggerall = (InGuardDist)
 trigger1 = (P2BodyDist X = [-10,55])
 trigger1 = (P2Dist Y >= -10)
-trigger1 = (var(55) = [0,50])
+trigger1 = (Random < (50 + 40 * var(52)))
 
 ;------------------------------------------------------------------------------
-; Block: high guard chance against any attack in range. The guard states
-; (baki.cns) choose standing or crouching guard by themselves.
-[State -3, Boss: guard]
+; Neutral game. Throws when right next to the opponent.
+[State -3, Boss: throw]
 type = ChangeState
-value = 120
+value = 800
 triggerall = (var(59) = 1) && (var(57) = 1)
-triggerall = (Alive) && (RoundState = 2)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
-triggerall = (stateno != [105,106])
-triggerall = (stateno != [120,131])
-triggerall = (stateno != [150,155])
-triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
-triggerall = (p2movetype = A)
-triggerall = (InGuardDist)
-triggerall = (var(25) != 1) || (P2BodyDist X != [-90,90])
-trigger1 = (Random < 950)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (enemynear,movetype != A) && (enemynear,movetype != H)
+trigger1 = (P2BodyDist X = [-5,10])
+trigger1 = (Random < (100 + 40 * var(52)))
+
+[State -3, Boss: back throw]
+type = ChangeState
+value = 801
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (enemynear,movetype != A) && (enemynear,movetype != H)
+trigger1 = (P2BodyDist X = [-5,10])
+trigger1 = (Random < (80 + 30 * var(52)))
 
 ;------------------------------------------------------------------------------
-; Pressure: dash in when the opponent is far away and not attacking.
-[State -3, Boss: dash in]
+; Start the chosen combo route when in range.
+[State -3, Boss: start combo route 1,4,8]
+type = ChangeState
+value = 400
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (var(54) = 1) || (var(54) = 4) || (var(54) = 8)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [-5,38])
+trigger1 = (Random < (250 + 120 * var(52)))
+
+[State -3, Boss: start combo route 2,7]
+type = ChangeState
+value = 200
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (var(54) = 2) || (var(54) = 7)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [-5,38])
+trigger1 = (Random < (250 + 120 * var(52)))
+
+[State -3, Boss: start combo route 3,5]
+type = ChangeState
+value = 430
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (var(54) = 3) || (var(54) = 5)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [-5,40])
+trigger1 = (Random < (250 + 120 * var(52)))
+
+[State -3, Boss: start combo route 6]
+type = ChangeState
+value = 206
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (var(54) = 6)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [-5,36])
+trigger1 = (Random < (250 + 120 * var(52)))
+
+;------------------------------------------------------------------------------
+; Specials in neutral.
+[State -3, Boss: Himokiri]
+type = ChangeState
+value = 1550
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (var(12) <= 0)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [0,40])
+trigger1 = (Random < (20 + 10 * var(52)))
+
+[State -3, Boss: Mach Punch poke]
+type = ChangeState
+value = 1644
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+trigger1 = (P2BodyDist X = [30,60])
+trigger1 = (Random < (25 + 15 * var(52)))
+
+[State -3, Boss: Heel Drop approach]
+type = ChangeState
+value = 1000
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+trigger1 = (P2BodyDist X = [40,90])
+trigger1 = (Random < (12 + 8 * var(52)))
+
+[State -3, Boss: Whip Strike (punch)]
+type = ChangeState
+value = 1333
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [50,80])
+trigger1 = (Random < (8 + 4 * var(52)))
+
+[State -3, Boss: Whip Strike (kick)]
+type = ChangeState
+value = 1335
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [50,80])
+trigger1 = (Random < (8 + 4 * var(52)))
+
+[State -3, Boss: overhead vs crouching]
+type = ChangeState
+value = 330
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != L)
+triggerall = (enemynear,statetype = C)
+trigger1 = (P2BodyDist X = [15,50])
+trigger1 = (Random < (30 + 10 * var(52)))
+
+[State -3, Boss: back kick poke]
+type = ChangeState
+value = 225
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+trigger1 = (P2BodyDist X = [45,70])
+trigger1 = (Random < (20 + 10 * var(52)))
+
+[State -3, Boss: sweep poke]
+type = ChangeState
+value = 420
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+trigger1 = (P2BodyDist X = [55,90])
+trigger1 = (Random < (15 + 10 * var(52)))
+
+;------------------------------------------------------------------------------
+; Supers from range: punish attacks from afar, close the distance.
+[State -3, Boss: Cockroach Tackle from range]
+type = ChangeState
+value = 2180
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (power >= 1000)
+trigger1 = (P2BodyDist X >= 110)
+trigger1 = (enemynear,movetype = A)
+trigger1 = (Random < (60 + 30 * var(52)))
+trigger2 = (P2BodyDist X >= 110)
+trigger2 = (Random < (8 + 8 * var(52)))
+
+[State -3, Boss: Triceratops Fist from range]
+type = ChangeState
+value = 2300
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (power >= 2000)
+trigger1 = (P2BodyDist X >= 90)
+trigger1 = (enemynear,movetype = A)
+trigger1 = (Random < (40 + 20 * var(52)))
+trigger2 = (P2BodyDist X >= 90)
+trigger2 = (Random < (4 + 4 * var(52)))
+
+;------------------------------------------------------------------------------
+; Power-up when the opponent is knocked down or far away.
+[State -3, Boss: Endorphin Release]
+type = ChangeState
+value = 2101
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (var(25) != 1)
+triggerall = (power >= 1000) && (!var(18))
+triggerall = (Life < (LifeMax * 85 / 100))
+trigger1 = (enemynear,statetype = L) || (P2BodyDist X >= 130)
+trigger1 = (Random < 40)
+
+;------------------------------------------------------------------------------
+; Movement: run in, walk in, jump in, back off now and then, and close in
+; on a knocked-down opponent.
+[State -3, Boss: run in from far]
 type = ChangeState
 value = 100
-triggerall = (var(59) = 1) && (var(57) = 1) && (hitpausetime = 0)
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
 triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
 triggerall = (StateType != A)
 triggerall = (stateno != 100)
 triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (enemynear,movetype != A) || (P2BodyDist X > 150)
+trigger1 = (P2BodyDist X > 120)
+trigger1 = (Random < (150 + 50 * var(52)))
+trigger2 = (P2BodyDist X = [70,120])
+trigger2 = (Random < (50 + 30 * var(52)))
+
+[State -3, Boss: walk in]
+type = ChangeState
+value = 20
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (stateno != 20) && (stateno != 100)
+triggerall = (ctrl) || (stateno = 0)
 triggerall = (enemynear,movetype != A)
-trigger1 = (P2BodyDist X > 90)
-trigger1 = (var(55) = [0,100])
+trigger1 = (P2BodyDist X = [40,120])
+trigger1 = (Random < 150)
+
+[State -3, Boss: jump in]
+type = ChangeState
+value = 40
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20) || (stateno = 100)
+triggerall = (enemynear,statetype != A) && (enemynear,statetype != L)
+triggerall = (enemynear,movetype != A)
+trigger1 = (P2BodyDist X = [60,110])
+trigger1 = (Random < (20 + 10 * var(52)))
+
+[State -3, Boss: back step to reset]
+type = ChangeState
+value = 105
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (var(52) <= 1)
+triggerall = (enemynear,movetype != A)
+triggerall = (backedgebodydist > 60)
+trigger1 = (P2BodyDist X = [0,30])
+trigger1 = (Random < 12)
+
+[State -3, Boss: close in on a knocked-down opponent]
+type = ChangeState
+value = 100
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (stateno != 100)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (enemynear,statetype = L)
+trigger1 = (P2BodyDist X > 50)
+trigger1 = (Random < 200)
+
+[State -3, Boss: taunt]
+type = ChangeState
+value = 195
+triggerall = (var(59) = 1) && (var(57) = 1)
+triggerall = (hitpausetime = 0)
+triggerall = (Alive) && (NumEnemy) && (RoundState = 2)
+triggerall = (StateType != A)
+triggerall = (ctrl) || (stateno = 0) || (stateno = 20)
+triggerall = (var(52) = 0)
+triggerall = (enemynear,statetype = L)
+trigger1 = (P2BodyDist X >= 80)
+trigger1 = (Random < 4)
+
 ;==============================================================================
-; End of BOSS AI. The original AI follows.
+; End of BOSS AI v5. The original AI follows.
 ;==============================================================================
 
 [State -3, —•‘]

@@ -4,29 +4,47 @@
 ;-----------------------------------------------------------------------------
 
 ;==============================================================================
-; BOSS SETTINGS (added for the boss version). Change the numbers below.
+; BOSS SETTINGS (boss version). Change the numbers below.
 ;==============================================================================
-; Boss powers: hyper armor on heavy attacks and extra invincibility frames.
-; 1 = on, 0 = off.
+; Who gets the boss powers (automatic meter, healing, hyper armor, extra
+; invincibility frames, awakening):
+;   1 = Baki always, 2 = only when the computer controls Baki, 0 = nobody.
 [State -2, Boss setting: powers]
 type = VarSet
 trigger1 = !IsHelper
 var(56) = 1
 
-; Boss AI: much harder computer opponent (see bakiAI.cns). 1 = on, 0 = off.
+; Boss AI (much harder computer opponent, see bakiAI.cns): 1 = on, 0 = off.
 [State -2, Boss setting: AI]
 type = VarSet
 trigger1 = !IsHelper
 var(57) = 1
 
-; Automatic meter: power added every frame while the round is being fought.
-; 60 frames = 1 second, 1000 power = 1 bar.
-; 2 = about one bar every 8 seconds (1 = every 17 s, 3 = every 6 s).
+; (internal) var(51) = 1 while the boss powers are active for this Baki.
+[State -2, Boss: powers active]
+type = VarSet
+trigger1 = !IsHelper
+var(51) = (var(56) = 1) || ((var(56) = 2) && (var(59) = 1))
+
+;------------------------------------------------------------------------------
+; Automatic meter: 10 power every 3 frames = one bar (1000) every 5 seconds.
 [State -2, Boss: automatic meter]
 type = PowerAdd
 trigger1 = !IsHelper
-trigger1 = RoundState = 2
-value = 2
+trigger1 = (var(51) = 1) && (RoundState = 2)
+trigger1 = (GameTime % 3) = 0
+value = 10
+
+; Passive healing: 1 life every 20 frames (3 per second; full life is 1000)
+; while he isn't being hit. A bigger number than 20 heals slower.
+[State -2, Boss: passive healing]
+type = LifeAdd
+trigger1 = !IsHelper
+trigger1 = (var(51) = 1) && (RoundState = 2) && (Alive)
+trigger1 = (movetype != H) && (Life < LifeMax)
+trigger1 = (GameTime % 20) = 0
+value = 1
+absolute = 1
 
 ; Boss toughness while the computer controls Baki: the damage he takes is
 ; divided by this number (1.25 = 80% damage, 1 = normal damage).
@@ -41,6 +59,127 @@ type = DefenceMulSet
 trigger1 = !IsHelper
 trigger1 = (var(59) != 1) || (var(57) != 1)
 value = 1
+
+;------------------------------------------------------------------------------
+; Awakening: when his life drops to 35% or less (once per round). While
+; awakened his meter stays full, his attacks come out faster, he has hyper
+; armor on everything he does and the AI is at its most aggressive.
+; Change 35 below to awaken earlier (bigger) or later (smaller).
+[State -2, Awakening: reset each round]
+type = VarSet
+trigger1 = !IsHelper
+trigger1 = RoundState <= 1
+var(53) = 0
+
+[State -2, Awakening: start]
+type = VarSet
+trigger1 = !IsHelper
+trigger1 = (var(51) = 1) && (var(53) = 0) && (RoundState = 2) && (Alive)
+trigger1 = Life <= (LifeMax * 35 / 100)
+var(53) = 1
+
+[State -2, Awakening: flash]
+type = PalFX
+trigger1 = !IsHelper
+trigger1 = var(53) = 1
+time = 40
+add = 200,40,40
+mul = 256,256,256
+sinadd = 60,20,20,10
+ignorehitpause = 1
+
+[State -2, Awakening: sound]
+type = PlaySnd
+trigger1 = !IsHelper
+trigger1 = var(53) = 1
+value = 490,0
+ignorehitpause = 1
+
+[State -2, Awakening: aura]
+type = Explod
+trigger1 = !IsHelper
+trigger1 = var(53) = 1
+anim = 7020
+pos = 0,0
+postype = p1
+sprpriority = -1
+bindtime = 1
+scale = 0.5,0.5
+ownpal = 1
+ignorehitpause = 1
+
+[State -2, Awakening: aura 2]
+type = Explod
+trigger1 = !IsHelper
+trigger1 = var(53) = 1
+anim = 7023
+pos = 0,20
+postype = p1
+sprpriority = -2
+bindtime = 1
+scale = 0.5,0.5
+ownpal = 1
+ignorehitpause = 1
+
+[State -2, Awakening: dramatic pause]
+type = Pause
+trigger1 = !IsHelper
+trigger1 = var(53) = 1
+time = 25
+movetime = 0
+ignorehitpause = 1
+
+[State -2, Awakening: started]
+type = VarSet
+trigger1 = !IsHelper
+trigger1 = var(53) = 1
+var(53) = 2
+ignorehitpause = 1
+
+[State -2, Awakening: full meter]
+type = PowerSet
+trigger1 = !IsHelper
+trigger1 = (var(53) > 0) && (var(51) = 1) && (RoundState = 2)
+value = 3000
+
+[State -2, Awakening: armor while attacking]
+type = HitOverride
+trigger1 = !IsHelper
+trigger1 = (var(53) > 0) && (var(51) = 1)
+trigger1 = (movetype = A)
+trigger1 = (stateno = [200,699]) || (stateno = 780) || (stateno = [1000,1001]) || (stateno = 1008) || (stateno = 1334) || (stateno = 1336) || (stateno = 1550) || (stateno = 1644)
+attr = SCA, AA, AP
+slot = 2
+time = 1
+stateno = 1008
+forceair = ifelse((!Alive),1,0)
+ignorehitpause = 1
+
+[State -2, Awakening: armor otherwise]
+type = HitOverride
+trigger1 = !IsHelper
+trigger1 = (var(53) > 0) && (var(51) = 1)
+trigger1 = (movetype != H)
+trigger1 = (stateno = [0,199]) || (stateno = 1009) || (stateno = 1333) || (stateno = 1335)
+attr = SCA, AA, AP
+slot = 3
+time = 1
+stateno = 1009
+ignorehitpause = 1
+
+[State -2, Awakening: after-image trail]
+type = AfterImage
+trigger1 = !IsHelper
+trigger1 = (var(53) > 0) && (var(51) = 1)
+trigger1 = (stateno != 2700) && (stateno != 99)
+trigger1 = (GameTime % 30) = 0
+time = 30
+length = 6
+timegap = 2
+framegap = 2
+paladd = 40,0,0
+palmul = 0.8,0.3,0.3
+trans = add
 ;==============================================================================
 
 
