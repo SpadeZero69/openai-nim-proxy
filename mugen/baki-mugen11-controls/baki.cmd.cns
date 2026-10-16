@@ -333,71 +333,74 @@ buffer.time = 3
 
 ;==============================================================================
 ; Special Motions
+; Input window: time = 20 ticks (1/3 second) for specials, 15 for the
+; overhead kick. The original file used 10. Raise or lower the time values
+; below to make them easier or stricter.
 ;==============================================================================
 ;-| Flying Heel Drop: QCF + a, b or c |----------------------------------------
 [Command]
 name = "前中カカト蹴り"
 command = ~D, F, a
-time = 10
+time = 20
 buffer.time = 3
 
 [Command]
 name = "前中カカト蹴り"   ;NEW: b version
 command = ~D, F, b
-time = 10
+time = 20
 buffer.time = 3
 
 [Command]
 name = "前中カカト蹴り"   ;NEW: c version
 command = ~D, F, c
-time = 10
+time = 20
 buffer.time = 3
 
 ;-| Whip Strike, punch version: QCB + x (hold x to charge) |-------------------
 [Command]
 name = "鞭打p"
 command = ~D, B, x
-time = 10
+time = 20
 buffer.time = 3
 
 ;-| Mach Punch: QCF + y or z |-------------------------------------------------
 [Command]
 name = "音速拳"
 command = ~D, F, y
-time = 10
+time = 20
 buffer.time = 3
 
 [Command]
 name = "音速拳"   ;NEW: z version
 command = ~D, F, z
-time = 10
+time = 20
 buffer.time = 3
 
 ;-| Whip Strike, kick version: QCB + a (hold a to charge) |--------------------
 [Command]
 name = "鞭打k"
 command = ~D, B, a
-time = 10
+time = 20
 buffer.time = 3
 
 ;-| Himokiri (optic nerve cut): QCF + x |--------------------------------------
 [Command]
 name = "紐切り"
 command = ~D, F, x
-time = 10
+time = 20
 buffer.time = 3
 
 ;-| Jumping Back Kick (overhead): F, B + b or c |------------------------------
 [Command]
 name = "中段"
 command = ~F, B, b
-time = 10
+time = 15
 buffer.time = 3
 
 [Command]
 name = "中段"   ;NEW: c version
 command = ~F, B, c
-time = 10
+time = 15
 buffer.time = 3
 
 ;==============================================================================

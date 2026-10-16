@@ -1,127 +1,166 @@
 ==========================================================================
- BAKI HANMA - MOVE LIST (MUGEN 1.1 six-button controls)
- Original character by tokage (WinMUGEN, last updated 2014/7/6)
+ BAKI HANMA - BOSS VERSION - MOVE LIST (PC keyboard)
+ Original character by tokage (WinMUGEN, 2014). Converted to the MUGEN 1.1
+ six-button layout, and turned into a boss: harder AI, automatic meter,
+ hyper armor and invincible moves.
 ==========================================================================
 
- The controls were converted to the standard MUGEN 1.1 six-button layout.
- Only the inputs changed. Damage, speed, combos and the AI are the same
- as the original character.
+--------------------------------------------------------------------------
+ HOW TO READ THIS LIST
+--------------------------------------------------------------------------
+ Directions are the arrow keys, written for Baki facing RIGHT:
 
- Only baki.cmd.cns was changed. It keeps every command name from the
- original file, so a custom common1.cns that worked with the original
- still works. If you edit baki.cmd.cns, save it as Shift-JIS (Japanese
- ANSI), not UTF-8, because some command names are Japanese.
+   Forward       = Right arrow (towards the opponent)
+   Back          = Left arrow
+   Up / Down     = Up arrow / Down arrow
+   Down-Forward  = Down and Right pressed together
+   Down-Back     = Down and Left pressed together
+
+ When Baki faces LEFT, Forward is the Left arrow and Back the Right arrow.
+
+ X, Y, Z, A, B, C and Start are MUGEN's buttons. To see which keyboard
+ key each one is, open MUGEN's Options > Input Config.
+
+   X = light punch    Y = medium punch    Z = heavy punch
+   A = light kick     B = medium kick     C = heavy kick
+
+ "then X" means press X straight after the arrows. Be quick:
+   special moves: within 1/3 of a second
+   super moves:   within 1/2 of a second
+ Tip: the in-between diagonals are optional. Down, then Forward, then
+ the button also works.
+
+ 1 bar = 1000 power. The bar now fills by itself (about 1 bar every
+ 8 seconds), so you don't need to hit anyone to build it.
 
 --------------------------------------------------------------------------
- BUTTONS
+ BASIC ATTACKS
 --------------------------------------------------------------------------
-   x = Light Punch     y = Medium Punch     z = Heavy Punch
-   a = Light Kick      b = Medium Kick      c = Heavy Kick
-   s = Start (Taunt)
+ Standing
+   X ....... Jab
+   Y ....... Straight punch               (hyper armor)
+   Z ....... Elbow                        (hyper armor)
+   A ....... Kick
+   B ....... Strong kick                  (hyper armor)
+   C ....... Back kick                    (hyper armor)
+   Start ... Taunt
 
-   These are MUGEN's A, B, C, X, Y, Z and Start buttons. Choose which
-   keys or pad buttons they are in Options > Input Config.
+ Crouching (hold Down)
+   X ....... Crouching jab
+   Y or Z .. Uppercut, launches           (hyper armor)
+   A ....... Low kick
+   B or C .. Sweep, knocks down           (hyper armor)
 
- Notation
-   F = forward, B = back, U = up, D = down (DF = down-forward, etc.)
-   QCF = D, DF, F          QCB = D, DB, B
-   1 bar = 1000 power
-   Timing: do the whole motion and press the button within about 1/6
-   of a second for special moves, and within half a second for supers.
-   [NEW] = input added by the conversion. Every move keeps its original
-           input too.
-
---------------------------------------------------------------------------
- NORMAL ATTACKS
---------------------------------------------------------------------------
-          Standing                   Crouching (hold D)       Jumping
-   x      Jab                        Crouching Jab            Light Punch
-   y      Straight Punch             Strong Punch (launches)  Strong Punch
-   z      Elbow Strike [NEW]         Strong Punch [NEW]       Strong Punch [NEW]
-   a      Light Kick                 Light Kick (low)         Light Kick
-   b      Strong Kick                Sweep (low) *            Strong Kick
-   c      Back Kick [NEW]            Sweep (low) * [NEW]      Strong Kick [NEW]
-   Start  Taunt
-
-   * knocks down
-
- Command normals
-   Knee Kick ............................ B + a
-   Elbow Strike ......................... B + y   (same move as z)
-   Back Kick ............................ F + a   (same move as c)
-   Middle Kick .......................... F + b
-   Jumping Back Kick (overhead) ......... F, B + b or c   (c is [NEW])
-
- Combos: light attacks chain into stronger ones and most attacks can be
- cancelled into specials and supers on contact (same routes as the
- original character).
+ Jumping
+   X ....... Punch          Y or Z .. Strong punch
+   A ....... Kick           B or C .. Strong kick
 
 --------------------------------------------------------------------------
- THROWS (close range)
+ COMMAND ATTACKS
 --------------------------------------------------------------------------
-   Tenrenge (throw) ..................... x + y,  or F + z [NEW]
-   Back Throw (into German suplex) ...... B + x + y,  or B + z [NEW]
+   Knee ..................... Back + A
+   Elbow .................... Back + Y        (same as Z)
+   Back kick ................ Forward + A     (same as C)
+   Middle kick .............. Forward + B                  (hyper armor)
+   Jumping back kick ........ Forward, then Back, then B or C
+                              (overhead: must be blocked standing)
+                                                           (hyper armor)
 
-   F + z / B + z only throw when the grab can connect. Otherwise they
-   give the Elbow Strike. The opponent can break a throw by pressing
-   F + y or F + b right after being grabbed.
+--------------------------------------------------------------------------
+ THROWS (stand right next to the opponent)
+--------------------------------------------------------------------------
+   Throw .................... X and Y together, or Forward + Z
+   Back throw ............... Back + X and Y together, or Back + Z
 
 --------------------------------------------------------------------------
  SPECIAL MOVES
 --------------------------------------------------------------------------
-   Himokiri (optic nerve cut) ........... QCF + x
-       Usable until it hits once in a round. After it lands, normal
-       attacks have a small chance to do chip damage for the rest of
-       the round.
-   Mach Punch ........................... QCF + y or z       (z is [NEW])
-   Flying Heel Drop ..................... QCF + a, b or c    (b, c [NEW])
-       Brief invincibility before the kick. Unsafe if blocked.
-       (Since any kick works, QCF + b now gives this instead of the
-       Middle Kick.)
-   Whip Strike (Bentatsu) ............... QCB + x or a
-       Hold the button to charge. Hold F or B while charging to inch
-       forward or back. Press y, z, b or c while charging to cancel
-       (z and c are [NEW]). Big chip damage.
+   Himokiri (optic nerve cut)
+       Down, Down-Forward, Forward, then X
+       Invincible while starting. Usable until it lands once per round.
+
+   Mach Punch
+       Down, Down-Forward, Forward, then Y or Z
+       Invincible until the punch comes out.
+
+   Flying Heel Drop
+       Down, Down-Forward, Forward, then A, B or C
+       Invincible while starting. Unsafe if blocked.
+
+   Whip Strike (slap)
+       Down, Down-Back, Back, then X or A
+       Keep holding the button to charge. While charging, hold Forward or
+       Back to inch along, or press Y, Z, B or C to cancel (invincible).
 
 --------------------------------------------------------------------------
  SUPER MOVES
 --------------------------------------------------------------------------
-   Goutaijutsu (1 bar) .................. QCF, QCF + x
-   Cockroach Tackle (1 bar) ............. QCF, QCF + b or c  (c is [NEW])
-       Projectile invincible while dashing.
-   Endorphin Release (1 bar) ............ QCF, QCF + a
-       Once per round. Attack x1.1 for a while and a small life refill.
-   Tiger King / Koou (1 bar) ............ QCB, QCB + b or c  (c is [NEW])
-       Full-body counter (catches the opponent's attack).
-   Trigger Counter (2 bars) ............. D, F, D, B + x
-       Unblockable against a standing opponent. Misses crouching ones.
-   Triceratops Fist (2 bars) ............ QCF, QCF + y or z  (z is [NEW])
-       Rushing attack, slow start.
-   Breathless Rush (3 bars) ............. D, F, D, B + y or z  (z is [NEW])
+   Goutaijutsu (1 bar)
+       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then X
+
+   Cockroach Tackle (1 bar)
+       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then B or C
+
+   Endorphin Release (1 bar, once per round)
+       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then A
+       Attack up for a while and a small life refill.
+
+   Tiger King (1 bar) - catches the opponent's attack
+       Down, Down-Back, Back, Down, Down-Back, Back, then B or C
+
+   Trigger Counter (2 bars) - unblockable against a standing opponent
+       Down, Down-Forward, Forward, Down, Down-Back, Back, then X
+
+   Triceratops Fist (2 bars)
+       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then Y or Z
+
+   Breathless Rush (3 bars)
+       Down, Down-Forward, Forward, Down, Down-Back, Back, then Y or Z
+
+ Every super except Tiger King is invincible while it starts up.
 
 --------------------------------------------------------------------------
  OTHER
 --------------------------------------------------------------------------
-   Dash ................................. F, F
-   Back Step ............................ B, B
-   Guard Cancel (1 bar) ................. while blocking: F + y, z, b or c
-                                          (z and c are [NEW])
-   Triangle (Wall) Jump ................. in the air next to the screen
-                                          edge, hold U + the direction
-                                          away from the wall
-   Taunt ................................ Start
+   Dash ..................... Forward, Forward
+   Back step ................ Back, Back            (invincible start)
+   Guard cancel (1 bar) ..... while blocking: Forward + Y, Z, B or C
+   Wall jump ................ jump next to the screen edge, then hold
+                              Up + the arrow pointing away from the wall
 
 --------------------------------------------------------------------------
- NOTES FROM THE ORIGINAL README (translated)
+ BOSS FEATURES
 --------------------------------------------------------------------------
- - Counter hits: Jumping Back Kick, Mach Punch and Whip Strike knock the
-   opponent back differently if they hit during the opponent's attack.
- - AI level: open bakiAI.cns in a text editor and change
-   "var(58) = 2" to "var(58) = 1" for an easier AI.
- - Bonus colors (palettes 11 and 12) change the character's
-   performance: more damage, faster normals, extra invincibility and
-   other changes. Palette 12 also revives once when KO'd. While revived,
-   the 3-bar super is the only special move left (no other specials,
-   supers or throws), and attacks get super armor.
- - The original author allows redistribution and modification at your
-   own risk.
+ Hyper armor: the attacks marked "(hyper armor)" absorb one hit. Baki
+ flashes red, takes the damage and keeps attacking. Throws beat armor.
+
+ Automatic meter: the bar fills by itself, about 1 bar every 8 seconds.
+
+ Boss AI (when the computer controls Baki):
+   - blocks almost everything, standing or crouching as needed
+   - answers your attacks with invincible moves (Breathless Rush,
+     Trigger Counter, Tiger King, Heel Drop, Mach Punch)
+   - always finishes his combos, ending in a super when he has meter
+   - kicks jumping opponents out of the air and dashes in on you
+   - uses guard cancels, and takes 20% less damage
+
+--------------------------------------------------------------------------
+ TUNING THE BOSS
+--------------------------------------------------------------------------
+ Open baki-2.cns in Notepad. The BOSS SETTINGS are at the top:
+   var(56) = 1 ...... hyper armor and extra invincibility (0 = off)
+   var(57) = 1 ...... boss AI (0 = the original, easier AI)
+   value = 2 ........ (under "automatic meter") meter per frame:
+                      1 = slower, 3 = faster, 0 = off
+   value = 1.25 ..... (under "CPU toughness") 1 = normal damage
+ Save the file in the same encoding it opened with (ANSI). Don't save it
+ as UTF-8.
+
+ Even harder: palettes 11 and 12 are the original author's bonus colors
+ (more damage, faster attacks). Palette 12 also revives once when KO'd.
+ To make the computer use palette 12 when it picks Baki, open baki.def
+ and change "pal.defaults = 1,2,3" to "pal.defaults = 12".
+
+ The AI switches on as soon as MUGEN's computer player starts pressing
+ buttons. If Baki stands still for a moment at the start of a round,
+ raise the difficulty in MUGEN's Options.
