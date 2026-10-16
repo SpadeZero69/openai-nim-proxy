@@ -1,0 +1,177 @@
+==========================================================================
+ BROLY (DBS) - MOVE LIST (PC keyboard) - MUGEN 1.1
+ Character by Blue (sprites by Blue and Kimex), "infinite scaling" edit
+ by coldskin1. Converted to MUGEN 1.1.
+==========================================================================
+
+--------------------------------------------------------------------------
+ HOW TO READ THIS LIST
+--------------------------------------------------------------------------
+ Directions are the arrow keys, written for Broly facing RIGHT:
+
+   Forward       = Right arrow (towards the opponent)
+   Back          = Left arrow
+   Up / Down     = Up arrow / Down arrow
+   Down-Forward  = Down and Right pressed together
+   Down-Back     = Down and Left pressed together
+
+ When Broly faces LEFT, Forward is the Left arrow and Back the Right arrow.
+
+ A, B, C, X, Y, Z and Start are MUGEN's buttons. To see which keyboard
+ key each one is, open MUGEN's Options > Input Config.
+
+ Broly uses every button:
+
+   A = punch string       B = kick string        C = ki blast
+   X = transform          Y = dash strike        Z = ki burst
+   Start (hold) = charge ki
+
+ "then A" means press A straight after the arrows. Be quick:
+   special moves: within 1/3 of a second
+   ultimate:      within 1/2 of a second
+ Tip: the in-between diagonals are optional. Down, then Forward, then
+ the button also works.
+
+ Power: 4 bars (1 bar = 1000). Hold Start to charge it. Some moves only
+ need a certain amount of power and don't use it up; the list says so.
+
+--------------------------------------------------------------------------
+ BASIC ATTACKS
+--------------------------------------------------------------------------
+ Standing
+   A ....... Punch
+   B ....... Kick
+   C ....... Ki blast (needs a little power). Hold C to keep firing, up
+             to 5 blasts.
+   Start ... Hold to charge ki (stand still; stops when the bar is full)
+
+ Crouching (hold Down, then press the button)
+   A ....... Ki explosion around Broly. Invincible. (needs 1/2 bar, not
+             used up)
+   B ....... Flip kick (also the last hit of the kick string)
+   C ....... Energy sphere: a ki aura around Broly that hits several
+             times (needs 1/2 bar, not used up)
+
+ Jumping
+   A ....... Punch
+   B ....... Kick
+   C ....... Air grab. When it connects, press C again to slam them.
+   Down + A  Ki explosion. Invincible. (needs 1/2 bar, not used up)
+   Down + B  Dive stomp, only when high in the air (needs 1/4 bar, not
+             used up)
+   Down + C  Ki ball thrown down at an angle. Can't be blocked.
+             (needs 3/4 bar, not used up)
+
+--------------------------------------------------------------------------
+ BUTTON MOVES
+--------------------------------------------------------------------------
+   Dash strike ........ Y, on the ground or in the air
+       (needs 1/2 bar, not used up)
+       A very fast flying strike at the opponent.
+
+   Ki burst ........... Z
+       An energy wave in front of Broly. It can't be blocked, knocks the
+       opponent back and stuns them. Works while you are blocking or
+       being hit, so use it to escape. Recharges in about 8 seconds (a
+       flash shows when it's ready). Not while attacking, and not when
+       the opponent is cornered right in front of you.
+
+   Transform .......... X, standing still (2 bars)
+       Legendary Super Saiyan: heals 500 life, faster dashes, much
+       stronger armor (see "infinite scaling" below).
+       Press X again to power down (gives back 1 bar).
+
+--------------------------------------------------------------------------
+ CHAINS (press the next button while the previous hit connects)
+--------------------------------------------------------------------------
+   Punch string ....... A, A, A
+       The third A is a flying tackle that knocks the opponent into the
+       air, and Broly goes up with them. Continue in the air with:
+         A, A or B, then Down + B (dive stomp)
+         C (air grab), then C again (slam)
+         Down + A (ki explosion)
+
+   Kick string ........ B, B, B, B, B, B, then Y
+       Six kicks, the last one is the flip kick, finished with the dash
+       strike (needs 1/2 bar). You can switch to the punch string with A
+       after the 1st, 3rd, 4th or 5th kick, and from the punch string to
+       the kick string with B after the first A.
+
+   After a jumping A or B you can cancel straight into the dive stomp,
+   the air ki ball or the ki barrage.
+
+   Y (dash strike) also follows up after: the flip kick, the dive stomp,
+   the charged punch and the energy grab.
+
+--------------------------------------------------------------------------
+ SPECIAL MOVES
+--------------------------------------------------------------------------
+   Charged punch
+       Down, Down-Forward, Forward, then A        (needs 1/2 bar, not used)
+       Keep holding A to charge (invincible while charging), let go to
+       dash in with a punch. Hold it for more than about 1 second for the
+       strong version, which can't be blocked.
+
+   Rushing assault (1 bar)
+       Down, Down-Back, Back, then A
+       Invincible charge. Can't be blocked. On hit, a rush combo.
+
+   Grab and smash (1 bar)
+       Down, Down-Forward, Forward, then B
+       Lunging grab, then he swings the opponent around and slams them.
+
+   Grab and drag (1 bar)
+       Down, Down-Back, Back, then B
+       Lunging grab, then he drags the opponent along and smashes them.
+
+   Ki barrage (1 bar, needs 1 1/2 bars to start)
+       Down, Down-Forward, Forward, then C        (ground or air)
+       Invincible. He rises and fires a long barrage of ki blasts, then a
+       rain of energy falls from the sky. Can't be blocked.
+
+   Energy grab (1 bar)
+       Down, Down-Back, Back, then C
+       Invincible lunging grab that ends with a ki blast. Y follows up.
+
+--------------------------------------------------------------------------
+ ULTIMATE
+--------------------------------------------------------------------------
+   Ultimate (2 bars, needs 2 1/2 bars to start)
+       Down, Down-Forward, Forward, Down, Down-Forward, Forward,
+       then A and B together
+       Invincible charge that can't be blocked. On hit, a cinematic
+       finisher. Only in 1-on-1 matches (not in team modes).
+
+--------------------------------------------------------------------------
+ MOVEMENT
+--------------------------------------------------------------------------
+   Run / fly forward ...... Forward, Forward (hold Forward to keep going)
+   Back dash .............. Back, Back (hold Back to keep going)
+   Super jump ............. Down, then Up (quickly)
+   Air dash ............... in the air: Forward, Forward or Back, Back
+   Recover in the air ..... when knocked into the air, press two buttons
+                            together (A+B, B+C, A+C, X+Y, Y+Z or X+Z)
+
+--------------------------------------------------------------------------
+ ABOUT THIS VERSION ("infinite scaling", by coldskin1)
+--------------------------------------------------------------------------
+ This Broly is meant to be overpowered:
+   - His attacks take away a share of the opponent's maximum life, so
+     they hurt everyone the same.
+   - Every 10 seconds of the match his attack and defense multiplier
+     goes up by one (x1, x2, x3 ...), and while he is transformed it is
+     8 times higher. It keeps building from round to round.
+   - His armor absorbs a number of hits (the same multiplier) before he
+     flinches. Hits on the armor still cost him a little life.
+   - When the computer controls him, he doesn't block while the armor is
+     up.
+
+--------------------------------------------------------------------------
+ MUGEN 1.1 NOTES
+--------------------------------------------------------------------------
+ Install: copy the whole "Broly (DBS)" folder (with the "-" folder inside)
+ into MUGEN's chars folder, then add a line with  Broly (DBS)  under
+ [Characters] in data/select.def.
+
+ This version is declared as a MUGEN 1.1 character. Special moves accept
+ a slower input (1/3 second instead of 1/4).

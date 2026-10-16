@@ -1,0 +1,50 @@
+;===========================================================================
+
+[Info]
+name = "Broly (DBS)"
+displayname = "Broly (DBS)"
+versiondate = 04/10/2021
+mugenversion = 1.1
+author = "Blue, infinite scaling by coldskin1"
+spriter = "Blue, Kimex"
+pal.defaults = 1,2,3,4,5,6
+localcoord = 220,180
+
+;---------------------------------------------------------------------------
+
+[Files]
+sprite = -/Broly (DBS).sff
+sound = -/Broly (DBS).snd
+anim = -/Broly (DBS).air
+cmd = -/Broly (DBS).cmd
+cns = -/Broly (DBS).cns
+st = -/Broly (DBS).cns
+stcommon = -/common1.cns
+pal1 = -/1.act
+pal2 = -/2.act
+pal3 = -/3.act
+pal4 = -/4.act
+pal5 = -/5.act
+pal6 = -/6.act
+;---------------------------------------------------------------------------
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =
+
+;---------------------------------------------------------------------------
+
+; Agradecimentos:
+
+; - AlissonViana
+; - Baby Desu (Loli)
+; - David11
+; - FusionCJ
+; - InSeph
+; - Kimex
+; - MichelST
+; - Mugen N5
+; - Riv
+; - Tendou
+
+;===========================================================================
