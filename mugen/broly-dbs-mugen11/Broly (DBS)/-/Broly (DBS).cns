@@ -6475,7 +6475,7 @@ type = HitDef
 trigger1 = !time
 attr = A, NA
 damage = enemy,lifemax / 95, enemy,lifemax / 200
-guardflag = MAFD
+guardflag = MA
 pausetime = 10,20
 sparkno = -1
 guard.sparkno = -1
@@ -8174,7 +8174,7 @@ add=-100,-100,-100
 type = Varadd
 trigger1 = animelem =6
 v = 52    ;fv = 10
-value = var(52)*.25
+value = var(52)/4
 ignorehitpause = 1
 
 [State 1200]
@@ -10761,7 +10761,7 @@ value = fvar(19)
 [State 1501]
 type = TargetLifeAdd
 trigger1 = time > 16 && time < 47 && time%4=0
-value = -(ceil(enemy,lifemax / 56)*fvar(19))
+value = -floor(ceil(enemy,lifemax / 56)*fvar(19))
 ID = -1
 kill = 0
 absolute = 0
@@ -13046,7 +13046,7 @@ ignorehitpause=1
 [State 1801]
 type = TargetLifeAdd
 trigger1 =time = 28 || time = 57 || time = 72 || time = 94 || time = 137
-value = -(ceil(enemy,lifemax / 28)*fvar(19))
+value = -floor(ceil(enemy,lifemax / 28)*fvar(19))
 ID = -1
 kill = 0
 absolute = 0
@@ -15302,7 +15302,7 @@ time = 20
 [State 6631]
 type = LifeAdd
 trigger1 = time = 0
-value = -((enemy,lifemax / 140)*(enemy,fvar(19)))
+value = -floor((enemy,lifemax / 140)*(enemy,fvar(19)))
 
 [State 6631]
 type = HitAdd
@@ -15521,7 +15521,7 @@ time=20
 [State 6806]
 type=LifeAdd
 trigger1=!Time
-value=-((enemy,lifemax / 140)*(enemy,fvar(19)))
+value=-floor((enemy,lifemax / 140)*(enemy,fvar(19)))
 
 [State 6806]
 type = HitAdd
@@ -15729,7 +15729,7 @@ trigger1 = facing = enemy,facing
 [State 6900]
 type = LifeAdd
 trigger1 = enemy,stateno = 3001 && enemy,time >= 230
-value = -(ceil(enemy,lifemax / 2.3)*(enemy,fvar(19)))
+value = -floor(ceil(enemy,lifemax / 2.3)*(enemy,fvar(19)))
 
 [State 6900]
 type = ChangeAnim
@@ -16692,7 +16692,7 @@ ignorehitpause=1
 type = ParentVarSet
 triggerall=parent, var(13)<=parent,fvar(19)&&parent,var(52)
 trigger1=1
-var(42)=GetHitVar(damage)/parent,fvar(19)
+var(42)=floor(GetHitVar(damage)/(parent,fvar(19)))
 ignorehitpause=1
 
 [State 6005, Change]

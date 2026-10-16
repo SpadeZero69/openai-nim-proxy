@@ -760,7 +760,7 @@ value = fvar(19)
 type = Varadd
 trigger1 = (GameTime % 600) = 0
 v = 52    ;fv = 10
-value = 1.75
+value = 1
 ignorehitpause = 1
 
 [State -2, Combo]

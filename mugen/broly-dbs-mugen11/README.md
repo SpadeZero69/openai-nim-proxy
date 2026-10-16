@@ -20,6 +20,18 @@ every trigger is valid in MUGEN 1.1. The conversion fixes what was left.
   HitDef hit/guard sounds and SuperPause, which keep it). Without a prefix
   PlaySnd plays from the character's own .snd, so the sounds are the same.
   No PlaySnd runs in a state the opponent is put into.
+- Integer parameters that were given decimal numbers. MUGEN refuses them
+  when loading ("Expected int value and read float"); IKEMEN accepts them
+  and drops the fraction. All eight come from the infinite-scaling edit:
+  - command file: the scaling counter `var(52)` was increased with
+    `value = 1.75`. It is an integer, so that always added 1; it now
+    says `value = 1`.
+  - `value = var(52)*.25` (state 1200) -> `value = var(52)/4`.
+  - six damage formulas that multiply by the float `fvar(19)` (states
+    1501, 1801, 6631, 6806, 6900 and the armor state 6005) are wrapped
+    in `floor()`, which gives the same whole number.
+- `guardflag = MAFD` in the dash strike -> `MA` (F and D are hit flags,
+  not guard flags).
 - AI fix: the AI's "Super Saiyan 2" entry in the command file jumped to
   state 15800, which doesn't exist. It now goes to the transformation
   (state 800) like the other AI transformation entries.
