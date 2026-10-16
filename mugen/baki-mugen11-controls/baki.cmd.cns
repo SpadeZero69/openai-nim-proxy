@@ -254,78 +254,81 @@ time = 0
 
 ;==============================================================================
 ; Super Motions
+; Input window: time = 30 ticks (half a second) for every super.
+; The original file used 20 (25 for the D, F, D, B motions). Raise or lower
+; the time values below to make supers easier or stricter.
 ;==============================================================================
 ;-| Breathless Rush (3 bars): D, F, D, B + y or z |-----------------------------
 [Command]
 name = "無呼吸乱舞"
 command = ~D, F, D, B, y
-time = 25
+time = 30
 buffer.time = 3
 
 [Command]
 name = "無呼吸乱舞"   ;NEW: z version
 command = ~D, F, D, B, z
-time = 25
+time = 30
 buffer.time = 3
 
 ;-| Triceratops Fist (2 bars): QCF, QCF + y or z |------------------------------
 [Command]
 name = "トリケラトプス拳"
 command = ~D, F, D, F, y
-time = 20
+time = 30
 buffer.time = 3
 
 [Command]
 name = "トリケラトプス拳"   ;NEW: z version
 command = ~D, F, D, F, z
-time = 20
+time = 30
 buffer.time = 3
 
 ;-| Trigger Counter (2 bars): D, F, D, B + x |---------------------------------
 [Command]
 name = "0.5"
 command = ~D, F, D, B, x
-time = 25
+time = 30
 buffer.time = 3
 
 ;-| Tiger King / Koou (1 bar): QCB, QCB + b or c |-----------------------------
 [Command]
 name = "虎王"
 command = ~D, B, D, B, b
-time = 20
+time = 30
 buffer.time = 3
 
 [Command]
 name = "虎王"   ;NEW: c version
 command = ~D, B, D, B, c
-time = 20
+time = 30
 buffer.time = 3
 
 ;-| Goutaijutsu (1 bar): QCF, QCF + x |----------------------------------------
 [Command]
 name = "剛体術"
 command = ~D, F, D, F, x
-time = 20
+time = 30
 buffer.time = 3
 
 ;-| Cockroach Tackle (1 bar): QCF, QCF + b or c |------------------------------
 [Command]
 name = "ゴキブリタックル"
 command = ~D, F, D, F, b
-time = 20
+time = 30
 buffer.time = 3
 
 [Command]
 name = "ゴキブリタックル"   ;NEW: c version
 command = ~D, F, D, F, c
-time = 20
+time = 30
 buffer.time = 3
 
 ;-| Endorphin Release (1 bar): QCF, QCF + a |----------------------------------
 [Command]
 name = "エンドルフィン"
 command = ~D, F, D, F, a
-time = 20
+time = 30
 buffer.time = 3
 
 ;==============================================================================

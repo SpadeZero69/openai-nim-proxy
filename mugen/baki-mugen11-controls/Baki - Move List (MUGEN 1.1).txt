@@ -26,6 +26,8 @@
    F = forward, B = back, U = up, D = down (DF = down-forward, etc.)
    QCF = D, DF, F          QCB = D, DB, B
    1 bar = 1000 power
+   Timing: do the whole motion and press the button within about 1/6
+   of a second for special moves, and within half a second for supers.
    [NEW] = input added by the conversion. Every move keeps its original
            input too.
 

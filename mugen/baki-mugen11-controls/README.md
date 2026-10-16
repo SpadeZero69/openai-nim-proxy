@@ -42,6 +42,8 @@ mugenversion of character".
 
 ## Changes
 
+- v3: super moves accept a longer input window, 30 ticks (half a second)
+  instead of 20 (25 for the D, F, D, B motions).
 - v2: the first version dropped command names the character doesn't use
   (`up`, `fwd`, ...). A `common1.cns` that refers to them then failed with
   `Undefined command label`. All original command names are back, and
