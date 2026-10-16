@@ -1,0 +1,1249 @@
+;==============================================================================
+; Baki Hanma - command file
+; Original character by tokage (WinMUGEN, 2014)
+; Controls converted to the standard MUGEN 1.1 six-button layout.
+;
+;   x = Light Punch    y = Medium Punch    z = Heavy Punch
+;   a = Light Kick     b = Medium Kick     c = Heavy Kick
+;   s = Start (Taunt)
+;
+; Every move from the original 4-button layout (x, y, a, b) still uses its
+; original input. z and c were unused; they now have their own normals and work
+; as the "strong" buttons for specials and supers (z works like y, c works like
+; b). The full move list is in "Baki - Move List (MUGEN 1.1).txt".
+;
+; Notation: F = forward, B = back, U = up, D = down (relative to facing)
+;           QCF = D, DF, F    QCB = D, DB, B
+;==============================================================================
+
+;-| Button Remapping |---------------------------------------------------------
+; Left side = button name used in this file, right side = the button you
+; press. Change the right side to move a button for this character only.
+; Example: "z = c" makes pressing c count as z.
+[Remap]
+x = x
+y = y
+z = z
+a = a
+b = b
+c = c
+s = s
+
+;-| Default Values |-----------------------------------------------------------
+[Defaults]
+; Default time limit (in ticks, 1/60 s) to enter a command.
+command.time = 15
+
+; Default number of ticks a completed command stays active.
+command.buffer.time = 1
+
+;==============================================================================
+; CPU detection commands (used by bakiAI.cns to switch on the AI).
+; They are impossible for a human to enter. Do not change or remove them.
+;==============================================================================
+[Command]
+name = "AI0"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI1"
+command = b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
+time = 0
+[Command]
+name = "AI2"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI3"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI4"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI5"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI6"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI7"
+command = F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F
+time = 0
+[Command]
+name = "AI8"
+command = D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D
+time = 0
+[Command]
+name = "AI9"
+command = B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B
+time = 0
+[Command]
+name = "AI10"
+command = U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U
+time = 0
+[Command]
+name = "AI11"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI12"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI13"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI14"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI15"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI16"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI17"
+command = a,B,c,x,y,z,s,B,D,F,U,a,b,c,x,y,z,s,s
+time = 0
+[Command]
+name = "AI18"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI19"
+command = b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b
+time = 0
+[Command]
+name = "AI20"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI21"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI22"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI23"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI24"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI25"
+command = F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F
+time = 0
+[Command]
+name = "AI26"
+command = D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D
+time = 0
+[Command]
+name = "AI27"
+command = B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B
+time = 0
+[Command]
+name = "AI28"
+command = U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U,U
+time = 0
+[Command]
+name = "AI29"
+command = a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a
+time = 0
+[Command]
+name = "AI30"
+command = c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c
+time = 0
+[Command]
+name = "AI31"
+command = x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x
+time = 0
+[Command]
+name = "AI32"
+command = y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y,y
+time = 0
+[Command]
+name = "AI33"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI34"
+command = s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s
+time = 0
+[Command]
+name = "AI35"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI36"
+command = z,z,z,z,z,z,a,a,a,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI37"
+command = z,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,z,z,z
+time = 0
+[Command]
+name = "AI38"
+command = z,z,z,z,z,a,a,a,z,z,z,z,z,a,a,a,z,z,z
+time = 0
+[Command]
+name = "AI39"
+command = z,z,z,z,z,a,a,a,z,z,z,z,z,z,a,a,z,z,z
+time = 0
+[Command]
+name = "AI40"
+command = z,z,z,z,a,a,a,z,z,z,z,a,z,z,a,a,z,z,z
+time = 0
+[Command]
+name = "AI41"
+command = z,z,z,a,z,z,z,z,z,z,z,z,z,a,a,z,z,z,z
+time = 0
+[Command]
+name = "AI42"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI43"
+command = z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,a,a,z
+time = 0
+[Command]
+name = "AI44"
+command = z,z,a,a,a,a,z,z,z,z,z,z,z,z,z,a,a,a,z
+time = 0
+[Command]
+name = "AI45"
+command = z,z,z,z,z,z,a,a,z,z,z,z,z,a,a,a,a,z,z
+time = 0
+[Command]
+name = "AI46"
+command = z,z,z,z,z,z,z,z,a,a,a,a,a,a,z,z,z,z,z
+time = 0
+[Command]
+name = "AI47"
+command = z,z,z,a,a,a,a,z,z,z,z,z,z,z,z,z,z,z,z
+time = 0
+[Command]
+name = "AI48"
+command = z,z,z,z,z,a,a,a,z,z,z,a,a,a,z,z,a,z,a
+time = 0
+[Command]
+name = "AI49"
+command = z,z,z,z,a,a,a,z,z,z,z,z,a,a,a,z,z,z,z
+time = 0
+[Command]
+name = "AI50"
+command = z,z,z,a,a,z,z,z,z,z,z,z,z,z,a,a,z,z,z
+time = 0
+
+;==============================================================================
+; Super Motions
+;==============================================================================
+;-| Breathless Rush (3 bars): D, F, D, B + y or z |-----------------------------
+[Command]
+name = "BreathlessRush"
+command = ~D, F, D, B, y
+time = 25
+buffer.time = 3
+
+[Command]
+name = "BreathlessRush"
+command = ~D, F, D, B, z
+time = 25
+buffer.time = 3
+
+;-| Triceratops Fist (2 bars): QCF, QCF + y or z |------------------------------
+[Command]
+name = "TriceratopsFist"
+command = ~D, F, D, F, y
+time = 20
+buffer.time = 3
+
+[Command]
+name = "TriceratopsFist"
+command = ~D, F, D, F, z
+time = 20
+buffer.time = 3
+
+;-| Trigger Counter (2 bars): D, F, D, B + x |---------------------------------
+[Command]
+name = "TriggerCounter"
+command = ~D, F, D, B, x
+time = 25
+buffer.time = 3
+
+;-| Tiger King / Koou (1 bar): QCB, QCB + b or c |-----------------------------
+[Command]
+name = "TigerKing"
+command = ~D, B, D, B, b
+time = 20
+buffer.time = 3
+
+[Command]
+name = "TigerKing"
+command = ~D, B, D, B, c
+time = 20
+buffer.time = 3
+
+;-| Goutaijutsu (1 bar): QCF, QCF + x |----------------------------------------
+[Command]
+name = "Goutaijutsu"
+command = ~D, F, D, F, x
+time = 20
+buffer.time = 3
+
+;-| Cockroach Tackle (1 bar): QCF, QCF + b or c |------------------------------
+[Command]
+name = "CockroachTackle"
+command = ~D, F, D, F, b
+time = 20
+buffer.time = 3
+
+[Command]
+name = "CockroachTackle"
+command = ~D, F, D, F, c
+time = 20
+buffer.time = 3
+
+;-| Endorphin Release (1 bar): QCF, QCF + a |----------------------------------
+[Command]
+name = "Endorphin"
+command = ~D, F, D, F, a
+time = 20
+buffer.time = 3
+
+;==============================================================================
+; Special Motions
+;==============================================================================
+;-| Flying Heel Drop: QCF + a, b or c |----------------------------------------
+[Command]
+name = "HeelDrop"
+command = ~D, F, a
+time = 10
+buffer.time = 3
+
+[Command]
+name = "HeelDrop"
+command = ~D, F, b
+time = 10
+buffer.time = 3
+
+[Command]
+name = "HeelDrop"
+command = ~D, F, c
+time = 10
+buffer.time = 3
+
+;-| Whip Strike, punch version: QCB + x (hold x to charge) |-------------------
+[Command]
+name = "WhipP"
+command = ~D, B, x
+time = 10
+buffer.time = 3
+
+;-| Mach Punch: QCF + y or z |-------------------------------------------------
+[Command]
+name = "MachPunch"
+command = ~D, F, y
+time = 10
+buffer.time = 3
+
+[Command]
+name = "MachPunch"
+command = ~D, F, z
+time = 10
+buffer.time = 3
+
+;-| Whip Strike, kick version: QCB + a (hold a to charge) |--------------------
+[Command]
+name = "WhipK"
+command = ~D, B, a
+time = 10
+buffer.time = 3
+
+;-| Himokiri (optic nerve cut): QCF + x |--------------------------------------
+[Command]
+name = "Himokiri"
+command = ~D, F, x
+time = 10
+buffer.time = 3
+
+;-| Jumping Back Kick (overhead): F, B + b or c |------------------------------
+[Command]
+name = "Overhead"
+command = ~F, B, b
+time = 10
+buffer.time = 3
+
+[Command]
+name = "Overhead"
+command = ~F, B, c
+time = 10
+buffer.time = 3
+
+;==============================================================================
+; Double Taps
+;==============================================================================
+[Command]
+name = "FF"     ;Required (do not remove)
+command = F, F
+time = 10
+buffer.time = 3
+
+[Command]
+name = "BB"     ;Required (do not remove)
+command = B, B
+time = 10
+buffer.time = 3
+
+;==============================================================================
+; Button Combinations
+;==============================================================================
+;-| Throw: x + y |-------------------------------------------------------------
+[Command]
+name = "throw"
+command = y+x
+time = 1
+buffer.time = 3
+
+[Command]
+name = "recovery" ;Required (do not remove)
+command = x+y
+time = 1
+
+;==============================================================================
+; Held Buttons (used by the Whip Strike charge in baki-S.cns)
+;==============================================================================
+;-| Keep holding x to charge the punch Whip Strike |---------------------------
+[Command]
+name = "hold_x"
+command = /x
+time = 1
+
+;-| Keep holding a to charge the kick Whip Strike |----------------------------
+[Command]
+name = "hold_a"
+command = /a
+time = 1
+
+;-| Hold y or z during the charge to cancel it |-------------------------------
+[Command]
+name = "hold_yz"
+command = /y
+time = 1
+
+[Command]
+name = "hold_yz"
+command = /z
+time = 1
+
+;-| Hold b or c during the charge to cancel it |-------------------------------
+[Command]
+name = "hold_bc"
+command = /b
+time = 1
+
+[Command]
+name = "hold_bc"
+command = /c
+time = 1
+
+;==============================================================================
+; Single Buttons
+;==============================================================================
+[Command]
+name = "a"
+command = a
+time = 1
+buffer.time = 3
+
+[Command]
+name = "b"
+command = b
+time = 1
+buffer.time = 3
+
+[Command]
+name = "c"
+command = c
+time = 1
+buffer.time = 3
+
+[Command]
+name = "x"
+command = x
+time = 1
+buffer.time = 3
+
+[Command]
+name = "y"
+command = y
+time = 1
+buffer.time = 3
+
+[Command]
+name = "z"
+command = z
+time = 1
+buffer.time = 3
+
+[Command]
+name = "start"
+command = s
+time = 1
+buffer.time = 3
+
+;==============================================================================
+; Held Directions
+;==============================================================================
+[Command]
+name = "holdfwd"  ;Required (do not remove)
+command = /$F
+time = 1
+
+[Command]
+name = "holdback" ;Required (do not remove)
+command = /$B
+time = 1
+
+[Command]
+name = "holdup"   ;Required (do not remove)
+command = /$U
+time = 1
+
+[Command]
+name = "holddown" ;Required (do not remove)
+command = /$D
+time = 1
+
+;==============================================================================
+; State entry section
+; Entries are checked from top to bottom; the first one that fires wins, so
+; higher-priority moves come first. The cancel lists (trigger2 and later) are
+; the original author's combo routes and are unchanged.
+;==============================================================================
+[Statedef -1] ;Required (do not remove)
+
+;==============================================================================
+; Supers
+;==============================================================================
+;---------------------------------------------------------------------------
+; Breathless Rush (3000 power): D, F, D, B + y or z
+[State -1, Breathless Rush]
+type = ChangeState
+value = 3000
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 3000
+triggerall = command = "BreathlessRush"
+triggerall = (command = "y") || (command = "z")
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Tiger King / Koou (1000 power): QCB, QCB + b or c
+[State -1, Tiger King]
+type = ChangeState
+value = 2310
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "TigerKing"
+triggerall = (command = "b") || (command = "c")
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Trigger Counter (2000 power): D, F, D, B + x
+[State -1, Trigger Counter]
+type = ChangeState
+value = 2700
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 2000
+triggerall = command = "TriggerCounter"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Goutaijutsu (1000 power): QCF, QCF + x
+[State -1, Goutaijutsu]
+type = ChangeState
+value = 2100
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "Goutaijutsu"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Triceratops Fist (2000 power): QCF, QCF + y or z
+[State -1, Triceratops Fist]
+type = ChangeState
+value = 2300
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 2000
+triggerall = command = "TriceratopsFist"
+triggerall = (command = "y") || (command = "z")
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Cockroach Tackle (1000 power): QCF, QCF + b or c
+[State -1, Cockroach Tackle]
+type = ChangeState
+value = 2180
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "CockroachTackle"
+triggerall = (command = "b") || (command = "c")
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Endorphin Release (1000 power, once per round): QCF, QCF + a
+[State -1, Endorphin Release]
+type = ChangeState
+value = 2101
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "Endorphin"
+triggerall = command = "a"
+triggerall = !var(18)
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;==============================================================================
+; Specials
+;==============================================================================
+;---------------------------------------------------------------------------
+; Mach Punch: QCF + y or z
+[State -1, Mach Punch]
+type = ChangeState
+value = 1644
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "MachPunch"
+triggerall = (command = "y") || (command = "z")
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Flying Heel Drop: QCF + a, b or c
+[State -1, Flying Heel Drop]
+type = ChangeState
+value = 1000
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "HeelDrop"
+triggerall = (command = "a") || (command = "b") || (command = "c")
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Whip Strike, punch version: QCB + x (hold x to charge)
+[State -1, Whip Strike P]
+type = ChangeState
+value = 1333
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "WhipP"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Whip Strike, kick version: QCB + a (hold a to charge)
+[State -1, Whip Strike K]
+type = ChangeState
+value = 1335
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "WhipK"
+triggerall = command = "a"
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Himokiri (optic nerve cut): QCF + x
+; Can no longer be used for the rest of the round once it has hit (var(12)).
+[State -1, Himokiri]
+type = ChangeState
+value = 1550
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = !var(12)
+triggerall = command = "Himokiri"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;==============================================================================
+; Movement
+;==============================================================================
+;---------------------------------------------------------------------------
+; Dash: F, F
+[State -1, Dash]
+type = ChangeState
+value = 100
+triggerall = !var(59)
+triggerall = command = "FF"
+triggerall = command = "holdfwd"
+triggerall = statetype != A
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Back step: B, B
+[State -1, Back Step]
+type = ChangeState
+value = 105
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "BB"
+triggerall = command = "holdback"
+triggerall = statetype != A
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Triangle (wall) jump: in the air next to the screen edge, hold U + the
+; direction away from the wall
+[State -1, Triangle Jump]
+type = ChangeState
+value = 99
+triggerall = var(59) <= 0
+triggerall = command = "holdup"
+triggerall = (command = "holdfwd" && BackEdgeBodyDist <= 0) || (command = "holdback" && FrontEdgeBodyDist <= 10)
+triggerall = statetype = A
+trigger1 = ctrl && pos y <= -50 && stateno != [45,46]
+trigger1 = (anim != [41,42])
+trigger1 = (stateno != 99)||(anim != 99)
+
+;==============================================================================
+; Throws
+;==============================================================================
+;---------------------------------------------------------------------------
+; Back throw (Ura-nage): B + x + y
+[State -1, Back Throw]
+type = ChangeState
+value = 801
+triggerall = !var(59)
+triggerall = command = "holdback"
+triggerall = command = "throw"
+triggerall = command = "y"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = stateno != 100
+triggerall = !var(25)
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Throw (Tenrenge): x + y
+[State -1, Throw]
+type = ChangeState
+value = 800
+triggerall = !var(59)
+triggerall = command = "throw"
+triggerall = command = "y"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = stateno != 100
+triggerall = !var(25)
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Back throw, standard input: B + z when close
+; Only fires when the grab can connect; otherwise B + z gives the elbow.
+[State -1, Back Throw close]
+type = ChangeState
+value = 801
+triggerall = !var(59)
+triggerall = command = "holdback"
+triggerall = command = "z"
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = stateno != 100
+triggerall = !var(25)
+triggerall = p2bodydist x = [-20,10]
+triggerall = (p2statetype = S) || (p2statetype = C)
+triggerall = p2movetype != H
+triggerall = p2stateno != [130,159]
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Throw, standard input: F + z when close
+; Only fires when the grab can connect; otherwise F + z gives the elbow.
+[State -1, Throw close]
+type = ChangeState
+value = 800
+triggerall = !var(59)
+triggerall = command = "holdfwd"
+triggerall = command = "z"
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = stateno != 100
+triggerall = !var(25)
+triggerall = p2bodydist x = [-20,10]
+triggerall = (p2statetype = S) || (p2statetype = C)
+triggerall = p2movetype != H
+triggerall = p2stateno != [130,159]
+trigger1 = ctrl
+
+;==============================================================================
+; Guard Cancel (1000 power): while blocking, F + y, z, b or c
+;==============================================================================
+[State -1, Guard Cancel]
+type = ChangeState
+value = 780
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = (StateNo = [150,153])
+triggerall = (InGuardDist)
+triggerall = statetype != A
+trigger1 = command = "holdfwd" && command = "b"
+trigger2 = command = "holdfwd" && command = "y"
+trigger3 = command = "holdfwd" && command = "c"
+trigger4 = command = "holdfwd" && command = "z"
+
+;==============================================================================
+; Command Normals
+;==============================================================================
+;---------------------------------------------------------------------------
+; Jumping Back Kick (overhead): F, B + b or c
+[State -1, Jumping Back Kick]
+type = ChangeState
+value = 330
+triggerall = !var(59)
+triggerall = command = "Overhead"
+triggerall = (command = "b") || (command = "c")
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=250||anim=252)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Middle Kick: F + b
+[State -1, Middle Kick]
+type = ChangeState
+value = 300
+triggerall = !var(59)
+triggerall = command = "holdfwd" && command = "b"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=250||anim=252)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Knee: B + a
+[State -1, Knee]
+type = ChangeState
+value = 215
+triggerall = !var(59)
+triggerall = command = "holdback" && command = "a"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Elbow: z (Heavy Punch), or B + y
+[State -1, Elbow]
+type = ChangeState
+value = 218
+triggerall = !var(59)
+triggerall = (command = "holdback" && command = "y") || (command = "z")
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Spinning Back Kick: c (Heavy Kick), or F + a
+[State -1, Spinning Back Kick]
+type = ChangeState
+value = 225
+triggerall = !var(59)
+triggerall = (command = "holdfwd" && command = "a") || (command = "c")
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=250||anim=252)&&(movecontact)
+
+;==============================================================================
+; Standing Normals
+;==============================================================================
+;---------------------------------------------------------------------------
+; Standing Light Punch: x
+[State -1, Standing Light Punch]
+type = ChangeState
+value = 200
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "x"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = stateno = 101
+trigger3 = anim = (200)&&(movecontact)
+trigger4 = anim = (400)&&(movecontact)
+trigger5 = anim = (200)&&(animelem = 4,>=0)
+
+;---------------------------------------------------------------------------
+; Standing Medium Punch: y
+[State -1, Standing Medium Punch]
+type = ChangeState
+value = 210
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "y"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = stateno = 101
+trigger3 = anim = (200)&&(movecontact)
+trigger4 = (anim=400||anim=401)&&(movecontact)
+trigger5 = (anim=430||anim=431)&&(movecontact)
+trigger6 = (anim=230||anim=231)&&(movecontact)
+trigger7 = (anim=245||anim=246)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Standing Light Kick: a
+[State -1, Standing Light Kick]
+type = ChangeState
+value = 206
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "a"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Standing Medium Kick: b
+[State -1, Standing Medium Kick]
+type = ChangeState
+value = 220
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "b"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=250||anim=252)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Taunt: s (Start)
+[State -1, Taunt]
+type = ChangeState
+value = 195
+triggerall = !var(59)
+triggerall = command = "start"
+triggerall = statetype != A
+trigger1 = ctrl
+
+;==============================================================================
+; Crouching Normals
+;==============================================================================
+;---------------------------------------------------------------------------
+; Crouching Light Punch: D + x
+[State -1, Crouching Light Punch]
+type = ChangeState
+value = 400
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "x"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=400||anim=401)&&(animelem = 5,>=0)
+
+;---------------------------------------------------------------------------
+; Crouching Light Kick: D + a
+[State -1, Crouching Light Kick]
+type = ChangeState
+value = 430
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = command = "a"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = (anim=430||anim=431)&&(animelem = 3,>=0)
+
+;---------------------------------------------------------------------------
+; Crouching Uppercut: D + y or z
+[State -1, Crouching Uppercut]
+type = ChangeState
+value = 410
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = (command = "y") || (command = "z")
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=250||anim=252)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Sweep: D + b or c
+[State -1, Crouching Sweep]
+type = ChangeState
+value = 420
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = (command = "b") || (command = "c")
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=250||anim=252)&&(movecontact)
+
+;==============================================================================
+; Air Normals
+;==============================================================================
+;---------------------------------------------------------------------------
+; Jumping Light Punch: x
+[State -1, Jumping Light Punch]
+type = ChangeState
+value = 600
+triggerall = !var(59)
+triggerall = command = "x"
+triggerall = statetype = A
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Jumping Light Kick: a
+[State -1, Jumping Light Kick]
+type = ChangeState
+value = 610
+triggerall = !var(59)
+triggerall = command = "a"
+triggerall = statetype = A
+trigger1 = ctrl
+
+;---------------------------------------------------------------------------
+; Jumping Medium/Heavy Punch: y or z
+[State -1, Jumping Heavy Punch]
+type = ChangeState
+value = 630
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = (command = "y") || (command = "z")
+triggerall = statetype = A
+trigger1 = ctrl
+trigger2 = anim = 600 &&(movecontact)
+trigger3 = anim = 610 &&(movecontact)
+
+;---------------------------------------------------------------------------
+; Jumping Medium/Heavy Kick: b or c
+[State -1, Jumping Heavy Kick]
+type = ChangeState
+value = 620
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = (command = "b") || (command = "c")
+triggerall = statetype = A
+trigger1 = ctrl
+trigger2 = anim = 600 &&(movecontact)
+trigger3 = anim = 610 &&(movecontact)

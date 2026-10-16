@@ -1,0 +1,123 @@
+==========================================================================
+ BAKI HANMA - MOVE LIST (MUGEN 1.1 six-button controls)
+ Original character by tokage (WinMUGEN, last updated 2014/7/6)
+==========================================================================
+
+ The controls were converted to the standard MUGEN 1.1 six-button layout.
+ Only the inputs changed. Damage, speed, combos and the AI are the same
+ as the original character.
+
+ Files changed: baki.cmd.cns (all inputs) and baki-S.cns (4 lines: the
+ button names used by the Whip Strike charge).
+
+--------------------------------------------------------------------------
+ BUTTONS
+--------------------------------------------------------------------------
+   x = Light Punch     y = Medium Punch     z = Heavy Punch
+   a = Light Kick      b = Medium Kick      c = Heavy Kick
+   s = Start (Taunt)
+
+   These are MUGEN's A, B, C, X, Y, Z and Start buttons. Choose which
+   keys or pad buttons they are in Options > Input Config.
+
+ Notation
+   F = forward, B = back, U = up, D = down (DF = down-forward, etc.)
+   QCF = D, DF, F          QCB = D, DB, B
+   1 bar = 1000 power
+   [NEW] = input added by the conversion. Every move keeps its original
+           input too.
+
+--------------------------------------------------------------------------
+ NORMAL ATTACKS
+--------------------------------------------------------------------------
+          Standing                   Crouching (hold D)       Jumping
+   x      Jab                        Crouching Jab            Light Punch
+   y      Straight Punch             Strong Punch (launches)  Strong Punch
+   z      Elbow Strike [NEW]         Strong Punch [NEW]       Strong Punch [NEW]
+   a      Light Kick                 Light Kick (low)         Light Kick
+   b      Strong Kick                Sweep (low) *            Strong Kick
+   c      Back Kick [NEW]            Sweep (low) * [NEW]      Strong Kick [NEW]
+   Start  Taunt
+
+   * knocks down
+
+ Command normals
+   Knee Kick ............................ B + a
+   Elbow Strike ......................... B + y   (same move as z)
+   Back Kick ............................ F + a   (same move as c)
+   Middle Kick .......................... F + b
+   Jumping Back Kick (overhead) ......... F, B + b or c   (c is [NEW])
+
+ Combos: light attacks chain into stronger ones and most attacks can be
+ cancelled into specials and supers on contact (same routes as the
+ original character).
+
+--------------------------------------------------------------------------
+ THROWS (close range)
+--------------------------------------------------------------------------
+   Tenrenge (throw) ..................... x + y,  or F + z [NEW]
+   Back Throw (into German suplex) ...... B + x + y,  or B + z [NEW]
+
+   F + z / B + z only throw when the grab can connect. Otherwise they
+   give the Elbow Strike. The opponent can break a throw by pressing
+   F + y or F + b right after being grabbed.
+
+--------------------------------------------------------------------------
+ SPECIAL MOVES
+--------------------------------------------------------------------------
+   Himokiri (optic nerve cut) ........... QCF + x
+       Usable until it hits once in a round. After it lands, normal
+       attacks have a small chance to do chip damage for the rest of
+       the round.
+   Mach Punch ........................... QCF + y or z       (z is [NEW])
+   Flying Heel Drop ..................... QCF + a, b or c    (b, c [NEW])
+       Brief invincibility before the kick. Unsafe if blocked.
+       (Since any kick works, QCF + b now gives this instead of the
+       Middle Kick.)
+   Whip Strike (Bentatsu) ............... QCB + x or a
+       Hold the button to charge. Hold F or B while charging to inch
+       forward or back. Press y, z, b or c while charging to cancel
+       (z and c are [NEW]). Big chip damage.
+
+--------------------------------------------------------------------------
+ SUPER MOVES
+--------------------------------------------------------------------------
+   Goutaijutsu (1 bar) .................. QCF, QCF + x
+   Cockroach Tackle (1 bar) ............. QCF, QCF + b or c  (c is [NEW])
+       Projectile invincible while dashing.
+   Endorphin Release (1 bar) ............ QCF, QCF + a
+       Once per round. Attack x1.1 for a while and a small life refill.
+   Tiger King / Koou (1 bar) ............ QCB, QCB + b or c  (c is [NEW])
+       Full-body counter (catches the opponent's attack).
+   Trigger Counter (2 bars) ............. D, F, D, B + x
+       Unblockable against a standing opponent. Misses crouching ones.
+   Triceratops Fist (2 bars) ............ QCF, QCF + y or z  (z is [NEW])
+       Rushing attack, slow start.
+   Breathless Rush (3 bars) ............. D, F, D, B + y or z  (z is [NEW])
+
+--------------------------------------------------------------------------
+ OTHER
+--------------------------------------------------------------------------
+   Dash ................................. F, F
+   Back Step ............................ B, B
+   Guard Cancel (1 bar) ................. while blocking: F + y, z, b or c
+                                          (z and c are [NEW])
+   Triangle (Wall) Jump ................. in the air next to the screen
+                                          edge, hold U + the direction
+                                          away from the wall
+   Taunt ................................ Start
+
+--------------------------------------------------------------------------
+ NOTES FROM THE ORIGINAL README (translated)
+--------------------------------------------------------------------------
+ - Counter hits: Jumping Back Kick, Mach Punch and Whip Strike knock the
+   opponent back differently if they hit during the opponent's attack.
+ - AI level: open bakiAI.cns in a text editor and change
+   "var(58) = 2" to "var(58) = 1" for an easier AI.
+ - Bonus colors (palettes 11 and 12) change the character's
+   performance: more damage, faster normals, extra invincibility and
+   other changes. Palette 12 also revives once when KO'd. While revived,
+   the 3-bar super is the only special move left (no other specials,
+   supers or throws), and attacks get super armor.
+ - The original author allows redistribution and modification at your
+   own risk.
