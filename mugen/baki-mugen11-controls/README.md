@@ -33,6 +33,13 @@ All other files of the character are unchanged.
 
 Copy both files into your existing `chars/baki/` folder and overwrite.
 
+Baki has no `common1.cns` of its own; it uses MUGEN's standard
+`data/common1.cns`. If `chars/baki/` contains a `common1.cns` (left over from
+another character, for example), delete it. Baki is a WinMUGEN character
+("pre-1.0 compatible mode"), so a common file that uses MUGEN 1.0+ triggers
+such as `AILevel` stops it from loading with "Trigger not valid for
+mugenversion of character".
+
 ## Changes
 
 - v2: the first version dropped command names the character doesn't use
