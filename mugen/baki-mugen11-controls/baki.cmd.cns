@@ -12,6 +12,12 @@
 ; as the "strong" buttons for specials and supers (z works like y, c works like
 ; b). The full move list is in "Baki - Move List (MUGEN 1.1).txt".
 ;
+; All command names from the original file are kept, including the Japanese
+; ones and some that this character never uses itself ("up", "fwd", "back",
+; "down", ...): other files such as common1.cns can refer to them.
+; This file is Shift-JIS (Japanese ANSI) encoded. If you edit it, save it in
+; that same encoding, not UTF-8, or the Japanese command names will break.
+;
 ; Notation: F = forward, B = back, U = up, D = down (relative to facing)
 ;           QCF = D, DF, F    QCB = D, DB, B
 ;==============================================================================
@@ -251,73 +257,73 @@ time = 0
 ;==============================================================================
 ;-| Breathless Rush (3 bars): D, F, D, B + y or z |-----------------------------
 [Command]
-name = "BreathlessRush"
+name = "無呼吸乱舞"
 command = ~D, F, D, B, y
 time = 25
 buffer.time = 3
 
 [Command]
-name = "BreathlessRush"
+name = "無呼吸乱舞"   ;NEW: z version
 command = ~D, F, D, B, z
 time = 25
 buffer.time = 3
 
 ;-| Triceratops Fist (2 bars): QCF, QCF + y or z |------------------------------
 [Command]
-name = "TriceratopsFist"
+name = "トリケラトプス拳"
 command = ~D, F, D, F, y
 time = 20
 buffer.time = 3
 
 [Command]
-name = "TriceratopsFist"
+name = "トリケラトプス拳"   ;NEW: z version
 command = ~D, F, D, F, z
 time = 20
 buffer.time = 3
 
 ;-| Trigger Counter (2 bars): D, F, D, B + x |---------------------------------
 [Command]
-name = "TriggerCounter"
+name = "0.5"
 command = ~D, F, D, B, x
 time = 25
 buffer.time = 3
 
 ;-| Tiger King / Koou (1 bar): QCB, QCB + b or c |-----------------------------
 [Command]
-name = "TigerKing"
+name = "虎王"
 command = ~D, B, D, B, b
 time = 20
 buffer.time = 3
 
 [Command]
-name = "TigerKing"
+name = "虎王"   ;NEW: c version
 command = ~D, B, D, B, c
 time = 20
 buffer.time = 3
 
 ;-| Goutaijutsu (1 bar): QCF, QCF + x |----------------------------------------
 [Command]
-name = "Goutaijutsu"
+name = "剛体術"
 command = ~D, F, D, F, x
 time = 20
 buffer.time = 3
 
 ;-| Cockroach Tackle (1 bar): QCF, QCF + b or c |------------------------------
 [Command]
-name = "CockroachTackle"
+name = "ゴキブリタックル"
 command = ~D, F, D, F, b
 time = 20
 buffer.time = 3
 
 [Command]
-name = "CockroachTackle"
+name = "ゴキブリタックル"   ;NEW: c version
 command = ~D, F, D, F, c
 time = 20
 buffer.time = 3
 
 ;-| Endorphin Release (1 bar): QCF, QCF + a |----------------------------------
 [Command]
-name = "Endorphin"
+name = "エンドルフィン"
 command = ~D, F, D, F, a
 time = 20
 buffer.time = 3
@@ -327,66 +333,66 @@ buffer.time = 3
 ;==============================================================================
 ;-| Flying Heel Drop: QCF + a, b or c |----------------------------------------
 [Command]
-name = "HeelDrop"
+name = "前中カカト蹴り"
 command = ~D, F, a
 time = 10
 buffer.time = 3
 
 [Command]
-name = "HeelDrop"
+name = "前中カカト蹴り"   ;NEW: b version
 command = ~D, F, b
 time = 10
 buffer.time = 3
 
 [Command]
-name = "HeelDrop"
+name = "前中カカト蹴り"   ;NEW: c version
 command = ~D, F, c
 time = 10
 buffer.time = 3
 
 ;-| Whip Strike, punch version: QCB + x (hold x to charge) |-------------------
 [Command]
-name = "WhipP"
+name = "鞭打p"
 command = ~D, B, x
 time = 10
 buffer.time = 3
 
 ;-| Mach Punch: QCF + y or z |-------------------------------------------------
 [Command]
-name = "MachPunch"
+name = "音速拳"
 command = ~D, F, y
 time = 10
 buffer.time = 3
 
 [Command]
-name = "MachPunch"
+name = "音速拳"   ;NEW: z version
 command = ~D, F, z
 time = 10
 buffer.time = 3
 
 ;-| Whip Strike, kick version: QCB + a (hold a to charge) |--------------------
 [Command]
-name = "WhipK"
+name = "鞭打k"
 command = ~D, B, a
 time = 10
 buffer.time = 3
 
 ;-| Himokiri (optic nerve cut): QCF + x |--------------------------------------
 [Command]
-name = "Himokiri"
+name = "紐切り"
 command = ~D, F, x
 time = 10
 buffer.time = 3
 
 ;-| Jumping Back Kick (overhead): F, B + b or c |------------------------------
 [Command]
-name = "Overhead"
+name = "中段"
 command = ~F, B, b
 time = 10
 buffer.time = 3
 
 [Command]
-name = "Overhead"
+name = "中段"   ;NEW: c version
 command = ~F, B, c
 time = 10
 buffer.time = 3
@@ -411,7 +417,7 @@ buffer.time = 3
 ;==============================================================================
 ;-| Throw: x + y |-------------------------------------------------------------
 [Command]
-name = "throw"
+name = "掴み"
 command = y+x
 time = 1
 buffer.time = 3
@@ -421,22 +427,113 @@ name = "recovery" ;Required (do not remove)
 command = x+y
 time = 1
 
+;-| Not used by this character; kept from the original file |-----------------
+[Command]
+name = "超1"
+command = a+x
+time = 1
+
+[Command]
+name = "超2"
+command = b+y
+time = 1
+
+[Command]
+name = "超3"
+command = c+z
+time = 1
+
 ;==============================================================================
-; Held Buttons (used by the Whip Strike charge in baki-S.cns)
+; Direction + Button (not used by this character; kept from the original file)
 ;==============================================================================
-;-| Keep holding x to charge the punch Whip Strike |---------------------------
+[Command]
+name = "down_a"
+command = /$D,a
+time = 1
+buffer.time = 3
+
+[Command]
+name = "down_b"
+command = /$D,b
+time = 1
+buffer.time = 3
+
+[Command]
+name = "down_y"
+command = /$D,y
+time = 1
+buffer.time = 3
+
+;==============================================================================
+; Held Buttons
+; The Whip Strike charge (baki-S.cns) uses the hold-x / hold-a commands to keep
+; charging, and the two cancel commands (held y or z / held b or c) to cancel.
+; The other hold commands are kept from the original file.
+;==============================================================================
+[Command]
+name = "おしっぱなしx"
+command = /$x
+time = 1
+
+[Command]
+name = "おしっぱなしy"
+command = /$y
+time = 1
+
+[Command]
+name = "おしっぱなしa"
+command = /$a
+time = 1
+
+[Command]
+name = "おしっぱなしb"
+command = /$b
+time = 1
+
+[Command]
+name = "おしっぱなしz"
+command = /$z
+time = 1
+
+[Command]
+name = "おしっぱなしc"
+command = /$c
+time = 1
+
+;-| Whip Strike charge cancel: hold b or c |-----------------------------------
+[Command]
+name = "おb"
+command = /b
+time = 1
+
+[Command]
+name = "おb"   ;NEW: c also cancels
+command = /c
+time = 1
+
+;-| Whip Strike charge cancel: hold y or z |-----------------------------------
+[Command]
+name = "おy"
+command = /y
+time = 1
+
+[Command]
+name = "おy"   ;NEW: z also cancels
+command = /z
+time = 1
+
+;-| Aliases of the Whip Strike commands above, used by the first version of |-
+;-| this conversion, so that version's baki-S.cns also loads.              |-
 [Command]
 name = "hold_x"
-command = /x
+command = /$x
 time = 1
 
-;-| Keep holding a to charge the kick Whip Strike |----------------------------
 [Command]
 name = "hold_a"
-command = /a
+command = /$a
 time = 1
 
-;-| Hold y or z during the charge to cancel it |-------------------------------
 [Command]
 name = "hold_yz"
 command = /y
@@ -447,7 +544,6 @@ name = "hold_yz"
 command = /z
 time = 1
 
-;-| Hold b or c during the charge to cancel it |-------------------------------
 [Command]
 name = "hold_bc"
 command = /b
@@ -504,6 +600,34 @@ time = 1
 buffer.time = 3
 
 ;==============================================================================
+; Single Directions (kept from the original file; common1.cns may use them)
+;==============================================================================
+[Command]
+name = "ななめ"
+command = ~UD
+time = 1
+
+[Command]
+name = "fwd"
+command = F
+time = 1
+
+[Command]
+name = "back"
+command = B
+time = 1
+
+[Command]
+name = "up"
+command = U
+time = 1
+
+[Command]
+name = "down"
+command = D
+time = 1
+
+;==============================================================================
 ; Held Directions
 ;==============================================================================
 [Command]
@@ -545,7 +669,7 @@ value = 3000
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 3000
-triggerall = command = "BreathlessRush"
+triggerall = command = "無呼吸乱舞"
 triggerall = (command = "y") || (command = "z")
 triggerall = statetype != A
 trigger1 = ctrl
@@ -569,7 +693,7 @@ value = 2310
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 1000
-triggerall = command = "TigerKing"
+triggerall = command = "虎王"
 triggerall = (command = "b") || (command = "c")
 triggerall = statetype != A
 triggerall = !var(25)
@@ -594,7 +718,7 @@ value = 2700
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 2000
-triggerall = command = "TriggerCounter"
+triggerall = command = "0.5"
 triggerall = command = "x"
 triggerall = statetype != A
 triggerall = !var(25)
@@ -619,7 +743,7 @@ value = 2100
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 1000
-triggerall = command = "Goutaijutsu"
+triggerall = command = "剛体術"
 triggerall = command = "x"
 triggerall = statetype != A
 triggerall = !var(25)
@@ -644,7 +768,7 @@ value = 2300
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 2000
-triggerall = command = "TriceratopsFist"
+triggerall = command = "トリケラトプス拳"
 triggerall = (command = "y") || (command = "z")
 triggerall = statetype != A
 triggerall = !var(25)
@@ -669,7 +793,7 @@ value = 2180
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 1000
-triggerall = command = "CockroachTackle"
+triggerall = command = "ゴキブリタックル"
 triggerall = (command = "b") || (command = "c")
 triggerall = statetype != A
 triggerall = !var(25)
@@ -694,7 +818,7 @@ value = 2101
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = power >= 1000
-triggerall = command = "Endorphin"
+triggerall = command = "エンドルフィン"
 triggerall = command = "a"
 triggerall = !var(18)
 triggerall = statetype != A
@@ -722,7 +846,7 @@ type = ChangeState
 value = 1644
 triggerall = hitpausetime = 0
 triggerall = !var(59)
-triggerall = command = "MachPunch"
+triggerall = command = "音速拳"
 triggerall = (command = "y") || (command = "z")
 triggerall = statetype != A
 triggerall = !var(25)
@@ -746,7 +870,7 @@ type = ChangeState
 value = 1000
 triggerall = hitpausetime = 0
 triggerall = !var(59)
-triggerall = command = "HeelDrop"
+triggerall = command = "前中カカト蹴り"
 triggerall = (command = "a") || (command = "b") || (command = "c")
 triggerall = statetype != A
 triggerall = !var(25)
@@ -770,7 +894,7 @@ type = ChangeState
 value = 1333
 triggerall = hitpausetime = 0
 triggerall = !var(59)
-triggerall = command = "WhipP"
+triggerall = command = "鞭打p"
 triggerall = command = "x"
 triggerall = statetype != A
 triggerall = !var(25)
@@ -794,7 +918,7 @@ type = ChangeState
 value = 1335
 triggerall = hitpausetime = 0
 triggerall = !var(59)
-triggerall = command = "WhipK"
+triggerall = command = "鞭打k"
 triggerall = command = "a"
 triggerall = statetype != A
 triggerall = !var(25)
@@ -820,7 +944,7 @@ value = 1550
 triggerall = hitpausetime = 0
 triggerall = !var(59)
 triggerall = !var(12)
-triggerall = command = "Himokiri"
+triggerall = command = "紐切り"
 triggerall = command = "x"
 triggerall = statetype != A
 triggerall = !var(25)
@@ -887,7 +1011,7 @@ type = ChangeState
 value = 801
 triggerall = !var(59)
 triggerall = command = "holdback"
-triggerall = command = "throw"
+triggerall = command = "掴み"
 triggerall = command = "y"
 triggerall = command = "x"
 triggerall = statetype != A
@@ -901,7 +1025,7 @@ trigger1 = ctrl
 type = ChangeState
 value = 800
 triggerall = !var(59)
-triggerall = command = "throw"
+triggerall = command = "掴み"
 triggerall = command = "y"
 triggerall = command = "x"
 triggerall = statetype != A
@@ -972,7 +1096,7 @@ trigger4 = command = "holdfwd" && command = "z"
 type = ChangeState
 value = 330
 triggerall = !var(59)
-triggerall = command = "Overhead"
+triggerall = command = "中段"
 triggerall = (command = "b") || (command = "c")
 triggerall = command != "holddown"
 triggerall = statetype != A

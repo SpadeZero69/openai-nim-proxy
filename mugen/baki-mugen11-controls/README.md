@@ -1,6 +1,6 @@
 # Baki Hanma (MUGEN): MUGEN 1.1 six-button controls
 
-Converted command files for tokage's Baki Hanma character (WinMUGEN, last
+Converted command file for tokage's Baki Hanma character (WinMUGEN, last
 updated 2014/7/6). Only the inputs changed. Damage, frame data, combo routes
 and the AI are the same as the original.
 
@@ -20,15 +20,23 @@ the Heel Drop instead of the Middle Kick. The full list is in
 
 ## Files
 
-- `baki.cmd.cns`: the rewritten command file (English, plain ASCII).
-- `baki-S.cns`: the original file with 4 lines changed. The Whip Strike
-  charge now uses ASCII command names (`hold_x`, `hold_a`, `hold_yz`,
-  `hold_bc`) instead of Shift-JIS ones, so the command file is safe to edit
-  in any text editor.
+- `baki.cmd.cns`: the converted command file. It keeps every command
+  definition of the original file unchanged, including the Japanese command
+  names and the ones the character never uses itself (`up`, `fwd`, `back`,
+  `down`, ...), because a custom `common1.cns` can refer to them. The file is
+  Shift-JIS encoded; keep that encoding if you edit it.
 - `Baki - Move List (MUGEN 1.1).txt`: the English move list.
+
+All other files of the character are unchanged.
 
 ## Install
 
-Copy the three files above into your existing `chars/baki/` folder and
-overwrite. The sprites, sounds and other files are unchanged, so they are not
-included here.
+Copy both files into your existing `chars/baki/` folder and overwrite.
+
+## Changes
+
+- v2: the first version dropped command names the character doesn't use
+  (`up`, `fwd`, ...). A `common1.cns` that refers to them then failed with
+  `Undefined command label`. All original command names are back, and
+  `baki-S.cns` is the original file again. The command file also accepts the
+  first version's `baki-S.cns`.

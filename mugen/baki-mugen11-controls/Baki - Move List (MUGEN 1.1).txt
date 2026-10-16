@@ -7,8 +7,10 @@
  Only the inputs changed. Damage, speed, combos and the AI are the same
  as the original character.
 
- Files changed: baki.cmd.cns (all inputs) and baki-S.cns (4 lines: the
- button names used by the Whip Strike charge).
+ Only baki.cmd.cns was changed. It keeps every command name from the
+ original file, so a custom common1.cns that worked with the original
+ still works. If you edit baki.cmd.cns, save it as Shift-JIS (Japanese
+ ANSI), not UTF-8, because some command names are Japanese.
 
 --------------------------------------------------------------------------
  BUTTONS
