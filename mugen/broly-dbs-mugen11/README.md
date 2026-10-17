@@ -5,8 +5,30 @@ coldskin1's "infinite scaling" edit, converted to a MUGEN 1.1 character.
 
 The character was already close to MUGEN 1.1. It uses 1.1 features: Explod
 `remappal` colors the grayscale effect sprites per palette (348 Explods),
-plus Explod `angle` and GameWidth/GameHeight. Every controller (1,926) and
-every trigger is valid in MUGEN 1.1. The conversion fixes what was left.
+plus Explod `angle` and GameWidth/GameHeight. Every controller and every
+trigger is valid in MUGEN 1.1. The conversion fixes what was left.
+
+## Scaling with no limit
+
+The infinite-scaling edit keeps a level in `var(52)`: +1 every 600 ticks
+(10 seconds) of `GameTime`, starting at 1, never capped. `IntPersistIndex
+= 52` keeps it between rounds. `fvar(19)` is the multiplier taken from it:
+the level, or 8 x the level while transformed (helper 6990 exists).
+
+- Damage: `AttackMulSet` = `fvar(19)` (Statedef -2, and in the helper
+  states that make attacks).
+- Durability: `DefenceMulSet` = `fvar(19)` (damage taken divided by it),
+  and the armor helper 60001 absorbs `fvar(19)` hits before he flinches.
+- Regeneration (added): Statedef -2 adds `2 * var(52) * LifeMax / 60000`
+  life per tick to an accumulator (`fvar(38)`) during `RoundState = 2`
+  and heals the whole part, so he heals level x 0.2% of his max life per
+  second. The 2 is the tuning value.
+
+Damage scaling fixes (added): the air grab (620) and its follow-up (621)
+are Broly's own states but read `parent,fvar(19)`, which doesn't exist for
+him, so they now read `fvar(19)`. The meteor rain helper (1275) read its
+own `fvar(19)` instead of Broly's (`parent,fvar(19)` now), and the ki burst
+helper (2000) had no multiplier (it gets `parent,fvar(19)`).
 
 ## Changes
 
@@ -47,11 +69,11 @@ every trigger is valid in MUGEN 1.1. The conversion fixes what was left.
 - Special moves: input window 15 -> 20 ticks (1/3 second). The ultimate
   stays at 30.
 - `Broly (DBS) - Move List (MUGEN 1.1).txt`: move list for PC keyboard
-  players (buttons, chains, specials, costs, the infinite-scaling rules).
+  players (buttons, chains, specials, costs, the scaling table).
+- Regeneration and damage-scaling fixes (see above).
 
 Unchanged: the button layout (it already uses all seven MUGEN buttons),
-sprites, sounds, palettes, the AI apart from the 15800 fix, and the
-overpowered balance. Two DefenceMulSet parameters only IKEMEN reads
+sprites, sounds, palettes and the AI apart from the 15800 fix. Two DefenceMulSet parameters only IKEMEN reads
 (`onhit`, `multype`) are left in place; MUGEN ignores them.
 
 ## Files

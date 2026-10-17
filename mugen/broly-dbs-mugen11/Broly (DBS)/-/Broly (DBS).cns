@@ -5706,7 +5706,7 @@ pos = 30,-3
 [State 3000]
 type = AttackMulSet
 trigger1 = 1
-value = parent,fvar(19)
+value = fvar(19)
 
 [State 620]
 type = HitDef
@@ -5798,7 +5798,7 @@ pos = 30,-3
 [State 3000]
 type = AttackMulSet
 trigger1 = 1
-value = parent,fvar(19)
+value = fvar(19)
 
 
 [State 621]
@@ -8890,7 +8890,7 @@ elem = 10
 [State 3000]
 type = AttackMulSet
 trigger1 = 1
-value = fvar(19)
+value = parent,fvar(19)
 
 [State 1275]
 type = PlaySnd
@@ -13376,6 +13376,11 @@ ctrl = 0
 velset= 0,0
 anim = 2000
 sprpriority = 1
+
+[State 2000, damage scaling (added)]
+type = AttackMulSet
+trigger1 = 1
+value = parent,fvar(19)
 
 [State 2000]
 type = RemapPal

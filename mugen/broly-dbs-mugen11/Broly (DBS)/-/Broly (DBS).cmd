@@ -787,6 +787,38 @@ trigger1 = NumHelper(6990) = 1
 fvar(19) = var(52)*8
 ignorehitpause = 1
 
+;---------------------------------------------------------------------------
+; REGENERATION (added). Broly heals all the time during a round, faster the
+; longer the match goes on, with no limit. It uses the infinite-scaling
+; level var(52) (+1 every 10 seconds of the match, kept between rounds):
+; per second he heals level x 2/1000 of his max life, so 0.2% at the start,
+; 1.4% after a minute, 6.2% after five minutes, and so on.
+; To change the speed, change the 2 at the start of "value" below
+; (bigger = faster, 0 = no regeneration).
+[State -2, Regeneration: build up]
+type = VarAdd
+trigger1 = !IsHelper
+trigger1 = (RoundState = 2) && Alive && (Life < LifeMax)
+fv = 38
+value = 2 * var(52) * (LifeMax / 60000.0)
+ignorehitpause = 1
+
+[State -2, Regeneration: heal]
+type = LifeAdd
+trigger1 = !IsHelper
+trigger1 = fvar(38) >= 1
+value = floor(fvar(38))
+absolute = 1
+ignorehitpause = 1
+
+[State -2, Regeneration: keep the rest]
+type = VarAdd
+trigger1 = !IsHelper
+trigger1 = fvar(38) >= 1
+fv = 38
+value = -floor(fvar(38))
+ignorehitpause = 1
+
 
 ;---------------------------------------------------------------------------
 

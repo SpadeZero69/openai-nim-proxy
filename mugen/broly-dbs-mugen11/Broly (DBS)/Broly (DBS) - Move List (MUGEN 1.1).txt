@@ -78,7 +78,7 @@
 
    Transform .......... X, standing still (2 bars)
        Legendary Super Saiyan: heals 500 life, faster dashes, much
-       stronger armor (see "infinite scaling" below).
+       stronger armor (see "The longer the fight" below).
        Press X again to power down (gives back 1 bar).
 
 --------------------------------------------------------------------------
@@ -153,18 +153,31 @@
                             together (A+B, B+C, A+C, X+Y, Y+Z or X+Z)
 
 --------------------------------------------------------------------------
- ABOUT THIS VERSION ("infinite scaling", by coldskin1)
+ THE LONGER THE FIGHT, THE STRONGER HE GETS (no limit)
 --------------------------------------------------------------------------
- This Broly is meant to be overpowered:
-   - His attacks take away a share of the opponent's maximum life, so
-     they hurt everyone the same.
-   - Every 10 seconds of the match his attack and defense multiplier
-     goes up by one (x1, x2, x3 ...), and while he is transformed it is
-     8 times higher. It keeps building from round to round.
-   - His armor absorbs a number of hits (the same multiplier) before he
-     flinches. Hits on the armor still cost him a little life.
-   - When the computer controls him, he doesn't block while the armor is
-     up.
+ Broly has a power level that goes up by 1 every 10 seconds of the
+ match, starting at 1. It never stops and it carries over from round to
+ round. With every level:
+   - Damage: his attacks hit harder (x level).
+   - Durability: he takes less damage (damage divided by the level), and
+     his armor absorbs one more hit before he flinches.
+   - Regeneration: he heals faster, by 0.2% of his max life per second
+     for each level. He heals all the time during a round.
+ While he is transformed, damage, durability and armor are 8 times
+ higher still (regeneration stays the same).
+
+   Match time   Level   Damage   Damage taken   Armor hits   Healing
+   start           1      x1      full             1        0.2% a second
+   1 minute        7      x7      1/7              7        1.4% a second
+   3 minutes      19      x19     1/19            19        3.8% a second
+   5 minutes      31      x31     1/31            31        6.2% a second
+   10 minutes     61      x61     1/61            61       12.2% a second
+
+ His attacks also take away a share of the opponent's maximum life, so
+ they hurt every opponent the same. When the computer controls him, he
+ doesn't block while the armor is up.
+ Original "infinite scaling" edit by coldskin1; the regeneration was
+ added in this version.
 
 --------------------------------------------------------------------------
  MUGEN 1.1 NOTES
