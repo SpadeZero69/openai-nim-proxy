@@ -3,6 +3,8 @@
  Original character by tokage (WinMUGEN, 2014). Converted to the MUGEN 1.1
  six-button layout, and turned into a boss: smart combo AI, automatic
  meter, slow healing, hyper armor, invincible moves and an awakening.
+ Easy controls: every super is one arrow + one button, and no move needs
+ two buttons pressed together.
 ==========================================================================
 
 --------------------------------------------------------------------------
@@ -24,11 +26,13 @@
    X = light punch    Y = medium punch    Z = heavy punch
    A = light kick     B = medium kick     C = heavy kick
 
- "then X" means press X straight after the arrows. Be quick:
-   special moves: within 1/3 of a second
-   super moves:   within 1/2 of a second
+ "then X" means press X straight after the arrows. Be quick: special
+ moves need the whole input within 1/3 of a second.
  Tip: the in-between diagonals are optional. Down, then Forward, then
  the button also works.
+
+ "Forward + X" means tap Forward and press X at the same time (or X right
+ after the arrow). This is how every super works.
 
  1 bar = 1000 power. The bar now fills by itself (about 1 bar every
  5 seconds), so you don't need to hit anyone to build it.
@@ -59,8 +63,6 @@
  COMMAND ATTACKS
 --------------------------------------------------------------------------
    Knee ..................... Back + A
-   Elbow .................... Back + Y        (same as Z)
-   Back kick ................ Forward + A     (same as C)
    Middle kick .............. Forward + B                  (hyper armor)
    Jumping back kick ........ Forward, then Back, then B or C
                               (overhead: must be blocked standing)
@@ -69,8 +71,9 @@
 --------------------------------------------------------------------------
  THROWS (stand right next to the opponent)
 --------------------------------------------------------------------------
-   Throw .................... X and Y together, or Forward + Z
-   Back throw ............... Back + X and Y together, or Back + Z
+   Throw .................... Forward + Z
+   Back throw ............... Back + Z
+   (Away from the opponent, Forward/Back + Z gives the elbow.)
 
 --------------------------------------------------------------------------
  SPECIAL MOVES
@@ -93,31 +96,30 @@
        Back to inch along, or press Y, Z, B or C to cancel (invincible).
 
 --------------------------------------------------------------------------
- SUPER MOVES
+ SUPER MOVES (tap the arrow and press the button together)
 --------------------------------------------------------------------------
-   Goutaijutsu (1 bar)
-       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then X
-
-   Cockroach Tackle (1 bar)
-       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then B or C
-
-   Endorphin Release (1 bar, once per round)
-       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then A
-       Attack up for a while and a small life refill.
-
-   Tiger King (1 bar) - catches the opponent's attack
-       Down, Down-Back, Back, Down, Down-Back, Back, then B or C
-
-   Trigger Counter (2 bars) - unblockable against a standing opponent
-       Down, Down-Forward, Forward, Down, Down-Back, Back, then X
-
-   Triceratops Fist (2 bars)
-       Down, Down-Forward, Forward, Down, Down-Forward, Forward, then Y or Z
-
-   Breathless Rush (3 bars)
-       Down, Down-Forward, Forward, Down, Down-Back, Back, then Y or Z
+   Forward + X ........ Goutaijutsu (1 bar)
+   Forward + Y ........ Triceratops Fist (2 bars)
+   Forward + C ........ Cockroach Tackle (1 bar)
+   Forward + A ........ Endorphin Release (1 bar, once per round)
+                        Attack up for a while and a small life refill.
+   Back + X ........... Trigger Counter (2 bars)
+                        Unblockable against a standing opponent.
+   Back + Y ........... Breathless Rush (3 bars)
+   Back + B or C ...... Tiger King (1 bar)
+                        Catches the opponent's attack.
 
  Every super except Tiger King is invincible while it starts up.
+ They also work to end a combo: press them while an attack hits.
+
+ Good to know:
+   - Without enough meter, these buttons give the normal attacks.
+   - The arrow has to be a fresh tap. If you are already walking
+     (holding the arrow), the button gives the normal attack.
+   - Down, then Forward (or Back), then the button is a special move,
+     not a super.
+   - The old full motions still work too, for example Down, Down-Forward,
+     Forward, Down, Down-Forward, Forward, then X for Goutaijutsu.
 
 --------------------------------------------------------------------------
  OTHER
@@ -125,6 +127,7 @@
    Dash ..................... Forward, Forward
    Back step ................ Back, Back            (invincible start)
    Guard cancel (1 bar) ..... while blocking: Forward + Y, Z, B or C
+   Air recovery ............. when knocked into the air: any attack button
    Wall jump ................ jump next to the screen edge, then hold
                               Up + the arrow pointing away from the wall
 

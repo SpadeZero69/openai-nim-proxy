@@ -12,6 +12,11 @@
 ; as the "strong" buttons for specials and supers (z works like y, c works like
 ; b). The full move list is in "Baki - Move List (MUGEN 1.1).txt".
 ;
+; Easy supers: every super also comes out with a tap of Forward or Back plus
+; one button (see "Easy supers" in the state entry section). No move needs two
+; buttons at once: throws are Forward/Back + z next to the opponent, and air
+; recovery works with any attack button.
+;
 ; All command names from the original file are kept, including the Japanese
 ; ones and some that this character never uses itself ("up", "fwd", "back",
 ; "down", ...): other files such as common1.cns can refer to them.
@@ -257,6 +262,8 @@ time = 0
 ; Input window: time = 30 ticks (half a second) for every super.
 ; The original file used 20 (25 for the D, F, D, B motions). Raise or lower
 ; the time values below to make supers easier or stricter.
+; These full motions still work; the easy inputs (tap Forward or Back + one
+; button) are defined further down.
 ;==============================================================================
 ;-| Breathless Rush (3 bars): D, F, D, B + y or z |-----------------------------
 [Command]
@@ -421,17 +428,82 @@ buffer.time = 3
 ;==============================================================================
 ; Button Combinations
 ;==============================================================================
-;-| Throw: x + y |-------------------------------------------------------------
+;-| x + y: no longer used for throws (Forward/Back + z instead) |-------------
 [Command]
 name = "掴み"
 command = y+x
 time = 1
 buffer.time = 3
 
+;-| Air recovery (used by MUGEN's common1.cns): any attack button |------------
 [Command]
 name = "recovery" ;Required (do not remove)
 command = x+y
 time = 1
+
+[Command]
+name = "recovery"
+command = x
+time = 1
+
+[Command]
+name = "recovery"
+command = y
+time = 1
+
+[Command]
+name = "recovery"
+command = z
+time = 1
+
+[Command]
+name = "recovery"
+command = a
+time = 1
+
+[Command]
+name = "recovery"
+command = b
+time = 1
+
+[Command]
+name = "recovery"
+command = c
+time = 1
+
+;==============================================================================
+; Easy supers: tap Forward or Back, then press the button.
+; "tapfwd" / "tapback" stay active for 12 ticks (1/5 second) after Forward or
+; Back is pressed, so pressing the direction and the button together, or the
+; button right after the direction, both work. Walking (holding the direction
+; longer) and then pressing a button still gives the normal attack.
+; Raise buffer.time to make the easy supers more forgiving.
+;==============================================================================
+[Command]
+name = "tapfwd"
+command = F
+time = 1
+buffer.time = 12
+
+[Command]
+name = "tapback"
+command = B
+time = 1
+buffer.time = 12
+
+; Guards: Down (or Forward) pressed in the last 20 (15) ticks means the player
+; is entering a special move (or the overhead), so the easy super stays out.
+[Command]
+name = "recentdown"
+command = $D
+time = 1
+buffer.time = 20
+
+[Command]
+name = "recentfwd"
+command = F
+time = 1
+buffer.time = 15
 
 ;-| Not used by this character; kept from the original file |-----------------
 [Command]
@@ -968,6 +1040,208 @@ trigger11 = (anim=250||anim=252)&&(movecontact)
 trigger12 = (anim=240||anim=241)&&(movecontact)
 
 ;==============================================================================
+; Easy supers: tap Forward or Back + one button (same button as the full
+; motion). They come after the specials, so Down, Forward + button still gives
+; the special move. The "command !=" lines keep them out when Down (or, for
+; Tiger King, Forward) was pressed just before: that input is a special move
+; (or the overhead) even when the special can't be used right now. Not while
+; running (states 100, 101): F, F, x is still the running punch.
+;==============================================================================
+;---------------------------------------------------------------------------
+; Goutaijutsu (1000 power): tap F + x
+[State -1, Goutaijutsu (easy)]
+type = ChangeState
+value = 2100
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "tapfwd"
+triggerall = command != "紐切り"
+triggerall = command != "recentdown"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Triceratops Fist (2000 power): tap F + y
+[State -1, Triceratops Fist (easy)]
+type = ChangeState
+value = 2300
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 2000
+triggerall = command = "tapfwd"
+triggerall = command != "音速拳"
+triggerall = command != "recentdown"
+triggerall = command = "y"
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Cockroach Tackle (1000 power): tap F + c
+[State -1, Cockroach Tackle (easy)]
+type = ChangeState
+value = 2180
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "tapfwd"
+triggerall = command != "前中カカト蹴り"
+triggerall = command != "recentdown"
+triggerall = command = "c"
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Endorphin Release (1000 power, once per round): tap F + a
+[State -1, Endorphin Release (easy)]
+type = ChangeState
+value = 2101
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "tapfwd"
+triggerall = command != "前中カカト蹴り"
+triggerall = command != "recentdown"
+triggerall = command = "a"
+triggerall = !var(18)
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Trigger Counter (2000 power): tap B + x
+[State -1, Trigger Counter (easy)]
+type = ChangeState
+value = 2700
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 2000
+triggerall = command = "tapback"
+triggerall = command != "鞭打p"
+triggerall = command != "recentdown"
+triggerall = command = "x"
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Breathless Rush (3000 power): tap B + y
+[State -1, Breathless Rush (easy)]
+type = ChangeState
+value = 3000
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 3000
+triggerall = command = "tapback"
+triggerall = command = "y"
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;---------------------------------------------------------------------------
+; Tiger King / Koou (1000 power): tap B + b or c
+[State -1, Tiger King (easy)]
+type = ChangeState
+value = 2310
+triggerall = hitpausetime = 0
+triggerall = !var(59)
+triggerall = power >= 1000
+triggerall = command = "tapback"
+triggerall = command != "中段"
+triggerall = command != "recentfwd"
+triggerall = (command = "b") || (command = "c")
+triggerall = statetype != A
+triggerall = stateno != [100,101]
+triggerall = !var(25)
+trigger1 = ctrl
+trigger2 = anim = (200)&&(movecontact)
+trigger3 = (anim=400||anim=401)&&(movecontact)
+trigger4 = (anim=430||anim=431)&&(movecontact)
+trigger5 = (anim=230||anim=231)&&(movecontact)
+trigger6 = (anim=245||anim=246)&&(movecontact)
+trigger7 = (anim=210||anim=211)&&(movecontact)
+trigger8 = (anim=251||anim=252)&&(movecontact)
+trigger9 = (anim=2321||anim=2322)&&(movecontact)
+trigger10 = (anim=253||anim=251)&&(movecontact)
+trigger11 = (anim=250||anim=252)&&(movecontact)
+trigger12 = (anim=240||anim=241)&&(movecontact)
+
+;==============================================================================
 ; Movement
 ;==============================================================================
 ;---------------------------------------------------------------------------
@@ -1010,37 +1284,10 @@ trigger1 = (stateno != 99)||(anim != 99)
 ;==============================================================================
 ; Throws
 ;==============================================================================
+; Throws need no button combination: Forward or Back + z next to the opponent.
+; (The original x + y throw is no longer used.)
 ;---------------------------------------------------------------------------
-; Back throw (Ura-nage): B + x + y
-[State -1, Back Throw]
-type = ChangeState
-value = 801
-triggerall = !var(59)
-triggerall = command = "holdback"
-triggerall = command = "掴み"
-triggerall = command = "y"
-triggerall = command = "x"
-triggerall = statetype != A
-triggerall = stateno != 100
-triggerall = !var(25)
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Throw (Tenrenge): x + y
-[State -1, Throw]
-type = ChangeState
-value = 800
-triggerall = !var(59)
-triggerall = command = "掴み"
-triggerall = command = "y"
-triggerall = command = "x"
-triggerall = statetype != A
-triggerall = stateno != 100
-triggerall = !var(25)
-trigger1 = ctrl
-
-;---------------------------------------------------------------------------
-; Back throw, standard input: B + z when close
+; Back throw: B + z when close
 ; Only fires when the grab can connect; otherwise B + z gives the elbow.
 [State -1, Back Throw close]
 type = ChangeState
@@ -1059,7 +1306,7 @@ triggerall = p2stateno != [130,159]
 trigger1 = ctrl
 
 ;---------------------------------------------------------------------------
-; Throw, standard input: F + z when close
+; Throw: F + z when close
 ; Only fires when the grab can connect; otherwise F + z gives the elbow.
 [State -1, Throw close]
 type = ChangeState

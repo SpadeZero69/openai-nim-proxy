@@ -11,11 +11,46 @@ character is set up as a hard boss.
 | z      | Heavy Punch  | c      | Heavy Kick  |
 | s      | Taunt        |        |             |
 
-Every move keeps its original input. Standing z is the Elbow Strike and
-standing c the Back Kick; z and c also work as the strong buttons for specials
-and supers (z like y, c like b). The Flying Heel Drop takes any kick, so QCF + b
-gives the Heel Drop instead of the Middle Kick. The full list, written for PC
-keyboard players, is in `Baki - Move List (MUGEN 1.1).txt`.
+Standing z is the Elbow Strike and standing c the Back Kick; z and c also work
+as the strong buttons for specials (z like y, c like b). The Flying Heel Drop
+takes any kick, so QCF + b gives the Heel Drop instead of the Middle Kick. The
+full list, written for PC keyboard players, is in
+`Baki - Move List (MUGEN 1.1).txt`.
+
+## Easy controls
+
+No move needs two buttons pressed together, and every super is one tap of
+Forward or Back plus one button (the same button its full motion used):
+
+| Input            | Super                                   |
+|------------------|-----------------------------------------|
+| Forward + x      | Goutaijutsu (1 bar)                     |
+| Forward + y      | Triceratops Fist (2 bars)               |
+| Forward + c      | Cockroach Tackle (1 bar)                |
+| Forward + a      | Endorphin Release (1 bar, once a round) |
+| Back + x         | Trigger Counter (2 bars)                |
+| Back + y         | Breathless Rush (3 bars)                |
+| Back + b or c    | Tiger King (1 bar)                      |
+
+- The direction has to be pressed at most 12 ticks (1/5 second) before the
+  button, or together with it (commands `tapfwd` / `tapback`). Holding the
+  direction longer (walking) and then pressing a button gives the normal
+  attack, and without enough meter the normal attack comes out too.
+- The easy supers are checked after the specials, and not within 20 ticks of
+  a Down press (15 ticks of a Forward press for Tiger King, because of the
+  overhead), so Down, Forward + button stays a special move.
+- They cancel out of the same attacks as the full-motion supers, which still
+  work.
+- Not while running (states 100, 101), so Forward, Forward, x is still the
+  running punch.
+- Throws: Forward + z and Back + z next to the opponent. The x + y throws
+  are gone.
+- Air recovery: any attack button (x + y still works).
+
+The inputs were checked frame by frame on 40 test cases (a MUGEN command
+matcher plus the state -1 entries), under both possible rules for keys
+pressed on the same tick. Compared with v5, the only results that changed are
+the easy supers and the x + y throw.
 
 ## Boss features
 
@@ -45,7 +80,8 @@ keyboard players, is in `Baki - Move List (MUGEN 1.1).txt`.
   - more movement (runs, walks, jumps in, backs off, closes in on knockdowns),
     specials in neutral, overheads against crouching guards, throws;
   - the CPU takes 20% less damage.
-- Input windows: specials 20 ticks (was 10), supers 30 ticks (was 20/25).
+- Input windows: specials 20 ticks (was 10), full-motion supers 30 ticks
+  (was 20/25).
 
 All boss settings are at the top of `baki-2.cns`: who gets the boss powers
 (always / CPU only / nobody), boss AI on/off, meter speed, healing speed, CPU
@@ -56,7 +92,7 @@ because Baki runs in MUGEN 1.1's pre-1.0 compatible mode.
 
 - `baki.cmd.cns`: command file. Keeps every original command definition
   (including the Japanese names and unused ones such as `up`, which a custom
-  `common1.cns` may need), plus the z/c variants.
+  `common1.cns` may need), plus the z/c variants and the easy-super inputs.
 - `baki-2.cns`: boss settings, automatic meter, healing, CPU toughness,
   awakening.
 - `bakiAI.cns`: boss AI block added before the original AI.
@@ -81,6 +117,9 @@ mugenversion of character".
 
 ## Changes
 
+- v6: easy controls. Every super on a tap of Forward or Back plus one button,
+  throws on Forward/Back + z only (no x + y), air recovery with any attack
+  button. The boss files are the same as v5.
 - v5: rebuilt boss AI (life-based aggression, 8 frame-checked combo routes
   using every move, counters when he can't block, more movement and
   specials), slow healing, meter one bar per 5 seconds, awakening at 35% life.
