@@ -1,0 +1,4771 @@
+;---------------------------------------------------------------
+;必殺技ステート
+;---------------------------------------------------------------
+;超元気玉
+[Statedef 1070]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+value=91070
+ignorehitpause=1
+
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=sysvar(2)
+sysvar(3)=3200
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=3200
+value=sysvar(3)
+elem=(sysvar(4)=[0,48])*floor(((sysvar(4)%12)>6)+((sysvar(4)%12/6)>3)+2)+(sysvar(4)=[49,63])*floor((sysvar(4)-49)/5+9)+(sysvar(4)=[64,483])*12+(sysvar(4)=[484,571])*13
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ];パワー管理
+Type=PowerAdd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Value=-7500
+ignorehitpause=1
+
+[State ];パワー管理
+type=null
+triggerall=!ishelper&&palno>=5
+trigger1=sysvar(4)=0
+trigger1=var(36):=var(36)-7500||1
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=65
+projanim=3202
+projremovetime=420
+supermovetime=999
+pausemovetime=999
+attr=S,NT
+sparkno=-1
+postype=p1
+offset=0,250
+ignorehitpause=1
+projscale=2.5,2.5
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=65
+value=7,4
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=0,13
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=485
+value=0,14
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=485
+value=4,3
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=!ishelper&&alive
+trigger1=palno<7
+trigger1=sysvar(4)=485
+projanim=3201
+velocity=3,0
+projremove=0
+projremovetime=87
+supermovetime=99
+pausemovetime=99
+projpriority=999999999
+projsprpriority=999999999
+projhits=20
+projmisstime=1
+attr=S,NA
+animtype=Hard ;MUGEN 1.1 conversion: was High
+damage=Ceil((0.035*(palno<5)+0.25*(palno>4))*var(0)),Ceil((0.02*(palno<5)+0.1*(palno>6))*var(0))
+guard.dist=160
+pausetime=1,2
+sparkno=s555
+sparkxy=-10,-60
+ground.type=High
+ground.hittime=100
+ignorehitpause=1
+projscale=2.5,2.5
+
+[State ]
+type=Projectile
+triggerall=!ishelper&&alive
+trigger1=palno>6
+Trigger1=sysvar(4)=485
+projanim=3201
+velocity=3,0
+projremove=0
+projremovetime=87
+supermovetime=99
+pausemovetime=99
+projpriority=999999999
+projsprpriority=999999999
+projhits=20
+projmisstime=1
+attr=S,NA
+animtype=Hard ;MUGEN 1.1 conversion: was High
+damage=Ceil(0.25*var(0)+random%25)*!(var(56)&128),Ceil(0.1*var(0)+random%25)*!(var(56)&128)
+guard.dist=0
+pausetime=0,0
+sparkno=s555
+sparkxy=-10,-60
+ground.type=High
+ground.hittime=100
+projscale=2.5,2.5
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=!ishelper&&alive
+Trigger1=sysvar(4)=485
+projanim=3201
+velocity=3,0
+projremove=0
+projremovetime=87
+supermovetime=99
+pausemovetime=99
+projhits=20
+projmisstime=1
+projpriority=2147483647
+projsprpriority=2147483647
+attr=S,SA
+animtype=Hard
+damage=1*!(var(56)&128),1*!(var(56)&128)
+guardflag=MA
+sparkno=-1
+guard.sparkno=-1
+ground.type=Trip
+ground.slidetime=50
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+ignorehitpause=1
+projscale=2.5,2.5
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+triggerall=root,palno>8
+Triggerall=sysvar(4)=[485,572]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax&&!((playerid(root,var(24)),var(22)&16)&&(playerid(root,var(24)),var(22)&32))
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax&&!((playerid(root,var(24)),var(27)&16)&&(playerid(root,var(24)),var(27)&32))
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=2147483647
+hitflag=MAFD
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=568
+anim=8550
+ownpal=1
+sprpriority=10
+pos=166,0
+BindTime=-1
+removetime=60
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=EnvShake
+triggerall=!ishelper
+Trigger1=ProjHittime(1070)=1
+time=12
+ampl=4
+freq=127
+ignorehitpause=1
+
+[State ]
+Type=SuperPause
+triggerall=!ishelper&&palno!=12
+trigger1=sysvar(4)=1
+Time=475
+anim=-1
+movetime=475
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerAll=palno!=12
+Trigger1=Var(1)=1
+Trigger1=animtime=0||sysvar(4)>571
+value=5300
+ignorehitpause=1
+
+[State ]
+type=SelfState
+Trigger1=animtime=0||sysvar(4)>571
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;-------------------------------------------------------------------------------------
+;スーパーノヴァ
+[Statedef 2012]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SprPriority
+trigger1=1
+value=1
+ignorehitpause=1
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=4041
+ignorehitpause=1
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=94041
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+triggerall=sysvar(4)=[0,412]
+trigger1=sysvar(3)=4041
+trigger2=sysvar(3)=94041
+value=sysvar(3)
+elem=(sysvar(4)=[0,109])*floor(sysvar(4)/10+2)+(sysvar(4)=[110,149])*floor((sysvar(4)-110)/5+9)+(sysvar(4)=[150,152])*17+(sysvar(4)=[153,272])*18+(sysvar(4)=[273,275])*19+(sysvar(4)=[276,279])*20+(sysvar(4)=[280,409])*21+(sysvar(4)=[410,412])*22
+ignorehitpause=1
+[state ];ステ抜け時のanimelem
+type=changeanim
+triggerall=sysvar(4)=[413,429]
+trigger1=sysvar(3)=4041
+trigger2=sysvar(3)=94041
+value=sysvar(3)
+elem=(sysvar(4)=[413,419])*23+(sysvar(4)=[420,429])*24
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=root,palno=12&&root,var(24)>0&&root,var(33)
+trigger1=playerID(root,var(24)),anim=450100
+trigger1=enemynear,numhelper(149990)<2
+trigger2=root,fvar(10)!=1
+trigger2=playerID(root,var(24)),var(50)&1
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,5
+guard.dist=0
+p2stateno=root,var(33)
+p2getp1state=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ]
+Type=PowerAdd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Value=-9500
+ignorehitpause=1
+
+[State ];11Pのパワー
+type=null
+triggerall=!ishelper&&palno>=5
+trigger1=sysvar(4)=0
+trigger1=var(36):=var(36)-9500||1
+ignorehitpause=1
+
+[State ]
+Type=AssertSpecial
+triggerall=!ishelper
+Trigger1=palno=[11,12]
+flag=unguardable
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=Turn
+triggerall=!ishelper
+trigger1=enemynear,alive||numenemy=1
+trigger1=(enemynear,pos x-pos x)*facing<0
+trigger2=!enemynear,alive&&numenemy>1
+trigger2=(enemynear(1),pos x-pos x)*facing<0
+ignorehitpause=1
+
+[state ]
+type=lifeadd
+triggerall=!ishelper
+triggerAll=palno!=12
+trigger1=sysvar(4)=280
+trigger1=life>=(lifemax*0.275)
+value=-Ceil(lifemax*0.925)
+kill=0
+ignoreHitPause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+anim=9102
+pos=-320,0
+postype=right
+sprpriority=-6
+BindTime=-1
+removetime=300
+supermovetime=999
+pausemovetime=999
+bindtime=-1
+persistent=0
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+anim=1041
+pos=0,0
+sprpriority=6
+BindTime=-1
+removetime=280
+supermovetime=999
+pausemovetime=999
+bindtime=-1
+persistent=0
+ignorehitpause=1
+
+[state ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=[150,180]
+trigger1=sysvar(4)%15=0
+projanim=8526
+projremovetime=90
+supermovetime=999
+pausemovetime=999
+Projespriority=-3
+attr=S,NT
+sparkno=-1
+offset=-60,0
+ignorehitpause=1
+
+[State ]
+Type=projectile
+triggerall=!ishelper
+Trigger1=sysvar(4)=150
+projanim=3015
+projremovetime=120
+supermovetime=999
+pausemovetime=999
+attr=S,NT
+sparkno=-1
+offset=-23,-55
+ignorehitpause=1
+projscale=0.8,0.8
+
+[state ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=[0,280]
+trigger1=gametime%10=0
+projanim=12117+(gametime%30)/10
+projremovetime=10
+supermovetime=99
+pausemovetime=99
+Projespriority=7
+attr=S,NT
+sparkno=-1
+offset=0,-40
+ignorehitpause=1
+
+[State ]
+Type=EnvShake
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+Time=450
+freq=127
+ampl=4
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=70
+value=0,16
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=150
+value=7,4
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=280
+trigger2=sysvar(4)=310
+trigger3=sysvar(4)=340
+trigger4=sysvar(4)=370
+trigger5=sysvar(4)=400
+value=4,3
+ignorehitpause=1
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+triggerall=palno<7
+Trigger1=sysvar(4)=[150,159]
+Trigger2=sysvar(4)=[220,229]
+Trigger3=sysvar(4)=[250,259]
+Trigger4=sysvar(4)=[270,279]
+Attr=S,HA
+AnimType=Hard
+Damage=Ceil((0.06*(palno<5)+0.15*(palno>4))*var(0)),Ceil((0.01*(palno<5)+0.075*(palno>4))*var(0))
+hitflag=MAFDP
+guardflag=MA
+priority=7
+guard.dist=160
+pausetime=0,20
+sparkxy=-10,-60
+hitsound=S20,5
+guardsound=S20,3
+givepower=10
+ground.Type=Trip
+ground.slidetime=25
+ground.hittime=25
+ground.velocity=-3,-12
+guard.velocity=-1
+air.velocity=-3,-12
+airguard.velocity=-1,-2
+fall=1
+fall.recover=0
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+triggerall=palno>6&&!(var(56)&256)
+Trigger1=sysvar(4)=[150,159]
+Trigger2=sysvar(4)=[220,229]
+Trigger3=sysvar(4)=[250,259]
+Trigger4=sysvar(4)=[270,279]
+Attr=S,HA
+AnimType=Hard
+Damage=Ceil(0.15*var(0)+random%25)*!(var(56)&128),Ceil(0.075*var(0)+random%25)*!(var(56)&128)
+hitflag=MAFDP
+priority=7
+pausetime=0,0
+sparkxy=-10,-60
+hitsound=S20,5
+guardsound=S20,3
+ground.Type=Trip
+ground.slidetime=25
+ground.hittime=25
+ground.velocity=-3,-12
+guard.velocity=-1
+air.velocity=-3,-12
+airguard.velocity=-1,-2
+fall=1
+fall.recover=0
+ignorehitpause=1
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&(var(56)&256)
+Attr=,HA
+AnimType=Hard
+Damage=Ceil(0.15*var(0)+random%25)*!(var(56)&128),Ceil(0.075*var(0)+random%25)*!(var(56)&128)
+hitflag=MAFDP
+priority=7
+pausetime=0,0
+sparkxy=-10,-60
+hitsound=S20,5
+guardsound=S20,3
+ground.Type=Trip
+ground.slidetime=25
+ground.hittime=25
+ground.velocity=-3,-12
+guard.velocity=-1
+air.velocity=-3,-12
+airguard.velocity=-1,-2
+fall=1
+fall.recover=0
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=!ishelper&&alive
+triggerall=palno<7
+Trigger1=sysvar(4)=280
+trigger2=sysvar(4)=305
+trigger3=sysvar(4)=330
+trigger4=sysvar(4)=355
+trigger5=sysvar(4)=380
+ProjAnim=4043
+Projremove=0
+projremovetime=30
+supermovetime=99
+pausemovetime=99
+projpriority=2147483647
+projsprpriority=2147483647
+attr=S,SA
+damage=Ceil((1.3*(palno<5)+25*(palno>4))*var(0))
+animtype=Hard ;MUGEN 1.1 conversion: was High
+givepower=10
+hitflag=MAFD
+guard.dist=160
+pausetime=10,30
+sparkno=-1
+hitsound=4,3
+guardsound=4,3
+ground.type=High
+ground.hittime=50
+ground.velocity=-8,-3
+guard.velocity=-1
+airguard.velocity=-8,-3
+air.velocity=-5,-9
+fall=1
+fall.recover=0
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=!ishelper&&alive
+triggerall=palno>6
+Trigger1=sysvar(4)=280
+trigger2=sysvar(4)=305
+trigger3=sysvar(4)=330
+trigger4=sysvar(4)=355
+trigger5=sysvar(4)=380
+ProjAnim=4043
+Projremove=0
+projremovetime=30
+supermovetime=99
+pausemovetime=99
+projpriority=2147483647
+projsprpriority=2147483647
+attr=S,SA
+damage=Ceil(25*var(0)+random%25)*!(var(56)&128)
+animtype=Hard ;MUGEN 1.1 conversion: was High
+hitflag=MAFD
+pausetime=0,0
+guard.dist=0
+sparkno=-1
+hitsound=4,3
+guardsound=4,3
+ground.type=High
+ground.hittime=50
+ground.velocity=-8,-3
+guard.velocity=-1
+airguard.velocity=-8,-3
+air.velocity=-5,-9
+fall=1
+fall.recover=0
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+Triggerall=sysvar(4)=[280,410]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=Ceil(25*enemy,Const(data.life)*ifelse(enemy,Const(data.defence)>100,enemy,Const(data.defence)/100,1))
+hitflag=MAFLPD
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerAll=palno!=12
+trigger1=sysvar(4)=410
+anim=30000
+sprpriority=99
+BindTime=-1
+pos=45,-40
+ownpal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerAll=palno!=12
+trigger1=sysvar(4)=410
+value=5,15
+ignorehitpause=1
+
+[state ]
+type=superpause
+triggerall=!ishelper&&palno!=12
+trigger1=sysvar(4)=0
+time=180
+anim=-1
+movetime=180
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerAll=palno!=12
+Trigger1=Var(1)=3
+Trigger1=AnimTime=0||sysvar(4)>429
+value=5300
+ignorehitpause=1
+
+[State ]
+type=SelfState
+Trigger1=AnimTime=0||sysvar(4)>429
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;-------------------------------------------------------------------------------------
+;ボルテニックアルテマ
+[Statedef 7775]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state enemy];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[state ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=7771
+ignorehitpause=1
+[state ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=97771+(ishelper(70000))
+ignorehitpause=1
+
+[state ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=7771
+trigger2=sysvar(3)=[97771,97772]
+value=sysvar(3)
+elem=(sysvar(4)=[0,29])*floor(sysvar(4)/6+2)+(sysvar(4)=[30,109])*floor((sysvar(4)-30)/5+7)+(sysvar(4)=[110,111])*24
+ignorehitpause=1
+
+[state ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger2=!ishelper&&palno=[7,11]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,0
+guard.dist=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+guard.dist=0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[state ]
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=root,palno=12&&root,var(24)>0&&root,var(33)
+trigger1=playerID(root,var(24)),anim=450100
+trigger1=enemynear,numhelper(149990)<2
+trigger2=root,fvar(10)!=1
+trigger2=playerID(root,var(24)),var(50)&1
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,5
+guard.dist=0
+p2stateno=root,var(33)
+p2getp1state=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[state ]
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno=11
+triggerall=numtarget>0
+trigger1=target,ishelper
+trigger2=target,hitpausetime>10
+ignorehitpause=1
+
+[state ]
+Type=PowerAdd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Value=-6000
+ignorehitpause=1
+
+[state ];11Pのパワー
+type=null
+triggerall=!ishelper&&palno>=5
+trigger1=sysvar(4)=0
+trigger1=var(36):=var(36)-6000||1
+ignorehitpause=1
+
+[State ]
+type=AttackMulSet
+trigger1=!ishelper&&palno>6
+trigger1=!(fvar(10)=1||(var(54)&256))
+value=(1/(Const(data.attack)*0.0100000))*(enemynear,Const(data.defence)*0.0100000)
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=18
+trigger2=sysvar(4)=24
+trigger3=sysvar(4)=30
+trigger4=sysvar(4)=35
+trigger5=sysvar(4)=40
+trigger6=sysvar(4)=45
+trigger7=sysvar(4)=50
+ID=4052
+anim=4052
+BindTime=-1
+postype=p1
+sprpriority=-1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=18
+value=5,11
+volume=255
+ignorehitpause=1
+
+[state ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=6||sysvar(4)=12||sysvar(4)=18||sysvar(4)=24||sysvar(4)=30
+trigger2=sysvar(4)=35||sysvar(4)=40||sysvar(4)=45||sysvar(4)=50||sysvar(4)=55
+trigger3=sysvar(4)=60||sysvar(4)=65
+value=S5,16
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+ID=4045
+anim=8550
+pos=0,40
+sprpriority=4
+postype=p1
+bindtime=57
+ownpal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=0,0
+channel=1
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+ID=9102
+anim=9102
+pos=0,0
+postype=back
+sprpriority=-2
+BindTime=-1
+removetime=100
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+projid=1065
+projanim=1065
+projremovetime=6
+Projespriority=3
+projsprpriority=3
+postype=p1
+offset=-40,-35
+projscale=0.8,0.8
+ignorehitpause=1
+supermovetime=9
+pausemovetime=9
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=18
+value=S5,16
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=18
+ID=77750
+anim=77750
+PosType=right
+pos=-1,0
+bindtime=-1
+BindTime=-1
+removetime=93
+SprPriority=-1
+Facing=-1
+ownpal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=BGPalFX
+triggerall=!ishelper&&alive
+trigger1=sysvar(4)<112
+time=(sysvar(4)<2)*105+1
+add=10,10,25
+mul=25,25,25
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper
+triggerall=palno<7
+Trigger1=AnimElem=4
+offset=-24,-54
+velocity=40,0
+velmul=1,1
+attr=S,SP
+damage=Ceil((0.12*(palno<5)+0.5*(palno>4))*var(0)),Ceil((0.007*(palno<5)+0.02*(palno>4))*var(0))
+animtype=Hard
+givepower=50
+guardflag=MA
+guard.dist=160
+pausetime=0,12
+sparkno=-1
+guard.sparkno=-1
+hitsound=S20,1
+guardsound=S20,3
+ground.type=Trip
+ground.slidetime=15
+ground.hittime=20
+ground.velocity=-30,-5.5
+guard.velocity=-3.5
+airguard.velocity=-3.5,-2.75
+air.type=Low
+air.velocity=-30,-5.5
+fall=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper
+triggerall=palno<7
+trigger1=AnimElem=12
+priority=7
+attr=S,NA
+damage=Ceil((0.16*(palno<5)+0.9*(palno>4))*var(0)),Ceil((0.02*(palno<5)+0.45*(palno>4))*var(0))
+animtype=hard
+guardflag=MA
+guard.dist=160
+sparkxy=-15,-70
+sparkno=S29999
+guard.sparkno=S29999
+pausetime=12,35
+ground.hittime=19
+ground.type=low
+ground.slidetime=9
+ground.velocity=-10
+air.velocity=-3,-3
+envshake.time=10
+envshake.freq=10
+envshake.ampl=10
+envshake.phase=10
+numhits=10
+fall=1
+fall.recover=0
+
+[state ]
+type=hitdef
+triggerall=!ishelper
+triggerall=palno<7
+trigger1=AnimElem=9
+trigger2=AnimElem=10
+trigger3=AnimElem=11
+trigger4=AnimElem=13
+trigger5=AnimElem=14
+trigger6=AnimElem=15
+priority=7
+attr=S,NA
+damage=Ceil((0.17*(palno<5)+0.92*(palno>4))*var(0)),Ceil((0.01*(palno<5)+0.06*(palno>4))*var(0))
+animtype=hard
+guardflag=MA
+guard.dist=160
+sparkxy=-15,-70
+sparkno=S29999
+guard.sparkno=S29999
+pausetime=12,35
+ground.hittime=19
+ground.type=low
+ground.slidetime=9
+ground.velocity=-10
+air.velocity=-3,-3
+envshake.time=10
+envshake.freq=10
+envshake.ampl=10
+envshake.phase=10
+numhits=10
+fall=1
+fall.recover=0
+
+[state ]
+type=hitdef
+triggerall=!ishelper
+triggerall=palno>6
+trigger1=AnimElem=4
+attr=,NA
+numhits=0
+priority=7
+pausetime=0,0
+animtype=hard
+sparkno=S29999
+guard.sparkno=S29999
+envshake.time=10
+envshake.freq=10
+envshake.ampl=10
+envshake.phase=10
+fall.damage=2147483647
+fall=1
+p2stateno=5110
+p2getp1state=0
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper
+triggerall=palno>6
+triggerall=palno<9||palno>8&&!(var(56)&256)
+trigger1=AnimElem=9
+trigger2=AnimElem=10
+trigger3=AnimElem=11
+trigger4=AnimElem=12
+trigger5=AnimElem=13
+trigger6=AnimElem=14
+trigger7=AnimElem=15
+attr=,NA
+numhits=0
+priority=7
+damage=Ceil((enemynear,movetype!=H)*0.92*var(0)+random%25)*!(var(56)&128),Ceil((enemynear,movetype!=H)*0.06*var(0)+random%25)*!(var(56)&128)
+pausetime=0,0
+animtype=hard
+guard.dist=0
+sparkno=S29999
+guard.sparkno=S29999
+envshake.time=10
+envshake.freq=10
+envshake.ampl=10
+envshake.phase=10
+fall.damage=2147483647
+fall=1
+p2stateno=5110
+p2getp1state=0
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper
+trigger1=palno>8&&(var(56)&256)
+attr=,NA
+numhits=0
+priority=7
+damage=Ceil((enemynear,movetype!=H)*0.92*var(0)+random%25)*!(var(56)&128),Ceil((enemynear,movetype!=H)*0.06*var(0)+random%25)*!(var(56)&128)
+pausetime=0,0
+animtype=hard
+guard.dist=0
+sparkno=S29999
+guard.sparkno=S29999
+envshake.time=10
+envshake.freq=10
+envshake.ampl=10
+envshake.phase=10
+fall.damage=2147483647
+fall=1
+p2stateno=5110
+p2getp1state=0
+ignorehitpause=1
+
+[state ]
+type=Projectile
+triggerall=ishelper(70000)
+Triggerall=sysvar(4)=[45,79]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax
+projanim=24000
+projremovetime=1
+postype=p2
+attr=C,AT
+pausetime=0,1
+damage=(-(enemynear,life<=0)*10)*!(var(56)&128)
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=Ceil(10*enemynear,Const(data.life)*ifelse(enemynear,Const(data.defence)>100,enemynear,Const(data.defence)/100,1))
+hitflag=MAFLPD
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=superpause
+triggerall=!ishelper&&palno!=12
+trigger1=sysvar(4)=0
+time=100
+anim=7777
+ignorehitpause=1
+
+[state ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>111
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=Vel X||1
+trigger1=fvar(2):=Pos X||1
+trigger1=fvar(3):=Vel Y||1
+trigger1=fvar(4):=Pos Y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;エネミーバースト
+[Statedef 2014]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+ignorehitpause=1
+
+[State ]
+type=ChangeState
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+value=92014
+ignorehitpause=1
+
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=sysvar(2)
+sysvar(3)=1072
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=1072
+value=sysvar(3)
+elem=(sysvar(4)=[0,4])*2+(sysvar(4)=[5,7])*3+(sysvar(4)=[8,9])*4+(sysvar(4)=[10,159])*5+(sysvar(4)=[160,161])*6+(sysvar(4)=[162,164])*7+(sysvar(4)=[165,169])*8+(sysvar(4)=[170,179])*9
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ]
+Type=AssertSpecial
+triggerall=!ishelper
+Trigger1=palno=[11,12]
+flag=unguardable
+ignoreHitPause=1
+
+[State ]
+Type=PowerAdd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Value=-5500
+ignorehitpause=1
+
+[State ];11Pのパワー
+type=null
+triggerall=!ishelper&&palno>=5
+Trigger1=sysvar(4)=0
+trigger1=var(36):=var(36)-5500||1
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+anim=3
+postype=P1
+pos=-25,-60
+ownpal=1
+sprpriority=3
+bindtime=-1
+BindTime=-1
+removetime=510
+Scale=0.7,0.7
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=250
+value=7,4
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+value=0,13
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+anim=9103
+postype=right
+sprpriority=-6
+pos=-310,0
+ownpal=1
+bindtime=-1
+removetime=150
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=EnvShake
+triggerall=!ishelper
+Trigger1=sysvar(4)=10
+time=150
+ampl=4
+freq=127
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=10
+value=0,9
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=11
+value=4,3
+ignorehitpause=1
+
+[state ]
+type=PalFX
+triggerall=!ishelper
+trigger1=(sysvar(4)>15)&&((GameTime%35)=0)
+time=20
+add=0,0,0
+mul=256,256,256
+sinadd=75,75,75,25
+invertall=0
+color=256
+ignorehitpause=1
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno<7
+trigger1=sysvar(4)=[20,151]
+attr=S,NA
+animtype=Hard
+damage=Ceil((0.004*(palno<5)+0.15*(palno>4))*var(0))
+guard.dist=160
+sparkno=-1
+guard.sparkno=-1
+sparkxy=-10,-60
+ground.type=High
+ground.slidetime=0
+ground.hittime=0
+ground.velocity=0
+air.velocity=0
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&!(var(56)&256)
+trigger1=sysvar(4)=[20,151]
+attr=S,NA
+animtype=Hard
+damage=Ceil((0.004*(palno<5)+0.15*(palno>4))*var(0)+random%25)*!(var(56)&128)
+pausetime=0,0
+sparkno=-1
+guard.sparkno=-1
+sparkxy=-10,-60
+ground.type=High
+ground.slidetime=0
+ground.hittime=0
+ground.velocity=0
+air.velocity=0
+ignorehitpause=1
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&(var(56)&256)
+attr=,NA
+animtype=Hard
+damage=Ceil((0.004*(palno<5)+0.15*(palno>4))*var(0)+random%25)*!(var(56)&128)
+pausetime=0,0
+sparkno=-1
+guard.sparkno=-1
+sparkxy=-10,-60
+ground.type=High
+ground.slidetime=0
+ground.hittime=0
+ground.velocity=0
+air.velocity=0
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=!(var(56)&256)
+Trigger1=sysvar(4)=151
+attr=S,SA
+animtype=Hard
+damage=Ceil((0.004*(palno<5)+0.015*(palno>4))*var(0)),Ceil((0.004*(palno<5)+0.015*(palno>4))*var(0))
+priority=5
+guardflag=M
+guard.dist=160
+pausetime=8,7
+sparkno=-1
+guard.sparkno=-1
+givepower=80
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+triggerall=root,palno>8
+Triggerall=sysvar(4)=[20,151]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax
+projID=2014
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=Ceil(25*enemy,Const(data.life)*ifelse(enemy,Const(data.defence)>100,enemy,Const(data.defence)/100,1))
+hitflag=MAFLPD
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+sprpriority=3
+anim=3301
+bindtime=-1
+removetime=151
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=BGPalFX
+triggerall=!ishelper
+Trigger1=ProjHit555=1
+time=10
+add=25,200,25
+mul=255,255,255
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=ProjHit555=1
+value=22,1
+
+[State ]
+type=EnvShake
+triggerall=!ishelper
+Trigger1=ProjHit555=1
+time=12
+ampl=4
+freq=127
+ignorehitpause=1
+
+[State ]
+Type=SuperPause
+triggerall=!ishelper&&palno!=12
+Trigger1=sysvar(4)=0
+Pos=-38,-82
+Darken=1
+Time=500
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerAll=palno!=12
+Trigger1=Var(1)=1
+Trigger1=sysvar(4)>179
+value=5300
+ignorehitpause=1
+
+[State ]
+type=SelfState
+Trigger1=sysvar(4)>179
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+;-------------------------------------------------------------------------------------
+;大地崩壊
+[Statedef 2015]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger1=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=A
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[state ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=4040
+ignorehitpause=1
+[state ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=94040
+ignorehitpause=1
+
+[state ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=4040
+trigger2=sysvar(3)=94040
+value=sysvar(3)
+elem=(sysvar(4)=[0,49])*2+(sysvar(4)=[50,56])*3+(sysvar(4)=[57,116])*4+(sysvar(4)=[117,185])*5
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[state ]
+Type=Turn
+triggerall=!ishelper
+trigger1=enemynear,alive||numenemy=1
+trigger1=(enemynear,Pos X-Pos X)*facing<0
+trigger2=!enemynear,alive&&numenemy>1
+trigger2=(enemynear(1),Pos X-Pos X)*facing<0
+ignorehitpause=1
+
+[State ]
+type=AttackMulSet
+trigger1=!ishelper&&palno>6
+trigger1=!(fvar(10)=1||(var(54)&256))
+value=(1/(Const(data.attack)*0.0100000))*(enemynear,Const(data.defence)*0.0100000)
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[State ]
+type=ScreenBound
+trigger1=!ishelper
+Trigger1=sysvar(4)=[0,50]
+value=0
+movecamera=0,0
+ignorehitpause=1
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Anim=ifelse((var(20)=1||palno=12),8999,9000)
+Pos=0,-30
+PosType=back
+SprPriority=-2
+BindTime=-1
+RemoveTime=50
+Scale=0.5,0.5
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Anim=9001
+PosType=back
+SprPriority=-3
+BindTime=-1
+RemoveTime=50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Anim=9005
+Pos=-20,52
+PosType=back
+SprPriority=-3
+BindTime=-1
+RemoveTime=50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Anim=9001
+Pos=-10,104
+PosType=back
+SprPriority=-3
+BindTime=-1
+RemoveTime=50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Anim=9005
+Pos=-10,156
+PosType=back
+SprPriority=-3
+BindTime=-1
+RemoveTime=50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Anim=9001
+Pos=0,208
+PosType=back
+SprPriority=-3
+BindTime=-1
+RemoveTime=50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=2
+Value=F20,0
+ignorehitpause=1
+
+[state ]
+Type=PowerAdd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Value=-6000
+ignorehitpause=1
+
+[state ];パワー管理
+type=null
+triggerall=!ishelper&&palno>=5
+Trigger1=sysvar(4)=0
+trigger1=var(36):=var(36)-6000||1
+ignorehitpause=1
+
+[state ];透明に
+type=AssertSpecial
+trigger1=sysvar(4)=[70,117]
+flag=Invisible
+flag2=noairguard
+flag3=nocrouchguard
+ignorehitpause=1
+
+[state ];カメラが追わない
+type=ScreenBound
+trigger1=!ishelper
+value=1
+movecamera=0
+ignorehitpause=1
+
+[state ]
+Type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=sysvar(4)=[0,117]
+Trigger1=var(37):=1
+Value=SCA
+Time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=sysvar(4)=[0,117]
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=57
+Value=20,9
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=96
+Value=5,15
+ignorehitpause=1
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=117
+Value=5,25
+ignorehitpause=1
+
+[state ]
+Type=VelSet
+trigger1=!ishelper
+Trigger1=sysvar(4)=[57,79]
+Y=-20
+ignorehitpause=1
+
+[state ]
+Type=VelSet
+trigger1=!ishelper
+Trigger1=sysvar(4)>=80
+trigger1=Pos Y<0
+Y=70
+ignorehitpause=1
+
+[state ]
+Type=VelSet
+triggerll=!ishelper
+Trigger1=sysvar(4)=0
+trigger2=Vel Y>0
+trigger2=Pos Y>=0
+Y=0
+ignorehitpause=1
+
+[state ]
+type=velset
+triggerall=!ishelper
+trigger1=sysvar(4)=[75,83]
+X=(sysvar(4)=[75,82])*20
+ignorehitpause=1
+
+[state ]
+type=posset
+triggerall=!ishelper
+trigger1=Pos Y>=0
+Y=0
+ignorehitpause=1
+
+[state ];演出用
+type=Projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=94
+ProjAnim=4053
+projremovetime=24
+supermovetime=99
+pausemovetime=99
+velocity=0,0
+projscale=0.5,0.5
+ignorehitpause=1
+
+[state ]
+type=Projectile
+triggerall=!ishelper
+triggerall=palno<7
+trigger1=sysvar(4)=[117,132]
+ProjAnim=60000
+ProjID=555
+Projremove=0
+projremovetime=1
+supermovetime=9
+pausemovetime=9
+attr=A,HP
+damage=Ceil((0.015*(palno<5)+0.045*(palno>4))*var(0)),Ceil((0.015*(palno<5)+0.045*(palno>4))*var(0))
+animtype=Medium
+guard.dist=160
+pausetime=0,12
+ground.type=High
+ground.slidetime=10
+ground.hittime=5
+ground.velocity=-2,-1
+airguard.velocity=-2,-1
+projscale=0.5,0.5
+ignorehitpause=1
+
+[state ];アーマーキラー
+type=Projectile
+triggerall=!ishelper
+triggerall=palno<7
+trigger1=sysvar(4)=[133,134]
+trigger2=sysvar(4)=[135,185]
+trigger2=EnemyNear,MoveType!=H
+ProjAnim=60000
+ProjID=555
+Projremove=0
+projremovetime=1
+supermovetime=9
+pausemovetime=9
+attr=A,HP
+damage=Ceil((0.1*(palno<5)+0.4*(palno>4))*var(0)),Ceil((0.1*(palno<5)+0.4*(palno>4))*var(0))
+animtype=back
+guard.dist=160
+pausetime=0,30
+ground.type=High
+ground.slidetime=15
+ground.hittime=20
+ground.velocity=-4,-3
+airguard.velocity=-4,-3
+air.type=Low
+air.velocity=-4,-3
+fall=1
+projscale=0.5,0.5
+ignorehitpause=1
+
+[state ];アーマーキラー
+type=Projectile
+triggerall=!ishelper
+triggerall=palno>6
+trigger1=sysvar(4)=[117,118]
+ProjAnim=60000
+ProjID=555
+Projremove=0
+projremovetime=1
+supermovetime=9
+pausemovetime=9
+attr=A,HP
+pausetime=0,10
+guard.dist=0
+hitflag=MAFLPD
+animtype=back
+fall.damage=2147483647
+fall=1
+p2stateno=5110
+p2getp1state=0
+ignorehitpause=1
+
+[state ];アーマーキラー
+type=Projectile
+triggerall=!ishelper
+triggerall=palno>6
+trigger1=sysvar(4)=[119,134]
+trigger2=sysvar(4)=[135,185]
+trigger2=EnemyNear,MoveType!=H
+ProjAnim=60000
+ProjID=555
+Projremove=0
+projremovetime=1
+supermovetime=9
+pausemovetime=9
+attr=A,HP
+damage=floor(ifelse(fvar(10)=1,0.4*var(0),2147483647)),floor(ifelse(fvar(10)=1,0.4*var(0),2147483647)) ;MUGEN 1.1 conversion: floor() added
+guard.dist=0
+pausetime=0,0
+hitflag=MAFLPD
+animtype=back
+fall.damage=2147483647
+fall=1
+p2stateno=5110
+p2getp1state=0
+ignorehitpause=1
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=117
+ID=9000
+Anim=20002
+Pos=0,0
+PosType=right
+SprPriority=-3
+Facing=-1
+BindTime=69
+OwnPal=1
+RemoveTime=69
+ignorehitpause=1
+supermovetime=99
+pausemovetime=99
+
+[state ]
+Type=SuperPause
+triggerall=!ishelper&&palno!=12
+Trigger1=sysvar(4)=0
+movetime=50
+Time=50
+Pos=11,-80
+Darken=0
+ignorehitpause=1
+
+[state ]
+Type=SelfState
+Trigger1=AnimTime=0||sysvar(4)>185
+Value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=Vel X||1
+trigger1=fvar(2):=Pos X||1
+trigger1=fvar(3):=Vel Y+const(movement.yaccel)||1
+trigger1=fvar(4):=Pos Y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;ダークフォース
+[Statedef 1071]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+value=91071
+ignorehitpause=1
+
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=sysvar(2)
+sysvar(3)=1071
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=1071
+value=sysvar(3)
+elem=(sysvar(4)=[0,4])*2+(sysvar(4)=5)*3+(sysvar(4)=[6,7])*4+(sysvar(4)=8)*5+(sysvar(4)=[9,58])*6+(sysvar(4)=[59,78])*(7+2*floor((sysvar(4)-59)/10)+(((sysvar(4)-59)%10)>7))
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ]
+Type=PowerAdd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+Value=-4500
+ignorehitpause=1
+
+[State ];11Pのパワー
+type=null
+triggerall=!ishelper&&palno>=5
+trigger1=sysvar(4)=0
+trigger1=var(36):=var(36)-4500||1
+ignorehitpause=1
+
+[State ]
+Type=AssertSpecial
+triggerall=!ishelper
+Trigger1=palno=[11,12]
+flag=unguardable
+ignoreHitPause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+trigger1=var(37):=1
+ignorehitpause=1
+
+[State ]
+type=bgpalfx
+triggerall=!ishelper
+trigger1=sysvar(4)=[0,270]
+time=12
+sprpriority=3
+add=150,150,150
+mul=250,250,250
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=s5,7
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=0,12
+ignorehitpause=1
+
+[State ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+anim=9100
+pos=-320,0
+postype=right
+sprpriority=-6
+removetime=200
+bindtime=-1
+persistent=0
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+trigger1=var(37):=1
+ignorehitpause=1
+
+[State ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+anim=8551
+pos=-20,-50
+sprpriority=-4
+postype=p1
+bindtime=42
+ownpal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+anim=8888
+pos=0,0
+sprpriority=2147483647
+postype=p1
+bindtime=57
+ownpal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=LifeAdd
+triggerall=!ishelper
+triggerAll=palno!=12
+trigger1=sysvar(4)=10
+value=-Ceil(lifemax*0.3)
+kill=0
+ignoreHitPause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+value=0,8
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+value=4,3
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=10
+value=4,3
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno<7
+trigger1=Animelem=3
+attr=S,SA
+animtype=Hard
+damage=Ceil((0.7*(palno<5)+30*(palno>4))*var(0))
+priority=999
+guardflag=MA
+guard.dist=160
+pausetime=12,35
+sparkno=-1
+guard.sparkno=-1
+numhits=1000
+hitsound=S4,3
+guardsound=S4,3
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&!(var(56)&256)
+Trigger1=Animelem=3
+attr=S,SA
+animtype=Hard
+damage=Ceil(30*var(0)+random%25)*!(var(56)&128)
+priority=999
+pausetime=0,0
+sparkno=-1
+guard.sparkno=-1
+numhits=0
+hitflag=MAFLPD
+hitsound=S4,3
+guardsound=S4,3
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&(var(56)&256)
+attr=,SA
+animtype=Hard
+damage=Ceil(30*var(0)+random%25)*!(var(56)&128)
+priority=999
+pausetime=0,0
+sparkno=-1
+guard.sparkno=-1
+numhits=0
+hitflag=MAFLPD
+hitsound=S4,3
+guardsound=S4,3
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+triggerall=root,palno>8
+Triggerall=sysvar(4)=[10,59]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=Ceil(30*enemy,Const(data.life)*ifelse(enemy,Const(data.defence)>100,enemy,Const(data.defence)/100,1))
+hitflag=MAFLPD
+ignorehitpause=1
+
+[State ]
+type=superpause
+triggerall=!ishelper&&palno!=12
+trigger1=sysvar(4)=0
+time=200
+anim=9100
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>78
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------
+;超元気玉SSJ5var
+[Statedef 91070]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=1070
+sysvar(3)=93200
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=1070
+sysvar(2)=1070
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=93200
+value=sysvar(3)
+elem=(sysvar(4)=[0,14])*floor(sysvar(4)/5+2)+(sysvar(4)=[15,189])*5+(sysvar(4)=[190,277])*6
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=root,palno=12&&root,var(24)>0&&root,var(33)
+trigger1=playerID(root,var(24)),anim=450100
+trigger1=enemynear,numhelper(149990)<2
+trigger2=root,fvar(10)!=1
+trigger2=playerID(root,var(24)),var(50)&1
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,5
+guard.dist=0
+p2stateno=root,var(33)
+p2getp1state=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ]
+type=AttackMulSet
+trigger1=!ishelper&&palno>6
+trigger1=!(fvar(10)=1||(var(54)&256))
+value=(1/(Const(data.attack)*0.0100000))*(enemynear,Const(data.defence)*0.0100000)
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+trigger1=var(37):=1
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=15
+projanim=3202
+projremove=1
+projremovetime=174
+attr=S,NT
+sparkno=-1
+offset=0,250
+ignorehitpause=1
+projscale=2.5,2.5
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=7,4
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=15
+value=0,23
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=191
+value=0,14
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=191
+value=4,3
+
+[State ]
+type=Projectile
+triggerall=!ishelper&&alive
+Trigger1=sysvar(4)=[190,277]
+projanim=3201+(EnemyNear,MoveType=H&&EnemyNear,time<1)*2
+offset=(sysvar(4)-195)*3,0
+velocity=3,0
+projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+projpriority=999999999
+projsprpriority=999999999
+attr=S,NA
+animtype=Hard ;MUGEN 1.1 conversion: was High
+damage=Ceil((0.015*(palno<5)+0.125*(palno>4))*var(0)+random%25)*!(var(56)&128),Ceil((0.015*(palno<5)+0.125*(palno>4))*var(0)+random%25)*!(var(56)&128)
+numhits=0
+sparkno=s555
+sparkxy=-10,-60
+ground.type=High
+ground.hittime=100
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+ignorehitpause=1
+projscale=2.5,2.5
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+Triggerall=sysvar(4)=[190,277]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax&&!((playerid(root,var(24)),var(22)&16)&&(playerid(root,var(24)),var(22)&32))
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax&&!((playerid(root,var(24)),var(27)&16)&&(playerid(root,var(24)),var(27)&32))
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=2147483647
+hitflag=MAFLPD
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=274
+anim=8550
+ownpal=1
+sprpriority=10
+pos=166,0
+BindTime=-1
+removetime=60
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=EnvShake
+triggerall=!ishelper
+Trigger1=ProjHittime(1070)=1
+time=12
+ampl=4
+freq=127
+
+[State ]
+type=SelfState
+Trigger1=animtime=0||sysvar(4)>277
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;エネミーバーストSSJ5var
+[Statedef 92014]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=2014
+sysvar(3)=91072+(ishelper(70000))
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=2014
+sysvar(2)=2014
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=[91072,91073]
+value=sysvar(3)
+elem=(sysvar(4)=[0,22])*2+(sysvar(4)=[23,25])*3+(sysvar(4)=[26,27])*4+(sysvar(4)=[28,177])*5+(sysvar(4)=[178,179])*6+(sysvar(4)=[180,182])*7+(sysvar(4)=[183,187])*8+(sysvar(4)=[188,197])*9
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+trigger1=!ishelper&&palno=[5,6]
+trigger1=numenemy>0&&numtarget=0&&var(5)>0
+trigger1=enemynear,hitdefattr=SCA,AA,AP,AT
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+pausetime=0,0
+p2stateno=6002
+priority=7,hit
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=root,palno=12&&root,var(24)>0&&root,var(33)
+trigger1=playerID(root,var(24)),anim=450100
+trigger1=enemynear,numhelper(149990)<2
+trigger2=root,fvar(10)!=1
+trigger2=playerID(root,var(24)),var(50)&1
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,5
+guard.dist=0
+p2stateno=root,var(33)
+p2getp1state=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ]
+Type=AssertSpecial
+triggerall=!ishelper
+Trigger1=palno=[11,12]
+flag=unguardable
+ignoreHitPause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=1
+anim=3
+pos=-25,-60
+sprpriority=3
+bindtime=-1
+removetime=21
+Scale=0.7,0.7
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=7,4
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+value=0,18
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=28
+anim=9103
+postype=right
+sprpriority=-6
+pos=-310,0
+bindtime=-1
+removetime=150
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=EnvShake
+triggerall=!ishelper
+Trigger1=sysvar(4)=28
+time=150
+ampl=4
+freq=127
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=28
+value=0,9
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=29
+value=4,3
+ignorehitpause=1
+
+[state ]
+type=PalFX
+triggerall=!ishelper
+trigger1=(sysvar(4)>33)&&((GameTime%35)=0)
+time=20
+add=0,0,0
+mul=256,256,256
+sinadd=75,75,75,25
+invertall=0
+color=256
+ignorehitpause=1
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno<7
+trigger1=sysvar(4)=[38,169]
+attr=S,NA
+animtype=Hard
+damage=Ceil((0.008*(palno<5)+0.2*(palno>4))*var(0)),Ceil((0.008*(palno<5)+0.2*(palno>4))*var(0))
+guard.dist=160
+numhits=0
+sparkno=-1
+guard.sparkno=-1
+sparkxy=-10,-60
+ground.type=High
+ground.slidetime=0
+ground.hittime=0
+ground.velocity=0
+air.velocity=0
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&!(var(56)&256)
+trigger1=sysvar(4)=[38,169]
+attr=S,NA
+animtype=Hard
+damage=Ceil(0.2*var(0)+random%25)*!(var(56)&128),Ceil(0.2*var(0)+random%25)*!(var(56)&128)
+hitflag=MAFLPD
+pausetime=0,0
+numhits=0
+sparkno=-1
+guard.sparkno=-1
+sparkxy=-10,-60
+ground.type=High
+ground.slidetime=0
+ground.hittime=0
+ground.velocity=0
+air.velocity=0
+ignorehitpause=1
+
+[State ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&(var(56)&256)
+attr=,NA
+animtype=Hard
+damage=Ceil(0.2*var(0)+random%25)*!(var(56)&128),Ceil(0.2*var(0)+random%25)*!(var(56)&128)
+hitflag=MAFLPD
+pausetime=0,0
+numhits=0
+sparkno=-1
+guard.sparkno=-1
+sparkxy=-10,-60
+ground.type=High
+ground.slidetime=0
+ground.hittime=0
+ground.velocity=0
+air.velocity=0
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=!(var(56)&256)
+Trigger1=sysvar(4)=169
+attr=S,SA
+animtype=Hard
+damage=Ceil((0.005*(palno<5)+0.018*(palno>4))*var(0)),Ceil((0.005*(palno<5)+0.018*(palno>4))*var(0))
+priority=5
+numhits=0
+guard.dist=160
+pausetime=8,7
+sparkno=-1
+guard.sparkno=-1
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+Triggerall=sysvar(4)=[38,169]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax&&!((playerid(root,var(24)),var(22)&16)&&(playerid(root,var(24)),var(22)&32))
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax&&!((playerid(root,var(24)),var(27)&16)&&(playerid(root,var(24)),var(27)&32))
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+numhits=0
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=2147483647
+hitflag=MAFLPD
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=28
+sprpriority=3
+anim=3301
+bindtime=-1
+removetime=151
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=BGPalFX
+triggerall=!ishelper
+Trigger1=ProjHit555=1
+time=10
+add=25,200,25
+mul=255,255,255
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=ProjHit555=1
+value=22,1
+ignorehitpause=1
+
+[State ]
+type=EnvShake
+triggerall=!ishelper
+Trigger1=ProjHit555=1
+time=12
+ampl=4
+freq=127
+ignorehitpause=1
+
+[State ]
+type=SelfState
+Trigger1=sysvar(4)>197
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;ダークフォース
+[Statedef 91071]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];判断
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];不純物排除
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=1071
+sysvar(3)=91071-(ishelper(70000))
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=1071
+sysvar(2)=1071
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=[91070,91071]
+value=sysvar(3)
+elem=(sysvar(4)=[0,34])*2+(sysvar(4)=35)*3+(sysvar(4)=[36,85])*4+(sysvar(4)=86)*5+(sysvar(4)=[87,89])*6+(sysvar(4)=90)*7+(sysvar(4)=[91,94])*8
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+trigger1=ishelper(70000)
+trigger1=!(root,fvar(10)=1&&((root,var(54)&1)||(root,var(54)&4)))
+trigger2=!ishelper&&palno>6
+trigger2=!numhelper(70000)
+trigger2=!(fvar(10)=1&&((var(54)&1)||(var(54)&4)))
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=149995
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=numhelper(60000)&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(root,var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(21)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(21)
+fall.damage=2147483647
+ignorehitpause=1
+[State ]
+type=ReversalDef
+triggerall=!ishelper&&palno>6
+triggerall=!numhelper(70000)&&var(24)>0
+trigger1=playerID(var(24)),var(26)=[120,155]
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,40
+guard.dist=0
+p2stateno=playerID(var(24)),var(26)
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+triggerall=target,ishelper
+trigger1=target,prevstateno!=[149995,149999]
+trigger1=target,prevstateno!=149990
+trigger1=target,prevstateno!=149993
+trigger1=target,stateno=149995
+var(35)=target,prevstateno
+ignorehitpause=1
+
+[State ];anim習得
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=!target,ishelper&&target,alive
+triggerall=!((target,stateno=110||target,stateno=115||target,stateno=5100||target,stateno=5110)&&target,time=0)
+triggerall=target,stateno!=149995&&target,stateno!=root,var(33)&&target,stateno!=root,var(34)
+trigger1=ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[State ];ターゲットを戻す
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno>6
+triggerall=numtarget>0
+trigger1=target,ishelper
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(70000)
+triggerall=root,palno=12&&root,var(24)>0&&root,var(33)
+trigger1=playerID(root,var(24)),anim=450100
+trigger1=enemynear,numhelper(149990)<2
+trigger2=root,fvar(10)!=1
+trigger2=playerID(root,var(24)),var(50)&1
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,5
+guard.dist=0
+p2stateno=root,var(33)
+p2getp1state=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=s5,7
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=0,12
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=5
+projid=8500
+projanim=8500
+projremovetime=30
+Projespriority=3
+projsprpriority=3
+postype=p1
+offset=-32,-81
+projscale=0.8,0.8
+ignorehitpause=1
+supermovetime=99
+pausemovetime=99
+
+[State ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=5
+projid=3015
+projanim=3015
+projremovetime=30
+Projespriority=3
+projsprpriority=3
+postype=p1
+offset=-32,-81
+projscale=0.8,0.8
+ignorehitpause=1
+supermovetime=99
+pausemovetime=99
+
+[State ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+anim=9100
+pos=-320,0
+postype=right
+sprpriority=-6
+removetime=200
+bindtime=-1
+persistent=0
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+trigger1=var(37):=1
+ignorehitpause=1
+
+[State ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=37
+anim=8888
+pos=0,0
+sprpriority=4
+postype=p1
+bindtime=57
+ownpal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=37
+value=0,8
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=37
+value=4,3
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=37
+value=4,3
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno<7
+Trigger1=Animelem=3
+attr=,SA
+animtype=Hard
+damage=Ceil(0.45*var(0)),Ceil(0.45*var(0))
+priority=999
+guard.dist=160
+sparkno=-1
+guard.sparkno=-1
+numhits=0
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&!(var(56)&256)
+Trigger1=Animelem=3
+attr=,SA
+animtype=Hard
+damage=Ceil(30*var(0)+random%25)*!(var(56)&128),Ceil(30*var(0)+random%25)*!(var(56)&128)
+hitflag=MAFLPD
+priority=999
+sparkno=-1
+guard.sparkno=-1
+numhits=0
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+ignorehitpause=1
+
+[state ]
+type=hitdef
+triggerall=!ishelper&&alive
+trigger1=palno>6&&(var(56)&256)
+attr=,SA
+animtype=Hard
+damage=Ceil(30*var(0)+random%25)*!(var(56)&128),Ceil(30*var(0)+random%25)*!(var(56)&128)
+hitflag=MAFLPD
+priority=999
+sparkno=-1
+guard.sparkno=-1
+numhits=0
+ground.type=Trip
+ground.slidetime=20
+ground.hittime=20
+ground.velocity=-20,-7
+air.velocity=-20,-7
+guard.velocity=-8
+airguard.velocity=-5,-3
+fall=1
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(70000)
+Triggerall=sysvar(4)=[36,85]
+triggerall=numenemy>0
+trigger1=enemy,stateno=110||enemy,stateno=115
+trigger1=enemy,gethitvar(fall.damage)<enemy,lifemax&&!((playerid(root,var(24)),var(22)&16)&&(playerid(root,var(24)),var(22)&32))
+trigger2=numenemy=2
+trigger2=enemy(1),stateno=110||enemy(1),stateno=115
+trigger2=enemy(1),gethitvar(fall.damage)<enemy(1),lifemax&&!((playerid(root,var(24)),var(27)&16)&&(playerid(root,var(24)),var(27)&32))
+projanim=60000
+Projremove=0
+projremovetime=3
+supermovetime=9
+pausemovetime=9
+postype=p2
+attr=C,AT
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=2147483647
+hitflag=MAFLPD
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>94
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------

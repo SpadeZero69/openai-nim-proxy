@@ -1,0 +1,2794 @@
+;------------------------------------------------------------------------------------
+;基本設定、イントロ等
+;------------------------------------------------------------------------------------
+[Data]
+life=1000
+attack=100
+defence=100
+power=2500
+powerup=8000
+fall.defence_up=1000
+liedown.time=0
+airjuggle=10
+sparkno=0
+guard.sparkno=40
+KO.echo=0
+volume=0
+IntPersistIndex=40
+FloatPersistIndex=20
+
+[Size]
+xscale=0.5
+yscale=0.5
+ground.back=20
+ground.front=18
+air.back=12
+air.front=12
+height=100
+attack.dist=0;160
+proj.attack.dist=0;90
+proj.doscale=0
+head.pos=-5,-90
+mid.pos=-5,-60
+shadowoffset=0
+
+[Velocity]
+walk.fwd=2
+walk.back=-1
+run.fwd=8,0
+run.back=-7
+jump.neu=0,-8
+jump.back=-3
+jump.fwd=3
+runjump.back=-3,-8
+runjump.fwd=4,-8
+airjump.neu=0,-8
+airjump.back=-3,-8
+airjump.fwd=3,-8
+
+[Movement]
+airjump.num=2
+airjump.height=35
+yaccel=1
+stand.friction=1
+crouch.friction=1
+;---------------------------------------------------------------------------
+;引き分け
+[Statedef 170]
+ctrl=0
+anim=23
+velset=0,0,0
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=23
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90023
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=23
+value=sysvar(3)
+elem=(sysvar(4)%64=[0,63])*(2+2*floor((sysvar(4)%64)/32)+((sysvar(4)%64%32)>24))
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=90023
+value=sysvar(3)
+elem=(sysvar(4)=[0,4])*2+(sysvar(4)>4)*3
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=numenemy=0
+value=5600
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=numenemy=0
+flag=noshadow
+
+[State ]
+type=NotHitBy
+trigger1=Time>=0
+value=SCA
+time=1
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(4)<180
+flag=RoundNotOver
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;強制死の宣告用敗北
+[Statedef 171]
+ctrl=0
+velset=0,0,0
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+trigger1=!ishelper||ishelper(70000)
+sysvar(3)=5605
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ];animtime管理
+type=varset
+triggerall=sysvar(3)=5605
+trigger1=pos Y<0&&sysvar(4)=70
+sysvar(4)=69
+ignorehitpause=1
+[State ];animtime管理
+type=varset
+triggerall=sysvar(3)=5605
+trigger1=pos Y>=0&&(sysvar(4)=[61,69])
+sysvar(4)=70
+ignorehitpause=1
+[State ];animtime管理
+type=varset
+triggerall=sysvar(3)=5605
+trigger1=pos Y>=0&&sysvar(4)=60
+sysvar(4)=71
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=5605
+value=sysvar(3)
+elem=(sysvar(4)=[0,59])*2+(sysvar(4)=[60,69])*3+(sysvar(4)=70)*4+(sysvar(4)>70)*5
+ignorehitpause=1
+
+[state ]
+type=VelSet
+trigger1=sysvar(4)>59
+y=(sysvar(4)-22)*0.6
+ignorehitpause=1
+
+[state ]
+type=VelSet
+trigger1=Pos Y>0
+trigger2=sysvar(4)>70
+y=0
+ignorehitpause=1
+
+[State ]
+type=posset
+trigger1=Pos Y>0
+trigger2=sysvar(4)>70
+y=0
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=!ishelper
+flag=Invisible
+flag2=noshadow
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=71
+value=20,7
+gnorehitpause=1
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=71
+value=20,6
+gnorehitpause=1
+
+[State ]
+type=CtrlSet
+trigger1=sysvar(4)=100
+value=1
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(4)<190
+flag=RoundNotOver
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=sysvar(4)>70
+trigger1=fvar(4):=0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;強制死の宣告用敗北
+[Statedef 172]
+ctrl=0
+velset=0,0,0
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+trigger1=!ishelper||ishelper(70000)
+sysvar(3)=5606
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=5606
+value=sysvar(3)
+elem=(sysvar(4)=[0,7])*floor(sysvar(4)/4+2)+(sysvar(4)>7)*4
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=!ishelper
+flag=Invisible
+flag2=noshadow
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=3
+value=0,37
+gnorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(4)<350
+flag=RoundNotOver
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;引き分け
+[Statedef 175]
+ctrl=0
+anim=0
+velset=0,0,0
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=23
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90023
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=23
+value=sysvar(3)
+elem=(sysvar(4)%64=[0,63])*(2+2*floor((sysvar(4)%64)/32)+((sysvar(4)%64%32)>24))
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=90023
+value=sysvar(3)
+elem=(sysvar(4)=[0,4])*2+(sysvar(4)>4)*3
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=Time>=0
+value=SCA
+time=1
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(4)<180
+flag=RoundNotOver
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;勝利演出1
+[Statedef 180]
+
+[State ]
+type=NotHitBy
+trigger1=Time>=0
+value=SCA
+time=1
+
+[State ]
+type=SelfState
+trigger1=sysvar(2)=181
+trigger2=sysvar(2)=182
+value=sysvar(2)
+
+[State ]
+type=SelfState
+triggerall=time=0
+triggerall=sysvar(2)!=stateno
+trigger1=RoundNo=1
+trigger1=random>400
+trigger2=RoundNo>=2
+trigger2=random>250
+value=181+ifelse(RoundNo>=2,ifelse(random>700,1,0),0)
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=181
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90180
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=181
+trigger2=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)=[0,9])*2+(sysvar(4)>9)*floor((sysvar(4)-10)%20/5+3)
+
+[state ]
+type=null
+triggerall=!ishelper
+Triggerall=var(7):=0||1
+Trigger1=sysvar(4)>10
+Trigger1=var(7):=1||1
+ignorehitpause=1
+
+[State ]
+type=parentvarset
+triggerall=ishelper
+triggerall=numtarget>0
+Trigger1=sysvar(4)>10
+var(7)=1
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=sysvar(4)>9
+trigger1=(sysvar(4)-10)%30=0
+ID=8511
+anim=8511
+sprpriority=-3
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=10
+value=0,8
+
+[State ]
+type=PlaySnd
+trigger1=gametime%26=0
+value=5,4
+
+[State ]
+type=PlaySnd
+trigger1=gametime%150=60
+value=21,6
+
+[State ]
+type=Explod
+trigger1=sysvar(4)=11
+anim=184
+sprpriority=3
+removetime=-1
+ownpal=1
+id=555
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=Explod
+triggerAll=numexplod(555)<=8
+triggerall=sysvar(4)>=40
+trigger1=sysvar(4)%18=9
+trigger2=sysvar(4)%18=0
+anim=8520
+Pos=-35,0
+sprpriority=-3
+ownpal=1
+id=555
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=EnvShake
+trigger1=sysvar(4)%4=0
+time=4
+ampl=4
+freq=127
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(4)<450
+flag=RoundNotOver
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;勝利演出2
+[Statedef 181]
+
+[State ]
+type=NotHitBy
+trigger1=Time>=0
+value=SCA
+time=1
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=183
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90183
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=183
+trigger2=sysvar(3)=90183
+value=sysvar(3)
+elem=(sysvar(4)=[0,8])*floor(sysvar(4)/3+2)+(sysvar(4)>8)*floor((sysvar(4)-9)%60/15+5)
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=10
+value=22,0
+volume=-100
+loop=1
+channel=7
+
+[State ]
+type=PlaySnd
+triggerAll=sysvar(4)=15
+trigger1=life>400
+value=0,10
+
+[State ]
+type=PlaySnd
+triggerAll=sysvar(4)=15
+trigger1=life<=400
+value=0,20
+
+[state ]
+type=explod
+trigger1=sysvar(4)%30=0
+anim=8511
+Pos=0,-60
+sprpriority=-3
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=AssertSpecial
+trigger1=(sysvar(4)<350)
+flag=RoundNotOver
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;----------------------------------------------------------------------------------------
+;勝利演出 地球破壊
+[Statedef 182]
+
+[State ]
+type=NotHitBy
+trigger1=Time>=0
+value=SCA
+time=1
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=1050
+[State ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=91050
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=1050
+trigger2=sysvar(3)=91050
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=!(var(56)&16)
+trigger1=var(56):=var(56)+16
+ignorehitpause=1
+
+[state ]
+type=explod
+trigger1=sysvar(4)<=30
+trigger1=sysvar(4)%5=0
+ID=4045
+anim=8520
+Pos=27,-35
+ownpal=1
+SprPriority=-3
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=explod
+trigger1=sysvar(4)=0
+ID=8520
+anim=8511
+ownpal=1
+Pos=48,-90
+SprPriority=3
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+Trigger1=sysvar(4)=0
+ID=3015
+Anim=3015
+RemoveTime=125
+Pos=48,-90
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+Scale=0.6,0.6
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+Trigger1=sysvar(4)=125
+ID=3015
+Anim=1056
+RemoveTime=13
+Pos=48,-90
+velocity=fvar(15)/14,(fvar(14)+90)/14
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+Scale=0.5,0.5
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=PlaySnd
+Trigger1=sysvar(4)=0
+Value=0,24
+Channel=7
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=50
+value=0,7
+Channel=7
+
+[State ]
+Type=PlaySnd
+Trigger1=sysvar(4)=125
+Value=5,11
+
+[State ]
+Type=Explod
+Trigger1=sysvar(4)=137
+ID=9000
+Anim=20000
+Pos=-1,0
+PosType=right
+SprPriority=2147483647
+Facing=-1
+BindTime=-1
+OwnPal=1
+RemoveTime=-1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=AssertSpecial
+trigger1=sysvar(4)>=137
+flag=noBG
+flag2=noFG
+flag3=invisible
+
+[state ]
+type=AssertSpecial
+trigger1=sysvar(4)>=137
+flag=nomusic
+flag2=noshadow
+flag3=nokoslow
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=137
+value=5,35
+
+[state ]
+type=AssertSpecial
+trigger1=sysvar(4)<=385
+flag=roundnotover
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+; avant l'intro
+[Statedef 190]
+type=S
+movetype=A
+ctrl=0
+velset=0,0
+
+[State ]
+type=ChangeAnim
+trigger1=SelfAnimExist(190)
+value=190
+elem=2
+
+[State ];惑星シャモの奴隷達
+type=Helper
+triggerall=!ishelper
+triggerall=palno=12
+trigger1=NumTarget<8
+helpertype=player
+stateno=155
+id=80000
+name="Slaves"
+pos=0,9999
+postype=P1
+keyctrl=0
+ownpal=1
+ignorehitpause=1
+
+[State ]
+Type=ChangeState
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<56
+Value=190
+IgnoreHitPause=1
+
+[State ]
+type=AssertSpecial
+trigger1=roundstate<2
+flag=Intro
+flag2=NoBarDisplay
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=ChangeState
+trigger1=PalNo=12
+trigger1=(var(56)&512)
+value=198
+ignorehitpause=1
+
+[State ]
+type=ChangeState
+trigger1=PalNo=12
+value=196
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=palno<3
+trigger1=var(10):=0
+ignorehitpause=1
+
+[State ]
+type=ChangeState
+trigger1=var(10)=0
+trigger1=Time=0
+value=191+random%2
+
+[State ]
+type=ChangeState
+trigger1=var(10)=1
+trigger1=Time=0
+value=193+random%2
+
+[State ]
+type=ChangeState
+trigger1=var(10)=2
+trigger1=Time=0
+value=197
+;---------------------------------------------------------------------------
+;イントロ1
+[Statedef 191]
+movetype=A
+ctrl=0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=191
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=A
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=190
+[State ];anim管理
+type=varset
+trigger1=sysvar(4)>=120
+sysvar(3)=0
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=190
+value=sysvar(3)
+elem=(sysvar(4)=[0,19])*2+(sysvar(4)=[20,31])*floor((sysvar(4)-19)/4+3)+(sysvar(4)=[32,106])*6+(sysvar(4)=[107,108])*7+(sysvar(4)=[109,112])*8+(sysvar(4)=[113,120])*9
+[state ]
+type=changeanim
+trigger1=sysvar(3)=0
+value=sysvar(3)
+elem=(sysvar(4)%55=[0,24])*2+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+3)
+
+[State ]
+type=AssertSpecial
+trigger1=(sysvar(4)<300)
+flag=Intro
+
+[State ]
+type=PowerSet
+trigger1=sysvar(4)=0
+value=3000
+
+[State ]
+type=PlaySnd
+trigger1=sysvar(4)=2
+value=0,11
+volume=255
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(4)=[0,300]
+flag=Intro
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=roundstate>1
+value=0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;イントロ1
+[Statedef 192]
+movetype=A
+ctrl=0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=192
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=A
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=191
+[State ];anim管理
+type=varset
+trigger1=sysvar(4)>=340
+sysvar(3)=0
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=191
+value=sysvar(3)
+elem=(sysvar(4)=[0,30])*2+(sysvar(4)=[31,270])*floor(((sysvar(4)-31)%32)/8+3)+(sysvar(4)=[271,290])*7+(sysvar(4)=[291,340])*8
+[state ]
+type=changeanim
+trigger1=sysvar(3)=0
+value=sysvar(3)
+elem=(sysvar(4)%55=[0,24])*2+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+3)
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=roundstate>1
+value=0
+ignorehitpause=1
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+Trigger1=sysvar(4)=30
+ID=1041
+Anim=1041
+RemoveTime=240
+Pos=0,0
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+Trigger1=sysvar(4)<=15
+Trigger1=sysvar(4)%5=0
+Trigger2=sysvar(4)=[290,310]
+Trigger2=sysvar(4)%5=0
+ID=1041
+Anim=8521
+RemoveTime=17
+Pos=-30,0
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=PowerSet
+trigger1=sysvar(4)=0
+value=3000
+
+[State ]
+type=PlaySnd
+triggerall=sysvar(3)=191
+triggerall=var(7):=0||1
+trigger1=sysvar(4)=[30,270]
+trigger1=var(7):=1
+value=5,4
+volume=255
+Channel=8
+LowPriority=1
+
+[State ]
+type=PlaySnd
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=290
+value=0,14
+volume=255
+
+[State ]
+type=PlaySnd
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[30,270]
+trigger1=gametime%120=60
+value=21,6
+
+[State ]
+type=EnvShake
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[30,270]
+trigger1=(sysvar(4)-30)%30=0
+time=30
+freq=90
+ampl=4
+
+[State ]
+type=AssertSpecial
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[0,340]
+flag=Intro
+;---------------------------------------------------------------------------
+;イントロ2
+[Statedef 193]
+movetype=A
+ctrl=0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=193
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=A
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=(var(14):=sysvar(3))||1
+triggerall=(var(15):=sysvar(4))||1
+trigger1=var(14)=3030
+trigger1=var(15)>162
+trigger2=var(14)=190
+trigger2=var(15)>140
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=3030
+ignorehitpause=1
+[State ];anim管理
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=sysvar(3)=3030
+trigger1=var(15)>162
+sysvar(3)=190
+ignorehitpause=1
+[State ];anim管理
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=sysvar(3)=190
+trigger1=var(15)>140
+sysvar(3)=0
+ignorehitpause=1
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=3030
+value=sysvar(3)
+elem=(sysvar(4)=[0,97])*3+(sysvar(4)=[98,102])*4+(sysvar(4)=[103,162])*floor((sysvar(4)-103)%30/5+5)
+ignorehitpause=1
+[state ]
+type=changeanim
+trigger1=sysvar(3)=190
+value=sysvar(3)
+elem=(sysvar(4)=[0,11])*floor((sysvar(4)-0)/4+3)+(sysvar(4)=[12,126])*6+(sysvar(4)=[127,128])*7+(sysvar(4)=[129,132])*8+(sysvar(4)=[133,140])*9
+ignorehitpause=1
+[state ]
+type=changeanim
+trigger1=sysvar(3)=0
+value=sysvar(3)
+elem=(sysvar(4)%55=[0,24])*2+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+3)
+ignorehitpause=1
+
+[state ]
+Type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=sysvar(4)>=0
+trigger1=var(37):=1
+Value=SCA
+Time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=sysvar(4)>=0
+trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+Type=VarSet
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=98
+var(5)=1
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=roundstate>1
+value=0
+ignorehitpause=1
+
+[state ]
+Type=EnvShake
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=98
+Trigger2=sysvar(4)>137
+Time=20
+freq=127
+ampl=4
+ignorehitpause=1
+
+[state ]
+Type=PalFX
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=90
+Trigger1=sysvar(4)%2=0
+Time=60
+Add=164,5,5
+ignorehitpause=1
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=[0,8]
+Trigger1=sysvar(4)%2=0
+Trigger2=sysvar(4)=[9,22]
+Trigger2=sysvar(4)%4=0
+ID=9002
+Anim=9002
+PosType=left
+OwnPal=1
+RemoveTime=1
+ontop=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=[9,22]
+Trigger1=sysvar(4)%4=2
+Trigger2=sysvar(4)=[23,42]
+Trigger3=sysvar(4)=[43,63]
+Trigger3=sysvar(4)%4=0
+ID=9003
+Anim=9003
+PosType=left
+OwnPal=1
+RemoveTime=1
+ontop=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=[43,63]
+Trigger1=sysvar(4)%4=2
+Trigger2=sysvar(4)>=64
+ID=9004
+Anim=9004
+PosType=left
+OwnPal=1
+RemoveTime=1
+ontop=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=projectile
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+trigger1=sysvar(4)=60
+projanim=8511
+projremove=1
+projremovetime=30
+velocity=Vel X,Vel Y
+accel=0,0
+attr=S,NT
+sparkno=-1
+postype=p1
+offset=0,-50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=0
+Value=7,6
+ignorehitpause=1
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+Trigger1=sysvar(4)=98
+Value=0,9
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+triggerall=sysvar(3)=3030
+trigger1=sysvar(4)=99
+value=5,7
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+triggerall=sysvar(3)=190
+trigger1=sysvar(4)=2
+value=0,28
+volume=255
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(3)=3030
+trigger2=sysvar(3)=190
+trigger2=sysvar(4)=[0,140]
+flag=Intro
+;---------------------------------------------------------------------------
+;イントロ2
+[Statedef 194]
+movetype=A
+ctrl=0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=194
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=A
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=191
+[State ];anim管理
+type=varset
+trigger1=sysvar(4)>=340
+sysvar(3)=0
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=191
+value=sysvar(3)
+elem=(sysvar(4)=[0,30])*2+(sysvar(4)=[31,270])*floor(((sysvar(4)-31)%32)/8+3)+(sysvar(4)=[271,290])*7+(sysvar(4)=[291,340])*8
+[state ]
+type=changeanim
+trigger1=sysvar(3)=0
+value=sysvar(3)
+elem=(sysvar(4)%55=[0,24])*2+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+3)
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=roundstate>1
+value=0
+ignorehitpause=1
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+Trigger1=sysvar(4)=30
+ID=1041
+Anim=1041
+RemoveTime=240
+Pos=0,0
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+Trigger1=sysvar(4)<=15
+Trigger1=sysvar(4)%5=0
+Trigger2=sysvar(4)=[290,310]
+Trigger2=sysvar(4)%5=0
+trigger3=sysvar(4)=[20,280]
+trigger3=sysvar(4)%12=0
+ID=1041
+Anim=8521
+RemoveTime=17
+Pos=-30,0
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=projectile
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=1
+projanim=8511
+projremove=1
+projremovetime=30
+velocity=Vel X,Vel Y
+accel=0,0
+attr=S,NT
+sparkno=-1
+postype=p1
+offset=0,-50
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=explod
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[20,280]
+trigger1=sysvar(4)%60=0
+anim=8550
+ownpal=1
+sprpriority=10
+pos=0,-60
+removetime=42
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[268,284]
+trigger1=sysvar(4)%2=0
+Trigger2=sysvar(4)=[285,290]
+ID=9004
+Anim=9004
+PosType=left
+OwnPal=1
+RemoveTime=1
+ontop=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=PalFX
+triggerall=!ishelper
+triggerall=sysvar(3)=191
+Trigger1=sysvar(4)=280
+Time=60
+Add=164,5,5
+ignorehitpause=1
+
+[State ]
+type=PowerSet
+trigger1=sysvar(4)=0
+value=3000
+
+[State ]
+type=PlaySnd
+triggerall=sysvar(3)=191
+triggerall=var(7):=0||1
+trigger1=sysvar(4)=[30,270]
+trigger1=var(7):=1
+value=5,4
+volume=255
+Channel=8
+LowPriority=1
+
+[state ]
+Type=VarSet
+triggerall=sysvar(3)=191
+Trigger1=sysvar(4)=290
+var(5)=1
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=290
+value=0,14
+volume=255
+
+[State ]
+type=PlaySnd
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[30,270]
+trigger1=gametime%120=60
+value=21,6
+
+[State ]
+type=EnvShake
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[30,270]
+trigger1=(sysvar(4)-30)%30=0
+time=30
+freq=90
+ampl=4
+
+[State ]
+type=AssertSpecial
+triggerall=sysvar(3)=191
+trigger1=sysvar(4)=[0,340]
+flag=Intro
+;---------------------------------------------------------------------------------------
+;insulte
+[Statedef 195]
+movetype=A
+ctrl=0
+velset=0,0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=195
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=I
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=ChangeState
+triggerall=sysvar(2)!=stateno
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+value=sysvar(2)
+
+[State ];animtime管理
+type=varset
+triggerall=!ishelper
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=195
+
+[State ];state管理
+type=varset
+triggerall=!ishelper
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=195
+value=sysvar(3)
+elem=(sysvar(4)=[0,5])*floor(sysvar(4)/3+2)+(sysvar(4)=[6,49])*4+(sysvar(4)=[50,64])*floor((sysvar(4)-50)/5+5)+(sysvar(4)>=65)*(((sysvar(4)-65)%10)/5+8)
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=0
+value=0,15
+
+[State ]
+type=ChangeState
+trigger1=sysvar(4)>=120
+value=0
+;---------------------------------------------------------------------------------------
+;イントロ12P用
+[Statedef 196]
+movetype=A
+ctrl=0
+velset=0,0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=196
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=A
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+triggerall=!ishelper
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=palno=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=90195
+
+[State ];state管理
+type=varset
+triggerall=!ishelper
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=90195
+value=sysvar(3)
+elem=(sysvar(4)=[0,169])*2+(sysvar(4)=[170,199])*3+(sysvar(4)=[200,202])*4+(sysvar(4)=[203,210])*floor((sysvar(4)-203)/4+5)+(sysvar(4)>=211)*floor((sysvar(4)-211)%52/13+7)
+
+[State ]
+type=AssertSpecial
+trigger1=RoundNo=1
+trigger1=(sysvar(4)<400)
+flag=Intro
+
+[State ]
+Type=null
+triggerall=palno=12
+Trigger1=Var(20):=1
+Trigger1=Var(5):=1
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=RoundNo>1||roundstate>1
+trigger2=sysvar(4)>1000
+value=0
+ignorehitpause=1
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=40
+ID=1041
+Anim=12111
+RemoveTime=155
+Pos=0,-50
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=40
+projanim=8511
+projremove=1
+projremovetime=155
+velocity=vel x,vel y
+accel=0,0
+attr=S,NT
+Projespriority=-2147483647
+projsprpriority=-2147483647
+sparkno=-1
+postype=p1
+offset=0,-50
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=190
+projanim=8550
+projremove=1
+projremovetime=42
+velocity=vel x,vel y
+accel=0,0
+attr=S,NT
+Projespriority=2147483647
+projsprpriority=2147483647
+sparkno=-1
+postype=p1
+offset=0,-50
+ignorehitpause=1
+
+[state ]
+type=explod
+triggerall=!ishelper
+trigger1=sysvar(4)=220
+anim=8550
+ownpal=1
+sprpriority=10
+pos=0,-60
+removetime=42
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=[40,195]
+Trigger1=sysvar(4)%15=0
+ID=1041
+Anim=8526
+RemoveTime=17
+Pos=-30,0
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)=[40,195]
+Trigger1=sysvar(4)%15=8
+ID=1041
+Anim=8521
+RemoveTime=17
+Pos=-30,0
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=5
+value=0,5
+volume=255
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=80
+value=5,7
+volume=255
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=45
+value=0,12
+volume=255
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=215
+value=5,5
+volume=255
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=230
+value=0,39
+volume=255
+
+[State ]
+Type=EnvShake
+triggerall=!ishelper
+Trigger1=sysvar(4)=[27,175]
+Time=1
+
+[State ]
+type=PalFx
+trigger1=!ishelper
+Color=256
+add=(sysvar(4)=[0,230])*sysvar(4),(sysvar(4)=[0,230])*sysvar(4),(sysvar(4)=[0,230])*sysvar(4)
+time=1
+ignorehitpause=1
+;---------------------------------------------------------------------------------------
+;イントロ3
+[Statedef 197]
+movetype=A
+ctrl=0
+velset=0,0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=197
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+movetype=A
+physics=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+triggerall=!ishelper
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ]
+type=varset
+triggerall=(var(14):=sysvar(3))||1
+triggerall=(var(15):=sysvar(4))||1
+trigger1=var(14)=90000
+trigger1=var(15)>179
+trigger2=var(14)=93200
+trigger2=var(15)>1
+sysvar(4)=0
+ignorehitpause=1
+
+[state ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=stateno!=sysvar(2)
+sysvar(3)=90000
+ignorehitpause=1
+[state ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=sysvar(3)=90000
+trigger1=var(15)>179
+sysvar(3)=93200
+ignorehitpause=1
+[state ];anim管理
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=sysvar(3)=93200
+trigger1=var(15)>1
+sysvar(3)=90001
+ignorehitpause=1
+
+[state ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=90000
+value=sysvar(3)
+elem=(sysvar(4)=[0,129])*floor(sysvar(4)/10+2)+(sysvar(4)=[130,179])*15
+ignorehitpause=1
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=93200
+value=sysvar(3)
+elem=(sysvar(4)=[0,1])*2
+ignorehitpause=1
+[state ]
+type=changeanim
+trigger1=sysvar(3)=90001
+value=sysvar(3)
+elem=(sysvar(4)%55=[0,24])*2+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+3)
+ignorehitpause=1
+
+[State ]
+Type=null
+Trigger1=Var(5):=1
+ignorehitpause=1
+
+[state ]
+Type=VarSet
+trigger1=sysvar(3)=90000
+Trigger1=sysvar(4)=130
+Trigger1=Alive=1
+Trigger1=Var(20)=0
+var(20)=1
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=roundstate>1
+trigger2=sysvar(4)>1000
+value=0
+ignorehitpause=1
+
+[state ]
+Type=EnvShake
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+Trigger1=sysvar(4)=130
+Trigger2=sysvar(4)>179
+Time=20
+freq=127
+ampl=4
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+trigger1=sysvar(4)=0
+ID=9102
+anim=9102
+pos=-320,0
+postype=right
+sprpriority=-3
+removetime=140
+ignorehitpause=1
+bindtime=-1
+persistent=0
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+Type=PalFX
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+Trigger1=sysvar(4)=140
+Time=60
+Add=164,5,5
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+trigger1=sysvar(4)=70
+value=0,16
+volume=255
+ignorehitpause=1
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+Trigger1=sysvar(4)=2
+Value=F20,0
+ignorehitpause=1
+
+[state ]
+Type=PlaySnd
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+Trigger1=sysvar(4)=10
+Value=7,4
+ignorehitpause=1
+
+[state ]
+Type=Explod
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+Trigger1=sysvar(4)=49
+ID=555
+Anim=8510
+RemoveTime=140
+SprPriority=3
+BindTime=-1
+OwnPal=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=explod
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+trigger1=sysvar(4)=0
+ID=4050
+anim=12111
+OwnPal=1
+RemoveTime=190
+SprPriority=-2
+Pos=0,-60
+sprpriority=1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+trigger1=sysvar(4)=130
+value=5,7
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+triggerall=sysvar(3)=93200
+trigger1=sysvar(4)=0
+value=0,36
+ignorehitpause=1
+
+[state ]
+Type=EnvShake
+triggerall=!ishelper
+triggerall=sysvar(3)=90000
+Trigger1=sysvar(4)>50
+Trigger1=Pos Y>=0
+Trigger1=sysvar(4)%4=0
+Time=4
+ignorehitpause=1
+
+[state ]
+type=SprPriority
+triggerall=sysvar(3)=90000
+trigger1=sysvar(4)=0
+value=-1
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=sysvar(3)=90000
+trigger2=sysvar(3)=93200
+trigger3=sysvar(3)=90001
+trigger3=sysvar(4)=[0,140]
+flag=Intro
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 198]
+movetype=A
+ctrl=0
+velset=0,0
+;------------------------------------------------------------------
+[state ];ライフ保存用ヘルパー
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ライフ保存用ヘルパーID調整
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(1)&&var(21)=0
+triggerall=helper(1),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+Value=198
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[state ];anim管理
+type=varset
+trigger1=!ishelper||ishelper(70000)
+trigger1=stateno!=sysvar(2)
+sysvar(3)=ifelse(!ishelper,95300,60000)
+ignorehitpause=1
+
+[state ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ステ抜け時のanimelem
+type=changeanim
+trigger1=sysvar(3)=95300
+value=sysvar(3)
+elem=(sysvar(4)=[0,119])*1+(sysvar(4)=[120,127])*floor((sysvar(4)-120)/4+2)+(sysvar(4)=[128,129])*4+(sysvar(4)=[130,300])*5
+ignorehitpause=1
+
+[state ]
+type=ReversalDef
+trigger1=ishelper(70000)
+reversal.attr=SCA,AA,AT,AP
+numhits=0
+priority=7,hit
+pausetime=0,0
+guard.dist=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[state ]
+type=parentvarset
+triggerall=ishelper(70000)
+triggerall=numtarget>0
+trigger1=target,anim!=25000&&target,anim!=24000
+trigger1=root,var(44)=0
+var(44)=target,anim
+ignorehitpause=1
+
+[state ];超即死前ステに送る
+type=targetstate
+triggerall=ishelper(70000)||!ishelper&&palno>8
+triggerall=numtarget>0
+triggerall=target,alive
+trigger1=ishelper
+trigger1=!target,ishelper
+trigger1=target,stateno!=149995
+trigger1=target,id=enemy,id&&root,var(24)>0
+trigger1=playerID(root,var(24)),var(21)!=[120,155]
+trigger1=!(root,fvar(10)=1&&(root,var(54)&1))
+trigger2=ishelper&&numenemy>1
+trigger2=!target,ishelper
+trigger2=target,stateno!=149995
+trigger2=target,id=enemy(1),id&&root,var(24)>0
+trigger2=playerID(root,var(24)),var(26)!=[120,155]
+trigger2=!(root,fvar(10)=1&&(root,var(54)&4))
+trigger3=!ishelper&&palno=12
+trigger3=!target,ishelper
+trigger3=target,id=enemy,id&&var(24)>0
+trigger3=playerID(var(24)),var(21)!=[120,155]
+trigger3=!(fvar(10)=1&&(var(54)&1))
+trigger4=!ishelper&&palno=12
+trigger4=!target,ishelper&&numenemy>1
+trigger4=target,id=enemy(1),id&&var(24)>0
+trigger4=playerID(var(24)),var(26)!=[120,155]
+trigger4=!(fvar(10)=1&&(var(54)&4))
+value=1000044
+ignorehitpause=1
+
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(var(24)),var(21)=[120,155]
+value=playerID(var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>0
+trigger1=target,id=enemy,id
+trigger1=playerID(root,var(24)),var(21)=[120,155]
+value=playerID(root,var(24)),var(21)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=!ishelper&&palno>8
+triggerall=numtarget>0&&var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(var(24)),var(26)=[120,155]
+value=playerID(var(24)),var(26)
+ignorehitpause=1
+[state ]
+type=targetstate
+triggerall=ishelper(70000)
+triggerall=numtarget>0&&root,var(24)>0
+triggerall=target,alive
+triggerall=!target,ishelper
+trigger1=numenemy>1
+trigger1=target,id=enemy(1),id
+trigger1=playerID(root,var(24)),var(26)=[120,155]
+value=playerID(root,var(24)),var(26)
+ignorehitpause=1
+
+[state ]
+type=targetdrop
+triggerall=ishelper(70000)||!ishelper&&palno=11
+triggerall=numtarget>0
+trigger1=target,ishelper
+trigger2=target,hitpausetime>10
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=!ishelper&&palno=12
+Trigger1=Var(20):=1
+Trigger1=Var(5):=1
+trigger1=(sysvar(4)<300)
+flag=Intro
+
+[State ]
+Type=null
+triggerall=palno=12
+Trigger1=Var(20):=1
+Trigger1=Var(5):=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=130
+value=5,11
+;volume=255
+ignorehitpause=1
+
+[state ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=0,40
+ignorehitpause=1
+
+[state ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=130
+value=S5,23
+ignorehitpause=1
+
+[state ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=1
+value=5,7
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+ID=9102
+anim=9102
+pos=0,0
+postype=back
+sprpriority=-5
+removetime=130
+bindtime=-1
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=projectile
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+projanim=3015
+projremovetime=120
+supermovetime=999
+pausemovetime=999
+attr=S,NT
+sparkno=-1
+offset=-19,-102
+ignorehitpause=1
+projscale=0.4,0.4
+
+[state ]
+type=projectile
+triggerall=!ishelper
+trigger1=sysvar(4)=[0,30]
+trigger1=sysvar(4)%15=0
+projanim=8526
+projremovetime=90
+supermovetime=999
+pausemovetime=999
+Projespriority=-3
+attr=S,NT
+sparkno=-1
+offset=-56,-50
+ignorehitpause=1
+
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=130
+ID=8600
+anim=8600
+pos=150,0
+postype=p1
+sprpriority=2147483647
+removetime=180
+bindtime=-1
+scale=0.75,0.5
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+[state ]
+type=Explod
+triggerall=!ishelper
+trigger1=sysvar(4)=130
+ID=8600
+anim=8600
+pos=150,0
+postype=p1
+sprpriority=2147483647
+removetime=180
+bindtime=-1
+scale=0.75,0.5
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+Type=Explod
+Trigger1=sysvar(4)=124
+ID=3015
+Anim=1056
+RemoveTime=6
+Pos=48,-70
+velocity=16.25,0
+accel=0,4.375
+SprPriority=3
+OwnPal=1
+ignorehitpause=1
+Scale=0.5,0.5
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=NotHitBy
+triggerall=!ishelper&&palno<3
+Trigger1=var(37):=1
+value=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=null
+triggerall=!ishelper&&palno>2
+Trigger1=var(37):=1
+ignorehitpause=1
+
+[state ]
+type=Projectile
+triggerall=!ishelper
+triggerall=numenemy>0
+trigger1=sysvar(4)=[135,300]
+projanim=60000
+Projremove=0
+projremovetime=1
+postype=p2
+attr=C,AT
+pausetime=0,1
+damage=floor((0.5*var(0)+random%25)*!(var(56)&128)) ;MUGEN 1.1 conversion: floor() added
+guard.dist=0
+p2stateno=1000044
+p2getp1state=1
+fall.damage=Ceil(10*enemynear,Const(data.life)*ifelse(enemynear,Const(data.defence)>100,enemynear,Const(data.defence)/100,1))
+hitflag=MAFLPD
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>300
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=Vel X||1
+trigger1=fvar(2):=Pos X||1
+trigger1=fvar(3):=Vel Y||1
+trigger1=fvar(4):=Pos Y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+;moque
+[Statedef 5300]
+ctrl=0
+velset=0,0
+
+[State ]
+type=ChangeState
+triggerall=sysvar(2)!=stateno
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+value=0;sysvar(2)
+
+[state ]
+type=statetypeset
+trigger1=1
+statetype=S
+gnorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtime管理
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+
+[State ];anim管理,分けたほうが安定する？
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=5300
+
+[State ];state管理
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=5300
+value=sysvar(3)
+elem=(sysvar(4)=[0,14])*floor(sysvar(4)/5+2)+(sysvar(4)>14)*floor(((sysvar(4)-15)%16>7)*2+((sysvar(4)-15)%8>5)*1+5)
+
+[state ]
+type=playsnd
+trigger1=sysvar(4)=0
+value=5,2
+volume=255
+
+[State ]
+type=VarSet
+trigger1=sysvar(4)>=160
+trigger1=Var(1)=1
+trigger2=sysvar(4)>=140
+trigger2=Var(1)=2
+trigger3=sysvar(4)>=80
+trigger3=Var(1)=3
+trigger4=sysvar(4)>=240
+trigger4=Var(1)=4
+v=1
+value=0
+
+[State ]
+type=StateTypeSet
+trigger1=Pos Y<0
+value=A
+
+[State ]
+type=ChangeState
+triggerall=var(20)!=1
+triggerAll=palno!=12
+trigger1=Var(1)=0
+trigger1=Pos Y<0
+value=2000
+
+[State ]
+type=ChangeState
+trigger1=Var(1)=0
+trigger2=palno=12
+trigger3=ishelper(70000)
+value=0

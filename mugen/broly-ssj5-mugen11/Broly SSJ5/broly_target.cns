@@ -1,0 +1,2577 @@
+;;=========================================================================
+;ÖŠáƒLƒ‰[
+;;=========================================================================
+[Statedef 1]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 2]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 3]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 4]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 5]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 6]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 16]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 666]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 777]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1003]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1007]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1008]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1009]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1065]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1253]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1412]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1720]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 2002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 2500]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 2506]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 2507]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 3002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 3929]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 5858]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 6000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 6003]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 6004]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 6540]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 6565]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 7055]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 9500]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 9510]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 9600]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 9998]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 9999]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 10003]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 10004]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 10015]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 10101]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 10504]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 10651]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 11001]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 11002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 11003]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 11004]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 11100]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 11502]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 12003]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 12004]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 12310]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+;[Statedef 12500] ;MUGEN 1.1 conversion: duplicate of [Statedef 12500] in broly_helper.cns, which MUGEN uses
+;movetype=I
+;
+;[state ]
+;type=destroyself
+;triggerall=ishelper
+;triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+;triggerall=numenemy>0
+;trigger1=enemy,name="Legendary Super Saiyan"
+;trigger1=enemy,palno=[1,9]
+;trigger2=numenemy=2
+;trigger2=enemy(1),name="Legendary Super Saiyan"
+;trigger2=enemy(1),palno=[1,9]
+;ignorehitpause=1
+;
+;[state ]
+;type=Changestate
+;triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+;trigger1=enemy,name="Legendary Super Saiyan"
+;trigger1=enemy,palno=[7,12]
+;trigger2=numenemy=2
+;trigger2=enemy(1),name="Legendary Super Saiyan"
+;trigger2=enemy(1),palno=[7,12]
+;value=ifelse(!ishelper,1000044,149990)
+;ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 13200]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 14001]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 14002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 16000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 16001]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 16002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 16003]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 16500]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 18102]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 19101]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 22101]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 22122]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 22224]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 24610]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 26320]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 26321]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 26322]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 26323]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 26324]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 26485]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 30000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 32555]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 40000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 45755]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 45999]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 50505]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 51515]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 51516]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 51517]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 51518]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 60001]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 64000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 64001]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 65000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 77777]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 84555]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 99919]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 99920]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 110010]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 142100]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 170000]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 180002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 313900]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 741001]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 741002]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1699922]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 1699955]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------
+[Statedef 2147483647]
+movetype=I
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ]
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;------------------------------------------------------------------------------

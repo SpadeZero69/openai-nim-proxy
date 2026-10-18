@@ -1,0 +1,195 @@
+==========================================================================
+ BROLY SSJ5 ("Limit-Breaking Broly") - MOVE LIST (PC keyboard) - MUGEN 1.1
+ Original character by the author of the kamasetoyobanaide blog, based on
+ gulthor's The Nightmare SSJ3HD. Package author in the .def: dgx.
+ Made loadable in MUGEN 1.1; the moves and the AI are unchanged.
+==========================================================================
+
+--------------------------------------------------------------------------
+ HOW TO READ THIS LIST
+--------------------------------------------------------------------------
+ Directions are the arrow keys, written for Broly facing RIGHT:
+
+   Forward       = Right arrow (towards the opponent)
+   Back          = Left arrow
+   Up / Down     = Up arrow / Down arrow
+   Down-Forward  = Down and Right pressed together
+
+ When Broly faces LEFT, Forward is the Left arrow and Back the Right arrow.
+
+ A, B, C, X, Y, Z and Start are MUGEN's buttons. To see which keyboard
+ key each one is, open MUGEN's Options > Input Config.
+
+   X / Y / Z = light / medium / strong punch
+   A / B / C = light / medium / strong kick
+   Start     = taunt
+
+ "Forward + X" means hold Forward and press X.
+ "X + Y" means press X and Y at the same time.
+ "Back, Forward, A" means tap Back, tap Forward, then press A, quickly
+ (all within 1/4 of a second).
+
+ Power: 1 bar = 1000. It fills by itself during the round (about a bar
+ every 12 seconds in palettes 1-2, faster in the others), and Power Up
+ fills it faster. In this download his gauge holds 2.5 bars (2500); see
+ "Big supers" for what that means.
+
+--------------------------------------------------------------------------
+ BASIC ATTACKS
+--------------------------------------------------------------------------
+ Standing
+   X, Y, Z ..... light, medium, strong punch
+   A, B, C ..... light, medium, strong kick
+   Start ....... taunt (not in SSJ5 mode)
+
+ Crouching (hold Down)
+   X, Y or Z ... crouching punch
+   A, B or C ... crouching kick
+
+ Jumping
+   any button .. jump kick
+
+ Chains (press the next button while the previous hit connects)
+   X, X, Y ..... light, medium, strong punch
+   A, A, B ..... light, medium, strong kick
+   On hit, a light or medium attack can also go into Y, Z, B or C, and
+   most hits can be cancelled into the moves below.
+
+--------------------------------------------------------------------------
+ DIRECTION + BUTTON MOVES (hold the arrow, press the button)
+--------------------------------------------------------------------------
+   Forward + X .... Atomic Bomber: a pillar of energy
+   Forward + A .... Smasher Lariat: rushes at the opponent
+   Back + A ....... Smasher Lariat EX (needs 1/2 bar)
+   Forward + B .... Machine Gun Shooter: kicks the opponent up fast
+   Back + B ....... Machine Gun Shooter EX (needs 1/2 bar)
+   Back + X ....... Energy Barrage: a stream of big energy blasts
+   Forward + C .... Ki Blast: a fast energy ball (uses a little power)
+   Back + C ....... Uppercut
+   Back + Y ....... Dynamite Kick
+   Forward + Y .... Throw
+   Forward + Z .... Throw (another throw)
+
+--------------------------------------------------------------------------
+ TWO-BUTTON MOVES
+--------------------------------------------------------------------------
+   Hold A + X ..... Power Up: charges ki, gives back power and life
+   Hold B + Y ..... Shockwave: uses some power to blow the opponent away
+   X + Y .......... Flight (on the ground or in the air). While flying
+                    the attack buttons still work, and A + B is the
+                    Fall Down Kick.
+   A + B (air) .... Fall Down Kick: dives down with a kick. While flying,
+                    or after a jump kick that connects.
+   Y + Z .......... Teleport. Also works while you are being hit, to get
+                    away. When awakened he fires a few ki blasts first.
+   Y + Z .......... Emergency Dodge (LSSJ and SSJ5 modes, while
+                    attacking): appears behind the opponent. You can
+                    keep attacking, but not with special moves.
+   Z + C .......... Awaken (see "Awakening and modes")
+
+--------------------------------------------------------------------------
+ SUPER MOVES
+--------------------------------------------------------------------------
+   Back, Forward, A ...... K.F.M.S.W.A: a rush of blows (1 bar)
+   Back, Forward, B ...... Eraser Cannon (1 bar)
+   Back, Forward, C ...... Blast Buster: grabs and carries the opponent
+                           (1 bar)
+   Back, Forward, X ...... Meteor Smash: a rush that ends by slamming the
+                           opponent into the ground (1 bar)
+   Back, Forward, Y ...... Kamehameha (1 1/2 bars)
+   Back, Forward, Z ...... Ultimate Rush: dashes in, then one of three
+                           moves at random (2 bars; not in SSJ5 mode)
+   Down, Forward, Back, Z  Energy Barrage EX
+
+--------------------------------------------------------------------------
+ BIG SUPERS (Down, Down-Forward, Forward, then the button)
+--------------------------------------------------------------------------
+   ... A ... Super Spirit Bomb .......... needs 7 bars
+   ... B ... Dark Force ................. needs 4 bars
+   ... C ... Supernova (as SSJ5) ........ needs more than 9 bars
+   ... X ... Voltenic Ultima ............ needs 6 bars
+   ... Y ... Earth Breaker .............. needs 6 bars (ground only)
+   ... Z ... Enemy Burst ................ needs 5 bars
+
+ Important: in this download his gauge holds only 2.5 bars, so in
+ palettes 1-11 you can't do these (the original behaves the same way).
+ Palette 12 skips the power check for all of them except Earth Breaker.
+ When the computer plays him in palettes 5-11 it also counts a hidden
+ power meter that goes up to 10 bars, so the computer can use them.
+ To unlock them, open broly_data.cns and change the line  power=2500
+ to  power=10000  (the gauge then holds 10 bars, and the computer
+ uses these moves too).
+
+--------------------------------------------------------------------------
+ AWAKENING AND MODES
+--------------------------------------------------------------------------
+ Z + C (palettes 3-12, full gauge, at least 501 life):
+   Legendary Super Saiyan (LSSJ) mode.
+ Z + C again in LSSJ mode (needs 10 bars, so with the 2.5-bar gauge only
+ palette 12 can do it; the computer can in palettes 5-11): SSJ5 mode.
+ To start a match in SSJ5 mode, see "Settings".
+ Palettes 1 and 2 can't awaken.
+
+ LSSJ mode: no juggle limit, Emergency Dodge, most normal attacks break
+ armor, power fills more slowly.
+ SSJ5 mode: power gauge always full, much tougher, every attack is
+ unblockable, some moves change, he slowly heals below 40% life. When
+ the time runs out (about 40 seconds) his life drops to 1, he turns back
+ and can't move for a while.
+
+ Extra moves in SSJ5 mode:
+   Back, Forward, B ...... Gigantic Meteor (after Eraser Cannon)
+   Back + X .............. Scatter Blasts: U-shaped energy blasts
+   Forward + C ........... Ki Wave: a faster beam
+   Down, Forward, Back, Z  Three-Way Barrage
+   Hold B + Y ............ Super Shockwave
+   Z + C ................. Ultima Field: lightning falls for 700 frames
+                           (stacks; permanent with the Counter Barrier)
+   Back, Forward, Z + C .. Counter Barrier (palettes 7-12, after losing a
+                           round): reflects attacks, powers up some moves
+
+--------------------------------------------------------------------------
+ PALETTES (each one plays differently)
+--------------------------------------------------------------------------
+ On the character select screen, A, B, C, X, Y, Z pick palettes 1-6.
+ Hold Start and press them for palettes 7-12.
+
+   1, 2   Normal. Strong but fair; can't awaken.
+   3, 4   Very strong: permanent armor, invincible Power Up, can awaken.
+   5, 6   Stronger again: life protection, armor, faster gauge when low
+          on life, starts round 2 with a full gauge.
+   7, 8   "God" level: much more damage, instant-kill tricks, heals when
+          low on life. SSJ5 lasts twice as long.
+   9, 10  Tougher god level. SSJ5 lasts three times as long.
+   11     Can't be damaged normally.
+   12     Strongest: uses every trick, starts with a full gauge.
+          It has the same colors as palette 1, so check which one you
+          picked.
+ Palettes 7-12 are made to fight other "god" characters; they can end a
+ match against normal characters almost instantly.
+
+--------------------------------------------------------------------------
+ SETTINGS (top of broly_command.cns, open it with Notepad)
+--------------------------------------------------------------------------
+   trigger1=var(4):=5     AI level, 1-5 (5 = strongest). 0 turns his AI
+                          off. If he ever moves on his own while you
+                          play him, set this to 0.
+   trigger1=var(10):=0    Starting mode for palettes 3-11:
+                          0 = normal, 1 = LSSJ, 2 = SSJ5.
+   trigger1=var(35):=2400 SSJ5 time in ticks (2400 = about 40 seconds).
+                          -1 = SSJ5 never ends.
+ Change only the number before the ";".
+
+--------------------------------------------------------------------------
+ MUGEN 1.1 NOTES
+--------------------------------------------------------------------------
+ Install: copy the whole "Broly SSJ5" folder into MUGEN's chars folder,
+ then add a line with  Broly SSJ5  under [Characters] in data/select.def.
+
+ He stays a WinMUGEN-style character (mugenversion is empty in the
+ .def), so MUGEN 1.1 runs him with the old engine rules his tricks were
+ built on. The conversion only changes lines MUGEN 1.1 can refuse to
+ load, and keeps what they did; the changed lines are marked with
+ ";MUGEN 1.1 conversion" in the files. One thing can't work in 1.1:
+ MUGEN 1.1 has no TagIn controller, so a trick that changed the state of
+ the opponent's partner in team matches is switched off.

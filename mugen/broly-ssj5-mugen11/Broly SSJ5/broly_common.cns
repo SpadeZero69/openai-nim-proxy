@@ -1,0 +1,7505 @@
+;------------------------------------------------------------------------------------------
+[Statedef 0]
+movetype=A
+Ctrl=0
+;------------------------------------------------------------------
+[state ];ƒ‰ƒCƒt•Û‘¶—pƒwƒ‹ƒp[
+type=helper
+triggerall=!ishelper&&alive
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)>0
+trigger2=PlayerIDExist(var(21))
+trigger2=playerID(var(21)),var(41)=0
+trigger2=numhelper(1)<59
+trigger3=numhelper(1)>0&&var(21)>0
+trigger3=!PlayerIDExist(var(21))
+trigger3=numhelper(1)<59
+Helpertype=player
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ƒ‰ƒCƒt•Û‘¶—pƒwƒ‹ƒp[ID’²®
+Type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+trigger1=numhelper(1)>0&&var(21)>0
+trigger1=PlayerIDExist(var(21))
+trigger1=playerID(var(21)),var(41)=0
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<200
+trigger2=numhelper(1)>0&&var(21)>0
+trigger2=!PlayerIDExist(var(21))
+Trigger2=Var(39):=Var(39)+1||1
+Trigger2=Var(39)<200
+Value=0
+ignorehitpause=1
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,8]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,8]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=name!="Legendary Super Saiyan"
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+type=SelfState
+triggerall=ishelper(70000)
+triggerall=roundstate>3
+trigger1=root,var(17)=1&&root,palno=12
+trigger1=root,var(21)>0&&PlayerIDExist(root,var(21))
+trigger1=playerID(root,var(21)),fvar(7)>5
+value=171+(root,win)*1
+ignorehitpause=1
+[State ]
+type=SelfState
+triggerall=!ishelper
+triggerall=roundstate>3
+trigger1=var(17)=1&&palno=12
+trigger1=!win&&var(21)>0&&PlayerIDExist(var(21))
+trigger1=playerID(var(21)),fvar(7)>5
+value=171
+ignorehitpause=1
+[State ]
+type=SelfState
+triggerall=ishelper(70000)
+triggerall=roundstate>3&&root,var(21)>0&&PlayerIDExist(root,var(21))
+trigger1=(root,var(56)&2)||(root,var(17)=[1,2])
+trigger1=playerID(root,var(21)),fvar(7)>5
+value=170+(root,win)*10
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=!ishelper&&(var(56)&2)
+triggerall=numhelper(70000)
+trigger1=roundstate>2
+trigger1=(var(56)&64)
+trigger2=roundstate>2
+trigger2=var(17)=1&&palno=12
+value=153
+ignorehitpause=1
+;------------------------------------------------------------
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=I
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=statetypeset
+triggerall=roundstate=2
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+sysvar(3)=ifelse(palno<3,ifelse(life<=250,23,0),ifelse(var(9)<=250,23,0))
+ignorehitpause=1
+[State ]
+type=varset
+trigger1=ishelper(70000)
+trigger1=!(root,var(20)=1||root,palno=12)
+sysvar(3)=ifelse(root,palno<3,ifelse(root,life<=250,23,0),ifelse(root,var(9)<=250,23,0))
+ignorehitpause=1
+[State ]
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90001
+ignorehitpause=1
+[State ]
+type=varset
+trigger1=ishelper(70000)
+trigger1=root,palno=12&&root,var(17)=1
+sysvar(3)=23
+ignorehitpause=1
+
+[State ];animŠÇ—
+type=varset
+triggerall=stateno!=sysvar(2)
+trigger1=sysvar(3)=90195
+sysvar(3)=90180
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=0
+trigger2=sysvar(3)=90001
+value=sysvar(3)
+elem=(sysvar(4)%55=[0,24])*2+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+3);(sysvar(4)%55=[0,24])*1+(sysvar(4)%55=[25,54])*floor((sysvar(4)%55-25)/6+2)
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=23
+value=sysvar(3)
+elem=(sysvar(4)%64=[0,63])*(2+2*floor((sysvar(4)%64)/32)+((sysvar(4)%64%32)>24))
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)>=0)*floor(sysvar(4)%52/13+2)
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper
+trigger1=var(12)=1
+value=1
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+triggerall=!ishelper
+triggerall=numhelper(70000)
+trigger1=roundstate>2
+flag=Invisible
+flag2=noshadow
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=ishelper(70000)
+trigger1=roundstate=3
+trigger1=(root,var(56)&2)
+trigger2=!ishelper&&(var(56)&2)
+trigger2=numhelper(70000)&&var(23)>0&&PlayerIDExist(var(23))
+trigger2=roundstate=3
+trigger2=playerID(var(23)),stateno!=0
+flag=RoundNotOver
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper&&(var(56)&2)
+trigger1=numhelper(70000)&&var(23)>0&&PlayerIDExist(var(23))
+trigger1=roundstate=3
+trigger1=playerID(var(23)),stateno!=0
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=!(var(56)&16)&&roundstate>2
+trigger1=var(23)>0&&PlayerIDExist(var(23))&&numhelper(70000)>0
+trigger1=playerID(var(23)),sysvar(2)=182
+trigger1=var(56):=var(56)+16
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+trigger1=var(7):=0||1
+y=0
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+trigger1=abs(vel x)<2
+trigger2=sysvar(4)=0
+x=0
+ignorehitpause=1
+
+[state ]
+type=removeExplod
+trigger1=stateno!=0
+id=1098
+ignorehitpause=1
+
+[state 2000]
+type=posset
+triggerall=!ishelper
+trigger1=pos Y>-10
+y=0
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=roundstate=2
+trigger1=sysvar(4)=0
+trigger1=Pos Y<0
+value=2000
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=Life=[250,750]
+trigger1=win=1
+trigger1=Var(5)!=0
+var(5)=0
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=anim=4
+trigger1=sysvar(4)%1605=679
+value=5,2
+volume=255
+ignorehitpause=1
+
+[state ]
+type=playsnd
+triggerall=!ishelper
+trigger1=anim=4
+trigger1=sysvar(4)%1605=1249
+value=5,8
+volume=255
+ignorehitpause=1
+
+[State ]
+type=StopSnd
+triggerall=!ishelper
+trigger1=sysvar(4)=5
+channel=1
+ignorehitpause=1
+
+[State ]
+type=StopSnd
+triggerall=!ishelper
+trigger1=sysvar(4)=5
+channel=2
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=!(var(56)&2)
+trigger1=var(17)!=[1,2]
+value=5050
+ignorehitpause=1
+
+[state a]
+type=turn
+triggerall=!ishelper
+trigger1=enemynear,alive||numenemy=1
+trigger1=(enemynear,pos x-pos x)*facing<0
+trigger2=!enemynear,alive&&numenemy>1
+trigger2=(enemynear(1),pos x-pos x)*facing<0
+ignorehitpause=1
+
+[state ]
+type=destroyself
+triggerall=ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysfvar(4)!=gametime+gametime
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause = 1
+;-------------------------------------------------------------
+[Statedef 10]
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=C
+physics=C
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=10
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90010
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=10
+trigger2=sysvar(3)=90010
+value=sysvar(3)
+elem=(sysvar(4)=0)*2
+ignorehitpause=1
+
+[State ]
+type=VelMul
+trigger1=sysvar(4)=0
+x=0.75
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>0
+value=11
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.crouch.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 11]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=C
+physics=C
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper
+trigger1=var(12)=1
+value=1
+ignorehitpause=1
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=1
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=11
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90011
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=11
+trigger2=sysvar(3)=90011
+value=sysvar(3)
+elem=(sysvar(4)%30=[0,29])*2
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holddown"
+value=12
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.crouch.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 12]
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerall=palno!=12
+trigger1=time=0
+trigger1=stateno!=sysvar(2)
+sysvar(3)=12
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=time=0
+triggerall=stateno!=sysvar(2)
+trigger1=var(20)=1
+trigger2=palno=12
+trigger3=ishelper(70000)
+sysvar(3)=90012
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=12
+trigger2=sysvar(3)=90012
+value=sysvar(3)
+elem=(sysvar(4)=0)*2
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>0
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 20]
+ctrl=0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper
+trigger1=var(12)=1
+value=1
+ignorehitpause=1
+
+[State ];animtimeŠÇ—
+type=varset
+triggerall=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(4)=0
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+triggerall=var(20)!=1
+triggerAll=palno!=12
+trigger1=sysvar(4)%49=0||sysvar(4)%49=24
+trigger1=sysvar(3)=20
+trigger2=sysvar(4)%63=0||sysvar(4)%63=33
+trigger2=sysvar(3)=21
+volume=-1
+value=21,2
+
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger1=Anim!=90005||Anim=90005&&AnimTime=0
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+trigger2=Anim!=90005||Anim=90005&&AnimTime=0
+sysvar(3)=ifelse(vel x>0,90020,90021)
+ignorehitpause=1
+
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger1=Anim!=5||Anim=5&&AnimTime=0
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+trigger2=Anim!=5||Anim=5&&AnimTime=0
+sysvar(3)=ifelse(vel x>0,20,21)
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=20
+trigger2=sysvar(3)=90020
+value=sysvar(3)
+elem=(sysvar(4)%49=[0,48])*floor((sysvar(4)%49)/7+2)
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=21
+trigger2=sysvar(3)=90021
+value=sysvar(3)
+elem=(sysvar(4)%63=[0,62])*floor((sysvar(4)%63)/9+2)
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+trigger1=command="holdfwd"
+x=const(velocity.walk.fwd.x)
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+trigger1=command="holdback"
+x=const(velocity.walk.back.x)
+ignorehitpause=1
+
+[State ]
+type=PosSet
+trigger1=Pos Y>=0
+Y=0
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=!ishelper
+trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdfwd"
+trigger1=command!="holdback"
+value=0
+ignorehitpause=1
+
+[state ]
+type=turn
+triggerall=!ishelper
+trigger1=enemynear,alive||numenemy=1
+trigger1=(enemynear,pos x-pos x)*facing<0
+trigger2=!enemynear,alive&&numenemy>1
+trigger2=(enemynear(1),pos x-pos x)*facing<0
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 40]
+ctrl=0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+triggerAll=time>=0
+trigger1=palno=12
+trigger2=var(20)=1
+value=70
+ignorehitpause=1
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=40
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90040
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=40
+trigger2=sysvar(3)=90040
+value=sysvar(3)
+elem=(sysvar(4)=[0,4])*floor(sysvar(4)/2+2)
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=sysvar(4)=0
+sysvar(1)=0
+ignorehitpause=1
+
+[State ]
+type=VarSet
+triggerall=!ishelper
+trigger1=var(4)!=[1,3]
+Trigger1=command="holdfwd"
+trigger2=var(4)=[1,3]
+Trigger2=EnemyNear,StateType!=L||fvar(13)>=20
+Trigger2=EnemyNear,MoveType=H||Random<=333||EnemyNear,StateType=L
+sysvar(1)=1
+ignorehitpause=1
+
+[State ]
+type=VarSet
+triggerall=!ishelper
+trigger1=var(4)!=[1,3]
+Trigger1=command="holdback"
+trigger2=var(4)=[1,3]
+Trigger2=EnemyNear,StateType!=L
+Trigger2=EnemyNear,MoveType!=H
+Trigger2=BackEdgeBodyDist>60
+Trigger2=Random<=500
+sysvar(1)=-1
+ignorehitpause=1
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+trigger1=sysvar(4)>1
+x=ifelse(sysvar(1)=0,0,ifelse(sysvar(1)=1,3,-3))
+y=-8
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=prevstateno=100
+triggerall=sysvar(1)=1
+trigger1=sysvar(4)>1
+trigger2=ishelper(70000)
+x=4
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>1
+value=50
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 45]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=A
+movetype=A
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+triggerall=!ishelper
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=41
+ignorehitpause = 1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90041
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=Playsnd
+triggerall=!ishelper
+trigger1=time=0
+value=20,9
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=41
+trigger2=sysvar(3)=90041
+value=sysvar(3)
+elem=(sysvar(4)=[0,15])*floor(sysvar(4)/8+2)+(sysvar(4)>15)*4
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=sysvar(4)=0
+sysvar(1)=0
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=!ishelper
+trigger1=command="holdfwd"
+trigger2=ishelper(70000)
+trigger2=root,command="holdfwd"
+sysvar(1)=1
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=!ishelper
+trigger1=command="holdback"
+trigger2=ishelper(70000)
+trigger2=root,command="holdback"
+sysvar(1)=-1
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+trigger1=sysvar(4)=1
+x=ifelse(sysvar(1)=0,0,ifelse(sysvar(1)=1,3,-3))
+y=-8
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=sysvar(4)>=1
+value=50
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1 ;MUGEN 1.1 conversion: was |1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 50]
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=A
+physics=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+triggerall=!ishelper
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=ifelse((vel x)=0,41,ifelse((vel x)>0,42,43))
+ignorehitpause=1
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90041
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=[41,43]
+trigger2=sysvar(3)=90041
+value=sysvar(3)
+elem=(sysvar(4)=[0,15])*floor(sysvar(4)/8+2)+(sysvar(4)>15)*4
+ignorehitpause=1
+
+[State ]
+type=Playsnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=20,9
+ignorehitpause=1
+
+[State ]
+type=Playsnd
+trigger1=sysvar(4)=0
+value=20,9
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=sysvar(4)>=0
+sysvar(1)=0
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y+const(movement.yaccel)||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 51]
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=A
+physics=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y+const(movement.yaccel)||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 52]
+ctrl=0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=47
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90047
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=47
+trigger2=sysvar(3)=90047
+value=sysvar(3)
+elem=(sysvar(4)=[0,3])*floor(sysvar(4)/2+2)
+ignorehitpause=1
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+trigger1=sysvar(4)=0
+y=0
+ignorehitpause=1
+
+[State ]
+type=PosSet
+trigger1=sysvar(4)=0
+y=0
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+trigger1=sysvar(4)=3
+value=1
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0||sysvar(4)>3
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;-----------------------------------------------------------------------------------
+[Statedef 70]
+ctrl=0
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=A
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=41
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90041
+ignorehitpause=1
+
+[State ];stateŠÇ—
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ];ƒXƒe”²‚¯‚Ìanimelem
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=41
+trigger2=sysvar(3)=90041
+value=sysvar(3)
+elem=(sysvar(4)=0)*2+(sysvar(4)=[1,25])*3+(sysvar(4)>=26)*4
+ignorehitpause=1
+
+[State ]
+type=VarSet
+trigger1=sysvar(4)=0
+sysvar(1)=0
+ignorehitpause=1
+
+[State ]
+type=Playsnd
+triggerall=!ishelper
+Trigger1=sysvar(4)=1
+value=20,9
+ignorehitpause=1
+
+[State ]
+type=Velset
+trigger1=!ishelper
+Trigger1=sysvar(4)>=0
+y=-10+(0.6*sysvar(4))
+ignorehitpause=1
+
+[State 70, VelSetX]
+type=VelSet
+triggerall=!ishelper
+triggerall=!(var(56)&32)||var(4)!=[1,5]
+Triggerall=sysvar(4)>=2
+Trigger1=command="holdback"
+Trigger1=command!="holdfwd"
+Trigger2=command="holdback"
+Trigger2=command="holdup"
+Trigger2=command!="holdfwd"
+x=-4.8
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+triggerall=!(var(56)&32)||var(4)!=[1,5]
+Triggerall=sysvar(4)>=2
+Trigger1=command="holdfwd"
+Trigger1=command!="holdback"
+Trigger2=command="holdfwd"
+Trigger2=command="holdup"
+Trigger2=command!="holdback"
+x=4.8
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+triggerall=!(var(56)&32)||var(4)!=[1,5]
+Trigger1=command!="holdfwd"
+Trigger1=command!="holdback"
+Trigger1=sysvar(4)>=1
+Trigger2=Vel X=0
+x=0
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+triggerall=(var(56)&32)&&var(4)=[1,5]
+Triggerall=sysvar(4)=2
+Trigger1=!inguarddist
+x=4.8
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+triggerall=(var(56)&32)&&var(4)=[1,5]
+Triggerall=sysvar(4)>=2
+Trigger1=inguarddist
+x=-4.8
+ignorehitpause=1
+
+[State ]
+type=AfterImage
+triggerall=!ishelper
+Trigger1=sysvar(4)=0
+length=13
+PalBright=30,30,0
+PalContrast=70,70,20
+PalAdd=-10,-10,-10
+PalMul=1,1,1
+TimeGap=1
+FrameGap=2
+Trans=Add
+time=10
+ignorehitpause=1
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+Trigger1=vel Y>=0
+Trigger1=Pos Y>=0
+x=0
+y=0
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+Trigger1=vel Y>=0
+Trigger1=Pos Y>=0
+value=52
+ignorehitpause=1
+
+[State ]
+type=Turn
+triggerall=!ishelper
+trigger1=enemynear,alive||numenemy=1
+trigger1=(enemynear,pos x-pos x)*facing<0
+trigger2=!enemynear,alive&&numenemy>1
+trigger2=(enemynear(1),pos x-pos x)*facing<0
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+; foncer vers l'avant
+[Statedef 100]
+juggle=5
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+movetype=A
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=100
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90100
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=100
+trigger2=sysvar(3)=90100
+value=sysvar(3)
+elem=(sysvar(4)%14=[0,13])*floor(sysvar(4)%14/7+2)
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=(var(56)&32)&&var(4)=[1,5]
+trigger1=enemynear,alive
+trigger1=enemynear,facing!=facing
+trigger1=fvar(13)<=90
+trigger1=fvar(14)>=-120
+trigger2=!enemynear(0),alive&&numenemy>1
+trigger2=enemynear(1),facing!=facing
+trigger2=fvar(13)<=90
+trigger2=fvar(14)>=-120
+trigger3=fvar(13)<=35
+trigger4=inguarddist
+value=0
+ignorehitpause=1
+
+[State ]
+type=Afterimage
+trigger1=sysvar(4)%14=7
+trans=add1
+TimeGap=1
+FrameGap=7
+time=15
+PalBright=0,0,0
+PalContrast=110,110,110
+PalAdd=0,0,0
+PalMul=1,1,1
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)%15=0
+ID=100
+Anim=18100
+Pos=-5,5
+vel=vel x,vel y
+postype=p1
+SprPriority=-3
+Facing=1
+BindTime=16
+OwnPal=1
+RemoveTime=16
+ignorehitpause=1
+scale=0.7,0.7
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)%15=10
+ID=100
+Anim=18100
+Pos=-100,5
+vel=vel x,vel y
+postype=p1
+SprPriority=-3
+Facing=1
+BindTime=15
+OwnPal=1
+RemoveTime=15
+ignorehitpause=1
+scale=0.7,0.7
+
+[State ]
+type=HitDef
+triggerall=!ishelper
+trigger1=sysvar(4)%25=0
+Trigger1=EnemyNear,MoveType!=H
+attr=S,NA
+damage=45
+animtype=Medium
+guardflag=MA
+hitflag=MFAP
+pausetime=10,20
+snap=40,-20
+guard.dist=160
+priority=9
+sparkno=s19999
+guard.sparkno=S29999
+hitsound=S20,0
+guardsound=S20,3
+ground.type=Trip
+ground.slidetime=12
+ground.hittime=15
+ground.velocity=-15
+airguard.velocity=-2,-1
+air.velocity=-15
+
+[State ]
+type=PlaySnd
+triggerall=!ishelper
+trigger1=sysvar(4)=0
+value=21,0
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+x=const(velocity.run.fwd.x)
+
+[State ]
+type=PosSet
+trigger1=Pos Y>=0
+Y=0
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdfwd"
+value=0
+ignorehitpause=1
+
+[State ]
+type=Turn
+triggerall=!ishelper
+trigger1=enemynear,alive||numenemy=1
+trigger1=(enemynear,pos x-pos x)*facing<0
+trigger2=!enemynear,alive&&numenemy>1
+trigger2=(enemynear(1),pos x-pos x)*facing<0
+
+[State ]
+type=AssertSpecial
+trigger1=1
+flag=NoWalk
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 105]
+juggle=5
+ctrl=0
+velset=-7,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=105
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90105
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=105
+trigger2=sysvar(3)=90105
+value=sysvar(3)
+elem=(sysvar(4)%14=[0,13])*floor(sysvar(4)%14/7+2)
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=(var(56)&32)&&var(4)=[1,5]
+trigger1=enemynear,alive
+Trigger1=enemynear,movetype!=A
+Trigger1=(fvar(13)>=100)&&fvar(14)>=-120
+trigger2=!enemynear(0),alive&&numenemy>1
+Trigger2=enemynear(1),movetype!=A
+Trigger2=(fvar(13)>=100)&&fvar(14)>=-120
+Trigger3=fvar(13)>=140
+Trigger4=fvar(13)>=100
+Trigger4=BackEdgeBodyDist<20
+Trigger5=inguarddist
+value=0
+ignorehitpause=1
+
+[State ]
+type=Afterimage
+trigger1=sysvar(4)%14=7
+trans=add1
+TimeGap=1
+FrameGap=7
+time=15
+PalBright=0,0,0
+PalContrast=110,110,110
+PalAdd=0,0,0
+PalMul=1,1,1
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)%15=0
+ID=100
+Anim=18100
+Pos=5,5
+vel=vel x,vel y
+postype=p1
+SprPriority=-3
+Facing=-1
+BindTime=16
+OwnPal=1
+RemoveTime=16
+ignorehitpause=1
+scale=0.7,0.7
+
+[State ]
+Type=Explod
+triggerall=!ishelper
+Trigger1=sysvar(4)%15=10
+ID=100
+Anim=18100
+Pos=100,5
+vel=vel x,vel y
+postype=p1
+SprPriority=-3
+Facing=-1
+BindTime=15
+OwnPal=1
+RemoveTime=15
+ignorehitpause=1
+scale=0.7,0.7
+
+[State ]
+type=PlaySnd
+trigger1=!ishelper
+trigger1=sysvar(4)=0
+value=21,0
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+x=const(velocity.run.back.x)
+
+[State ]
+type=PosSet
+trigger1=Pos Y>=0
+Y=0
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+trigger1=1
+flag=NoWalk
+
+[State ]
+type=SelfState
+trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdback"
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;-------------------------------------------------------------------------
+[Statedef 106]
+ctrl=0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=47
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90047
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=47
+trigger2=sysvar(3)=90047
+value=sysvar(3)
+elem=(sysvar(4)%4=[0,3])*floor(sysvar(4)/2+2)
+ignorehitpause=1
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+trigger1=sysvar(4)=0
+y=0
+
+[State ]
+type=PosSet
+trigger1=sysvar(4)=0
+y=0
+
+[State ]
+type=MakeDust
+trigger1=sysvar(4)=2
+pos=-5,-2
+spacing=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=sysvar(4)>=7
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 110]
+
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=120
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90120
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=120
+trigger2=sysvar(3)=90120
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+trigger1=sysvar(4)=0
+value=0
+
+[State ]
+type=HitBy
+trigger1=sysvar(4)=0
+value=SCA,NT,ST,HT
+time=30
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+trigger1=sysvar(4)=0
+x=0
+Y=-7
+
+[State ]
+type=VelMul
+trigger1=!ishelper||ishelper(70000)
+Y=0.8
+
+[State ]
+type=CtrlSet
+trigger1=sysvar(4)>0
+value=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=sysvar(4)>0
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 115]
+
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper
+statetype=S
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=120
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90120
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=120
+trigger2=sysvar(3)=90120
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+trigger1=sysvar(4)=0
+value=0
+
+[State ]
+type=HitBy
+trigger1=sysvar(4)=0
+value=SCA,NT,ST,HT
+time=30
+
+[State ]
+type=VelSet
+trigger1=!ishelper
+trigger1=sysvar(4)=0
+x=0
+
+[State ]
+type=CtrlSet
+trigger1=sysvar(4)>0
+value=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+trigger1=sysvar(4)>0
+value=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 120]
+type=U
+physics=U
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=120+(statetype=C)+(statetype=A)*2
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90120+(statetype=C)+(statetype=A)
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=[120,122]
+trigger2=sysvar(3)=[90120,90121]
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0&&statetype=S
+physics=S
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0&&statetype=C
+physics=C
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0&&statetype=A
+physics=A
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+Triggerall=Statetype=S
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+Trigger1=command="holddown"
+Trigger2=(var(56)&32)&&var(4)=[1,5]
+Trigger2=EnemyNear,StateType!=A
+Trigger2=Random<=var(4)*60
+statetype=C
+physics=C
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+Triggerall=Statetype=C
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+Trigger1=command!="holddown"
+Trigger2=(var(56)&32)&&var(4)=[1,5]
+Trigger2=EnemyNear,StateType=A
+Trigger2=Random<=var(4)*60
+statetype=S
+physics=S
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=AnimTime=0
+value=130+(statetype=C)+(statetype=A)*2
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdback"
+trigger2=!inguarddist
+Trigger3=(var(56)&32)&&var(4)=[1,5]
+Trigger3=fvar(13)<0
+Trigger3=Random<=(8-var(4)*2)*40
+value=140
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x*(statetype=S)*const(movement.stand.friction)*(statetype=C)*const(movement.crouch.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y+(statetype=A)*const(movement.yaccel)||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 130]
+type=S
+physics=S
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=130
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90001
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=130
+trigger2=sysvar(3)=90130
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdback"
+trigger2=!inguarddist
+Trigger3=(var(56)&32)&&var(4)=[1,5]
+Trigger3=fvar(13)<0
+Trigger3=Random<=(8-var(4)*2)*40
+value=140
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 131]
+type=C
+physics=C
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=131
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90131
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=131
+trigger2=sysvar(3)=90131
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=command!="holddown"
+value=130
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=command!="holdback"
+trigger2=!inguarddist
+value=140
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x*const(movement.crouch.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 132]
+type=A
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=132
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90131
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=132
+trigger2=sysvar(3)=90131
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=VelAdd
+triggerall=name="Legendary Super Saiyan"
+trigger1=!ishelper
+y=Const(movement.yaccel)
+
+[State ]
+type=VarSet
+trigger1=name="Legendary Super Saiyan"
+sysvar(0)=(pos y>=0)&&(vel y>0)
+
+[State ]
+type=VelSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=!ishelper
+trigger1=sysvar(0)
+y=0
+
+[State ]
+type=PosSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(0)
+y=0
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(0)
+trigger1=command!="holdback"
+value=52
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(0)
+value=130
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdback"
+trigger2=!inguarddist
+Trigger3=(var(56)&32)&&var(4)=[1,5]
+Trigger3=fvar(13)<0
+Trigger3=Random<=(8-var(4)*2)*40
+value=140
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 140]
+type=U
+physics=U
+ctrl=0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=140+(statetype=C)+(statetype=A)*2
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90120+(statetype=C)+(statetype=A)
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=[140,142]
+trigger2=sysvar(3)=[90120,90121]
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=var(12)=1
+value=1
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0&&statetype=S
+physics=S
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0&&statetype=C
+physics=C
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0&&statetype=A
+physics=A
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=statetype=S&&command="holddown"
+statetype=C
+physics=C
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=statetype=C&&command!="holddown"
+statetype=S
+physics=S
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x*(statetype=S)*const(movement.stand.friction)*(statetype=C)*const(movement.crouch.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y+(statetype=A)*const(movement.yaccel)||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 150]
+type=S
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=150
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+ttriggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90150
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=150
+trigger2=sysvar(3)=90150
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=SprPriority
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)>=0
+value=-1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=HitShakeOver
+trigger2=sysvar(4)>=50
+trigger2=Pos Y<0
+value=151
+ignorehitpause=1
+
+[State ]
+type=ForceFeedback
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0
+waveform=square
+time=3
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 151]
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=name="Legendary Super Saiyan"
+statetype=S
+movetype=H
+physics=S
+ignorehitpause=1
+
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=150
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+ttriggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90180
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=150
+trigger2=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time=0
+x=1
+
+[State ]
+type=VelSet
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time=GetHitVar(slidetime)
+trigger2=Time>=GetHitVar(hittime)
+x=0
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time=GetHitVar(ctrltime)
+value=1
+
+[State ]
+type=selfstate
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time>=GetHitVar(hittime)
+value=130
+ctrl=1
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x*const(movement.stand.friction)||0
+trigger1=fvar(2):=pos x||0
+trigger1=fvar(3):=vel y||0
+trigger1=fvar(4):=pos y||0
+trigger1=fvar(5):=facing||0
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 152]
+type=C
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=152
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90180
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=152
+trigger2=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=HitShakeOver
+value=153
+ignorehitpause=1
+
+[State ]
+type=ForceFeedback
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+waveform=square
+time=4
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 153]
+type=C
+movetype=H
+physics=C
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+triggerall=roundstate<3
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=151
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90180
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=roundstate<3
+triggerall=name="Legendary Super Saiyan"
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=151
+trigger2=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=AssertSpecial
+triggerall=name="Legendary Super Saiyan"
+trigger1=!(anim=151||anim=90180)
+flag=Invisible
+flag2=noshadow
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+triggerall=roundstate<3
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time=0
+x=1
+
+[State ]
+type=VelSet
+triggerall=roundstate<3
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time=GetHitVar(slidetime)
+trigger2=Time>=GetHitVar(hittime)
+x=0
+
+[State ]
+type=CtrlSet
+triggerall=roundstate<3
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time=GetHitVar(ctrltime)
+value=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=roundstate<3
+triggerall=name="Legendary Super Saiyan"
+trigger1=Time>=GetHitVar(hittime)
+value=131
+ctrl=1
+ignorehitpause=1
+
+[State ]
+type=VelSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=roundstate>=3
+x=0
+y=0
+
+[State ];ƒ‰ƒCƒtŠÇ—
+type=lifeadd
+triggerall=!ishelper&&(var(56)&2)
+triggerall=name="Legendary Super Saiyan"
+triggerall=numhelper(1)
+trigger1=roundstate>2
+trigger1=var(21)>0&&PlayerIDExist(var(21))
+trigger1=(playerID(var(21)),sysvar(0)-life)>0
+value=playerID(var(21)),sysvar(0)-life
+ignorehitpause=1
+
+[State ];ƒ^ƒCƒ€ƒAƒbƒv‰ñ•œ1
+type=lifeadd
+triggerall=!ishelper&&(var(56)&2)
+triggerall=name="Legendary Super Saiyan"
+triggerall=roundstate>2&&palno>=9
+trigger1=numenemy=1
+trigger1=(life*1.000/lifemax)<(enemy,life*1.000/enemy,lifemax)
+trigger1=enemy,life<enemy,lifemax
+value=ceil((enemy,life*1.000/enemy,lifemax)*lifemax+3)-life
+ignorehitpause=1
+
+[State ];ƒ^ƒCƒ€ƒAƒbƒv‰ñ•œ2
+type=lifeadd
+triggerall=!ishelper&&(var(56)&2)
+triggerall=name="Legendary Super Saiyan"
+triggerall=roundstate>2&&palno>=9
+trigger1=numenemy>1
+trigger1=(life*1.000/lifemax)<((enemy,life*1.000/enemy,lifemax)+(enemy(1),life*1.000/enemy(1),lifemax))*0.500
+trigger1=enemy,life<enemy,lifemax||enemy(1),life<enemy(1),lifemax
+value=ceil((((enemy,life*1.000/enemy,lifemax)+(enemy(1),life*1.000/enemy(1),lifemax))*0.500)*lifemax+3)-life
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=!ishelper&&(var(56)&2)
+triggerall=name="Legendary Super Saiyan"
+trigger1=roundstate>2
+statetype=S
+movetype=I
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=AssertSpecial
+triggerall=!ishelper&&(var(56)&2)
+triggerall=name="Legendary Super Saiyan"
+triggerall=PlayerIDExist(var(23))
+trigger1=roundstate>2
+trigger1=playerID(var(23)),stateno>199
+flag=RoundNotOver
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=!(var(56)&16)&&roundstate>2
+trigger1=var(23)>0&&PlayerIDExist(var(23))&&numhelper(70000)>0
+trigger1=playerID(var(23)),sysvar(2)=182
+trigger1=var(56):=var(56)+16
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=roundstate>3
+triggerall=name="Legendary Super Saiyan"
+trigger1=!ishelper&&!win
+trigger1=var(17)=1&&palno=12
+value=171
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=roundstate>3
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(70000)
+value=0
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+triggerall=name="Legendary Super Saiyan"
+triggerall=PlayerIDExist(var(23))
+trigger1=roundstate>2
+trigger1=playerID(var(23)),sysvar(2)=0
+value=1*!(var(17)=[1,2])
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x*const(movement.crouch.friction)||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 154]
+type=A
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=hitdef
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[State ];animtimeŠÇ—
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=152
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90180
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=SelfAnimExist(sysvar(3))
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(3)=152
+trigger2=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=name="Legendary Super Saiyan"
+trigger1=HitShakeOver
+value=155
+ignorehitpause=1
+
+[State ]
+type=ForceFeedback
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+waveform=square
+time=4
+
+[state ]
+type=null
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 155]
+type=U
+movetype=U
+physics=U
+hitdefpersist=1
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=ishelper
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=149990
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+trigger1=!ishelper&&alive
+trigger1=name!="Legendary Super Saiyan"
+statetype=C
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=null;hitdef
+trigger1=!ishelper&&alive
+trigger1=name!="Legendary Super Saiyan"
+trigger1=hitpausetime<=2
+attr=,NT
+hitflag=MAFD
+sparkno=-1
+hitsound=-1
+numhits=0
+affectteam=B
+pausetime=20,0
+
+[state ]
+type=Changestate
+triggerall=!ishelper&&alive
+trigger1=name!="Legendary Super Saiyan"
+trigger1=hitpausetime>2
+value=149995
+ctrl=0
+ignorehitpause=1
+
+[State ]
+type=NotHitBy
+trigger1=!ishelper&&alive
+trigger1=name!="Legendary Super Saiyan"
+value=SCA
+ignorehitpause=1
+
+[State ]
+type=lifeset
+Triggerall=!IsHelper
+trigger1=name!="Legendary Super Saiyan"
+value=0
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim2
+trigger1=!ishelper&&alive
+trigger1=name!="Legendary Super Saiyan"
+value=60000
+ignorehitpause=1
+
+[state ]
+type=Changestate
+trigger1=!ishelper
+trigger1=name!="Legendary Super Saiyan"
+trigger1=!alive
+value=104010
+ignorehitpause=1
+;=============================================================================
+[state ]
+type=statetypeset
+trigger1=!ishelper
+trigger1=var(11):=1
+trigger2=ishelper(70000)
+statetype=A
+movetype=H
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];animtimeŠÇ—
+type=varset
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=time=0
+trigger1=sysvar(2)!=stateno
+sysvar(4)=0
+ignorehitpause=1
+
+[State ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=152
+ignorehitpause=1
+[State ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=stateno!=sysvar(2)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90180
+ignorehitpause=1
+
+[State ]
+type=varset
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[state ]
+type=changeanim
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=SelfAnimExist(sysvar(3))
+trigger1=sysvar(3)=152
+trigger2=sysvar(3)=90180
+value=sysvar(3)
+elem=(sysvar(4)>=0)*2
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=0
+x=1
+y=1
+
+[State ]
+type=VelAdd
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=Const(movement.yaccel)>0
+y=Const(movement.yaccel)
+
+[State ]
+type=CtrlSet
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(4)=GetHitVar(ctrltime)
+trigger1=var(12):=1
+value=1
+
+[State ]
+type=VarSet
+trigger1=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+sysvar(0)=(pos y>=0)&&(vel y>0)
+
+[State ]
+type=VelSet
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(0)
+y=0
+
+[State ]
+type=PosSet
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(0)
+y=0
+
+[state ]
+type=statetypeset
+triggerall=name="Legendary Super Saiyan"
+trigger1=!ishelper&&palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=SelfState
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+triggerall=sysvar(0)
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=command!="holdback"
+Trigger3=(var(56)&32)&&var(4)=[1,5]
+Trigger3=fvar(13)<0
+Trigger3=Random<=(8-var(4)*2)*40
+value=52
+ignorehitpause=1
+
+[State ]
+type=SelfState
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(0)
+value=130
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper||ishelper(70000)
+triggerall=name="Legendary Super Saiyan"
+trigger1=fvar(1):=vel x||1
+trigger1=fvar(2):=pos x||1
+trigger1=fvar(3):=vel y||1
+trigger1=fvar(4):=pos y||1
+trigger1=fvar(5):=facing||1
+ignorehitpause=1
+;--------------------------------------------------------------
+[State ];ƒ^ƒQ•Û—p“–g
+type=ReversalDef
+triggerall=ishelper
+trigger1=numtarget>0
+reversal.attr=C,ST
+numhits=0
+priority=7,hit
+pausetime=0,0
+ignorehitpause=1
+
+[State ];ƒ^ƒQ•Û—p“–g
+type=ReversalDef
+trigger1=ishelper(60000)
+trigger1=root,palno<11
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+priority=7,hit
+pausetime=0,0
+ignorehitpause=1
+
+[State ];ƒ^ƒQ•Û—p“–g
+type=ReversalDef
+trigger1=ishelper(60000)
+trigger1=root,palno>10
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+priority=7,hit
+pausetime=0,0
+fall.damage=2147483647
+ignorehitpause=1
+
+[State ];ƒ^ƒQ•Û—p“–g
+type=ReversalDef
+trigger1=ishelper(60000)
+trigger1=root,palno>11
+trigger1=enemy,name="Oswald"
+trigger1=enemy,selfanimexist(9999)&&enemy,selfanimexist(10000)&&enemy,selfanimexist(10001)
+reversal.attr=SCA,AA,AP,AT
+sparkno=-1
+numhits=0
+priority=7,hit
+pausetime=0,5
+p2stateno=512
+p2getp1state=0
+ignorehitpause=1
+
+[State ]
+type=ReversalDef
+triggerall=ishelper(60000)
+trigger1=root,palno=12&&anim!=450100
+trigger1=enemynear,numhelper(149990)<2
+trigger1=root,var(16)>3500
+reversal.attr=SCA,AA,AT,AP
+sparkno=-1
+numhits=0
+priority=7,hit
+pausetime=0,0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+fall.damage=2147483647
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=ishelper(60000)
+trigger1=numtarget<=0
+trigger1=gametime%45=0
+statetype=S
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=statetypeset
+trigger1=ishelper(60000)
+trigger1=numtarget<=0
+trigger1=gametime%45=15
+statetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=statetypeset
+trigger1=ishelper(60000)
+trigger1=numtarget<=0
+trigger1=gametime%45=30
+statetype=C
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=HitDef
+triggerall=ishelper(60000)
+triggerall=gametime%15=0
+triggerall=!(root,var(18)&128)
+trigger1=numtarget<=0
+trigger1=roundstate>1
+attr=,AA
+hitflag=MAFD
+numhits=0
+priority=99999999
+fall.damage=2147483647
+sparkno=-1
+gurad,sparkno=-1
+ignorehitpause=1
+[State ]
+type=HitDef
+triggerall=ishelper(60000)
+triggerall=gametime%15=5
+triggerall=!(root,var(18)&128)
+trigger1=numtarget<=0
+trigger1=roundstate>1
+attr=,AT
+hitflag=MAFD
+numhits=0
+priority=99999999
+fall.damage=2147483647
+sparkno=-1
+gurad,sparkno=-1
+ignorehitpause=1
+[State ]
+type=HitDef
+triggerall=ishelper(60000)
+triggerall=gametime%15=10
+triggerall=!(root,var(18)&128)
+trigger1=numtarget<=0
+trigger1=roundstate>1
+attr=,AP
+hitflag=MAFD
+numhits=0
+priority=99999999
+fall.damage=2147483647
+sparkno=-1
+gurad,sparkno=-1
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=ishelper(60000)
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=statetypeset
+trigger1=ishelper(78000)
+trigger2=ishelper(80000)||ishelper(80001)
+trigger3=ishelper(1)
+trigger3=anim=60000
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[state ]
+type=statetypeset
+trigger1=!(ishelper(1)||ishelper(1010)||ishelper(60000))
+trigger2=ishelper(1)
+trigger2=anim!=60000
+trigger3=ishelper(60000)
+trigger3=numtarget>0||roundstate!=2
+movetype=I
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=AssertSpecial
+triggerall=ishelper
+triggerall=name="Legendary Super Saiyan"
+triggerall=roundstate=2
+trigger1=root,var(17)=2
+trigger2=root,alive!=1&&(root,var(56)&2)
+trigger2=root,var(17)!=[1,2]
+flag=noko
+ignorehitpause=1
+
+[State ]
+type=lifeset
+triggerall=name="Legendary Super Saiyan"
+triggerall=!ishelper(1)
+trigger1=ishelper
+value=0
+ignorehitpause=1
+
+[State ]
+type=CtrlSet
+trigger1=ishelper
+value=0
+ignorehitpause=1
+;===========================================================================
+[state ]
+Type=Explod
+triggerall=ishelper(1)
+triggerall=var(36)>0
+Trigger1=var(36)%100=0
+Anim=20004
+Pos=0,0
+PosType=back
+SprPriority=-2
+BindTime=-1
+RemoveTime=21
+supermovetime=21
+pausemovetime=21
+Scale=0.5,0.5
+ignorehitpause=1
+
+[state ]
+Type=PlaySnd
+triggerall=ishelper(1)
+triggerall=var(36)>0
+Trigger1=var(36)%100=0
+Value=21,1
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(1)
+triggerall=root,fvar(10)!=1
+triggerall=var(36)>0
+trigger1=(var(36):=var(36)-1)*0
+Trigger2=var(36)%100=0
+projid=20004
+projanim=60000
+projremovetime=21
+supermovetime=21
+pausemovetime=21
+projhits=7
+projmisstime=3
+attr=S,NA
+damage=Ceil((0.005*(root,palno<5)+0.02*(root,palno>4))*root,var(0)+random%25)*!(root,var(56)&128)
+sparkno=-1
+gurad,sparkno=-1
+animtype=back
+ignorehitpause=1
+
+[State ]
+type=Projectile
+triggerall=ishelper(1)
+triggerall=root,fvar(10)=1
+triggerall=var(36)>0
+trigger1=(var(36):=var(36)-1)*0
+Trigger2=var(36)%100=0
+projid=20004
+projanim=60000
+projremovetime=21
+supermovetime=21
+pausemovetime=21
+projhits=7
+projmisstime=3
+attr=S,NA
+damage=Ceil(0.45*root,var(0)+random%50)*!(root,var(56)&128)
+sparkno=-1
+gurad,sparkno=-1
+animtype=back
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=S,AA
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=S,AT
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=S,AP
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=A,AA
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=A,AT
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=A,AP
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=C,AT
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=C,AT
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+[State ]
+type=projectile
+triggerall=ishelper(1)
+triggerall=roundstate=2
+triggerall=var(36)>0&&root,var(25)>0&&PlayerIDExist(root,var(25))
+Triggerall=var(36)%100=0
+Triggerall=playerID(root,var(25)),var(6)>0
+trigger1=numenemy=1
+trigger1=enemy,numhelper(149990)<1
+trigger2=numenemy>1
+trigger2=enemy,numhelper(149990)<1&&enemy(1),numhelper(149990)<1
+projanim=60000
+projremovetime=1
+projheightbound=-2000000000,2000000000
+projedgebound=2000000000
+projstagebound=2000000000
+attr=C,AP
+numhits=0
+p2stateno=playerID(root,var(25)),var(6)
+p2getp1state=0
+sparkno=-1
+gurad,sparkno=-1
+supermovetime=1
+pausemovetime=1
+ignorehitpause=1
+
+[state ]
+Type=Projectile
+triggerall=ishelper(1)
+triggerall=root,fvar(10)!=1
+trigger1=root,sysvar(2)=93010
+Trigger1=root,sysvar(4)=63
+ProjAnim=20051
+projremove=0
+projremovetime=800
+supermovetime=800
+pausemovetime=800
+projhits=400
+projmisstime=1
+offset=80,-80
+velocity=1.5,0
+Attr=S,HP
+Damage=Ceil((0.05*(root,palno<7)+0.25*(root,palno>6))*root,var(0)+random%25)*!(root,var(56)&128)
+AnimType=Hard
+pausetime=0,12
+sparkno=-1
+guard.sparkno=-1
+ground.type=Trip
+ground.slidetime=25
+ground.hittime=25
+ground.velocity=-20
+guard.velocity=-25
+air.velocity=-20,-5
+airguard.velocity=-25,-5
+projscale=0.7,0.7
+
+[state ]
+Type=Projectile
+triggerall=ishelper(1)
+triggerall=root,fvar(10)=1
+trigger1=root,sysvar(2)=93010
+Trigger1=root,sysvar(4)=63
+ProjAnim=20051
+projremove=0
+projremovetime=800
+supermovetime=800
+pausemovetime=800
+projhits=400
+projmisstime=1
+offset=80,-80
+velocity=1.5,0
+Attr=S,HP
+Damage=Ceil(0.8*root,var(0)+random%50)*!(root,var(56)&128)
+AnimType=Hard
+pausetime=0,12
+sparkno=-1
+guard.sparkno=-1
+ground.type=Trip
+ground.slidetime=25
+ground.hittime=25
+ground.velocity=-20
+guard.velocity=-25
+air.velocity=-20,-5
+airguard.velocity=-25,-5
+projscale=0.7,0.7
+
+[State ]
+Type=SelfState
+triggerall=ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=(root,var(18)&1)||(root,var(18)&16)
+Value=5150
+ignorehitpause=1
+;---------------------------------------------------------------------------
+[Statedef 5000]
+type=S
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+trigger1=Time=0
+trigger1=GetHitVar(animtype)!=[3,5]
+value=ifelse((GetHitVar(groundtype)=1),5000,5010)+GetHitVar(animtype)
+
+[State ]
+type=ChangeAnim
+trigger1=SelfAnimExist(5030)
+trigger1=GetHitVar(animtype)=[3,5]
+trigger1=anim!=5030
+value=5030
+
+[State ]
+type=ChangeAnim
+trigger1=GetHitVar(animtype)=[4,5]
+trigger1=SelfAnimExist(5047+GetHitVar(animtype))
+trigger1=anim!=5047+GetHitVar(animtype)
+value=5047+GetHitVar(animtype)
+[State ]
+type=ChangeAnim
+trigger1=Time>0
+value=anim
+
+[State ]
+type=StateTypeSet
+trigger1=GetHitVar(yvel)!=0||GetHitVar(fall)
+trigger2=Pos Y!=0
+statetype=a
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+trigger1=GetHitVar(yvel)=0
+value=5001
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+value=5030
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5000
+trigger2=anim=5010
+persistent=0
+time=6
+waveform=square
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5001
+trigger2=anim=5011
+persistent=0
+time=8
+waveform=sinesquare
+ampl=110,-1,-.3
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5012
+trigger2=anim=5002
+trigger3=anim=5030
+persistent=0
+time=15
+waveform=sinesquare
+ampl=140
+;---------------------------------------------------------------------------
+[Statedef 5001]
+type=S
+movetype=H
+physics=S
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+trigger1=Time=0
+x=1
+
+[State ]
+type=ChangeAnim
+trigger1=AnimTime=0
+value=5005+GetHitVar(animtype)+(GetHitVar(groundtype)=2)*10
+
+[State ]
+type=VelMul
+trigger1=Time>=GetHitVar(slidetime)
+x=.6
+
+[State ]
+type=VelSet
+trigger1=HitOver
+x=0
+
+[State ]
+type=DefenceMulSet
+trigger1=HitOver
+value=1
+
+[State ]
+type=SelfState
+trigger1=HitOver
+value=0
+ctrl=1
+;---------------------------------------------------------------------------
+[Statedef 5010]
+type=C
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+trigger1=GetHitVar(animtype)!=[3,5]
+trigger1=SelfAnimExist(5020+GetHitVar(animtype))
+trigger1=anim!=5020+GetHitVar(animtype)
+value=5020+GetHitVar(animtype)
+
+[State ];AnimforHIT_BACK
+type=ChangeAnim
+trigger1=GetHitVar(animtype)=[3,5]
+trigger1=SelfAnimExist(5030)
+trigger1=anim!=5030
+value=5030
+
+[State ]
+type=ChangeAnim
+trigger1=GetHitVar(animtype)=[4,5]
+trigger1=SelfAnimExist(5047+GetHitVar(animtype))
+trigger1=anim!=5047+GetHitVar(animtype)
+value=5047+GetHitVar(animtype)
+
+[State ]
+type=ChangeAnim
+trigger1=Time>0
+value=anim
+
+[State ]
+type=ChangeState
+trigger1=HitShakeOver
+trigger1=GetHitVar(yvel)=0
+value=5011
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+value=5030
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5020
+persistent=0
+time=6
+waveform=square
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5021
+persistent=0
+time=8
+waveform=sinesquare
+ampl=110,-1,-.3
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5022
+persistent=0
+time=15
+waveform=sinesquare
+ampl=140
+;---------------------------------------------------------------------------
+[Statedef 5011]
+type=C
+movetype=H
+physics=C
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+trigger1=Time=0
+x=1
+
+[State ]
+type=ChangeAnim
+trigger1=AnimTime=0
+value=5025+GetHitVar(animtype)
+
+[State ]
+type=VelMul
+trigger1=animelemtime(1)>=GetHitVar(slidetime)
+x=.6
+
+[State ]
+type=VelSet
+trigger1=HitOver
+x=0
+
+[State ]
+type=DefenceMulSet
+trigger1=HitOver
+value=1
+
+[State ]
+type=SelfState
+trigger1=HitOver
+value=11
+ctrl=1
+;---------------------------------------------------------------------------
+[Statedef 5020]
+type=A
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+type=DestroySelf
+trigger1=ishelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+triggerall=GetHitVar(animtype)!=[3,5]
+trigger1=GetHitVar(airtype)=1
+trigger1=SelfAnimExist(5000+GetHitVar(animtype))
+trigger1=anim!=5000+GetHitVar(animtype)
+trigger2=GetHitVar(airtype)!=1
+trigger2=SelfAnimExist(5010+GetHitVar(animtype))
+trigger2=anim!=5010+GetHitVar(animtype)
+value=ifelse((GetHitVar(airtype)=1),5000,5010)+GetHitVar(animtype)
+
+[State ]
+type=ChangeAnim
+trigger1=GetHitVar(animtype)=[3,5]
+trigger1=SelfAnimExist(5030)
+trigger1=anim!=5030
+value=5030
+
+[State ]
+type=ChangeAnim
+trigger1=GetHitVar(animtype)=[4,5]
+trigger1=SelfAnimExist(5047+GetHitVar(animtype))
+trigger1=anim!=5047+GetHitVar(animtype)
+value=5047+GetHitVar(animtype)
+
+[State ]
+type=ChangeAnim
+trigger1=Time>0
+value=anim
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+value=5030
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5000
+trigger2=anim=5010
+persistent=0
+time=6
+waveform=square
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5001
+trigger2=anim=5011
+persistent=0
+time=8
+waveform=sinesquare
+ampl=110,-1,-.3
+
+[State ]
+type=ForceFeedback
+trigger1=anim=5012
+trigger2=anim=5002
+trigger3=anim=5030
+trigger4=anim=[5051,5059]
+persistent=0
+time=15
+waveform=sinesquare
+ampl=140
+;---------------------------------------------------------------------------
+[Statedef 5030]
+type=A
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+[State ]
+type=VelAdd
+trigger1=1
+y=GetHitVar(yaccel)
+
+[State ]
+type=HitVelSet
+trigger1=Time=0
+x=1
+y=1
+
+[State ]
+type=SelfState
+triggerall=!HitFall
+trigger1=HitOver
+trigger2=Vel Y>0
+trigger2=Pos Y>=10
+value=5040
+
+[State ]
+type=SelfState
+triggerall=HitFall
+trigger1=HitOver
+trigger1=Pos Y>=100
+trigger2=Vel Y>0
+trigger2=Pos Y>=10
+value=5050
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0
+value=5035
+;---------------------------------------------------------------------------
+[Statedef 5035]
+type=A
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+trigger1=Time=0
+trigger1=SelfAnimExist(5035)
+trigger1=Anim!=[5051,5059]
+trigger1=Anim!=5090
+value=5035
+
+[State ]
+type=VelAdd
+trigger1=1
+y=GetHitVar(yaccel)
+
+[State ]
+type=SelfState
+triggerall=!HitFall
+trigger1=HitOver
+trigger2=AnimTime=0
+trigger3=Vel Y>0
+trigger3=Pos Y>=10
+trigger4=Anim!=5035
+value=5040
+
+[State ]
+type=SelfState
+triggerall=HitFall
+trigger1=HitOver
+trigger2=AnimTime=0
+trigger3=Vel Y>0
+trigger3=Pos Y>=10
+trigger4=Anim!=5035
+value=5050
+;---------------------------------------------------------------------------
+[Statedef 5040]
+type=A
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=!Alive
+value=5050
+
+[State ]
+type=ChangeAnim
+trigger1=AnimTime=0
+trigger1=Anim!=5040
+trigger2=Time=0
+trigger2=Anim!=5035
+value=5040
+
+[State ]
+type=CtrlSet
+trigger1=HitOver
+value=1
+
+[State ]
+type=StateTypeSet
+trigger1=HitOver
+movetype=I
+
+[State ]
+type=VelAdd
+trigger1=1
+y=GetHitVar(yaccel)
+
+[State ]
+type=SelfState
+trigger1=Vel Y>0
+trigger1=Pos Y>=0
+value=52
+;---------------------------------------------------------------------------
+[Statedef 5050]
+type=A
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+trigger1=AnimTime=0
+trigger1=Anim=5035
+trigger2=Time=0
+trigger2=Anim!=5035
+trigger2=(Anim!=[5051,5059])&&(Anim!=[5061,5069])
+trigger2=Anim!=5090
+value=5050
+
+[State ]
+type=ChangeAnim
+trigger1=anim=[5050,5059]
+trigger1=Vel Y>=ifelse(anim=5050,1,-2)
+trigger1=SelfAnimExist(anim+10)
+value=anim+10
+persistent=0
+
+[State ]
+type=VelAdd
+trigger1=GetHitVar(yaccel)>0
+y=GetHitVar(yaccel)
+
+[State ]
+type=SelfState
+triggerall=Vel Y>0
+triggerall=Pos Y>=-20
+triggerall=alive
+triggerall=CanRecover
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=Command="recovery"
+Trigger2=(var(56)&32)&&var(4)=[1,5]
+Trigger2=Random<=var(4)*80
+value=5200
+
+[State ]
+type=SelfState
+triggerall=Vel Y>-1
+triggerall=alive
+triggerall=CanRecover
+Trigger1=!(var(56)&32)||var(4)!=[1,5]
+trigger1=Command="recovery"
+Trigger2=(var(56)&32)&&var(4)=[1,5]
+Trigger2=Random<=var(4)*80
+value=5210
+
+[State ]
+type=SelfState
+trigger1=Vel Y>0
+trigger1=Pos Y>=ifelse((anim=[5051,5059])||(anim=[5061,5069]),0,25)
+value=5100
+;---------------------------------------------------------------------------
+[Statedef 5070]
+type=A
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+trigger1=1
+value=5070
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+value=5071
+
+[State ]
+type=ForceFeedback
+trigger1=time=0
+time=12
+waveform=sinesquare
+ampl=140
+;---------------------------------------------------------------------------
+[Statedef 5071]
+type=A
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+trigger1=Time=0
+x=1
+y=1
+
+[State ]
+type=VelAdd
+trigger1=1
+y=GetHitVar(yaccel)
+
+[State ]
+trigger1=Vel Y>0
+trigger1=Pos Y>=15
+type=SelfState
+value=5110
+;---------------------------------------------------------------------------
+[Statedef 5080]
+type=L
+movetype=H
+physics=N
+velset=0,0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+trigger1=(anim=[5081,5089])||(anim=[5111,5119])
+trigger1=SelfAnimExist(ifelse(GetHitVar(yvel)=0,5080,5090)+(anim%10))
+value=ifelse(GetHitVar(yvel)=0,5080,5090)+(anim%10)
+
+[State ]
+type=ChangeAnim
+triggerall=GetHitVar(yvel)=0&&SelfAnimExist(5080)||GetHitVar(yvel)!=0&&SelfAnimExist(5090)
+trigger1=!((anim=[5081,5089])||(anim=[5091,5099]))
+trigger2=!SelfAnimExist(ifelse(GetHitVar(yvel)=0,5080,5090)+(anim%10))
+value=ifelse(GetHitVar(yvel)=0,5080,5090)
+
+[State ]
+type=ChangeAnim
+trigger1=GetHitVar(yvel)!=0
+trigger1=!SelfAnimExist(5090)
+value=5030
+
+[State ]
+type=ChangeAnim
+trigger1=1
+value=anim
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+trigger1=GetHitVar(yvel)=0
+value=5081
+
+[State ]
+type=SelfState
+trigger1=HitShakeOver
+trigger1=GetHitVar(yvel)!=0
+value=5030
+;---------------------------------------------------------------------------
+[Statedef 5081]
+type=L
+movetype=H
+physics=C
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=HitVelSet
+trigger1=Time=0
+x=1
+
+[State ]
+type=VelSet
+trigger1=HitOver
+x=0
+
+[State ]
+type=VarSet
+trigger1=Time=0
+sysvar(0)=1
+
+[State ]
+type=SelfState
+trigger1=HitOver
+value=5110
+;---------------------------------------------------------------------------
+[Statedef 5100]
+type=L
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=VelSet
+trigger1=Time=0
+trigger1=GetHitVar(fall.yvel)=0
+trigger1=vel x>1
+x=1
+
+[State ]
+type=VarSet
+trigger1=Time=0
+sysvar(1)=floor(vel y)
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+trigger1=(anim!=[5051,5059])&&(anim!=[5061,5069])
+trigger2=!SelfAnimExist(5100+(anim%10))
+value=5100
+
+[State ]
+type=ChangeAnim
+trigger1=time=0
+trigger1=(anim=[5051,5059])||(anim=[5061,5069])
+trigger1=SelfAnimExist(5100+(anim%10))
+value=5100+(anim%10)
+
+[State ]
+type=PosSet
+trigger1=Time=0
+y=0
+
+[State ]
+type=VelSet
+trigger1=Time=0
+y=0
+
+[State ]
+type=VelMul
+trigger1=Time=0
+x=0.75
+
+[State ]
+type=ChangeState
+trigger1=Time=0
+trigger1=GetHitVar(fall.yvel)=0
+value=5110
+
+[State ]
+type=GameMakeAnim
+trigger1=Time=1
+value=60+(sysvar(1)>5)+(sysvar(1)>14)
+pos=0,0
+under=sysvar(1)<=10
+
+[State ]
+type=HitFallDamage
+trigger1=Time=3
+
+[State ]
+type=PlaySnd
+trigger1=Time=1
+value=20,7
+
+[State ]
+type=PlaySnd
+trigger1=Time=1
+value=20,6
+
+[State ]
+type=PosFreeze
+trigger1=1
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0
+value=5101
+
+[State ]
+type=ForceFeedback
+trigger1=Time=0
+waveform=sinesquare
+ampl=128,-3,-.2,.005
+time=20
+;---------------------------------------------------------------------------
+[Statedef 5101]
+type=L
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+trigger1=anim!=[5101,5109]
+trigger2=!SelfAnimExist(5160+(anim%10))
+value=5160
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+trigger1=anim=[5101,5109]
+trigger1=SelfAnimExist(5160+(anim%10))
+value=5160+(anim%10)
+
+[State ]
+type=HitFallVel
+trigger1=Time=0
+
+[State ]
+type=PosSet
+trigger1=Time=0
+y=20
+
+[State ]
+type=VelAdd
+trigger1=1
+y=.4
+
+[State ]
+type=SelfState
+trigger1=Vel Y>0
+trigger1=Pos Y>=12
+value=5110
+;---------------------------------------------------------------------------
+[Statedef 5110]
+type=L
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=ishelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+persistent=0
+trigger1=SelfAnimExist(5110+(anim%10))
+trigger1=anim=[5081,5089]
+value=5110+(anim%10)
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+triggerall=anim!=[5110,5119]
+trigger1=anim!=[5161,5169]
+trigger2=!SelfAnimExist(5170+(anim%10))
+value=5170
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+triggerall=anim!=[5110,5119]
+trigger1=anim=[5161,5169]
+trigger1=SelfAnimExist(5170+(anim%10))
+value=5170+(anim%10)
+
+[State ]
+type=HitFallDamage
+trigger1=Time=0
+
+[State ]
+type=PosSet
+trigger1=Time=0
+y=0
+
+[State ]
+type=VarSet
+trigger1=Time=0
+trigger1=GetHitVar(fall.yvel)!=0
+sysvar(1)=floor(vel y)
+
+[State ]
+type=PlaySnd
+trigger1=Time=0
+trigger1=!SysVar(0)
+value=20,7
+
+[State ]
+type=PlaySnd
+trigger1=Time=0
+trigger1=!SysVar(0)
+value=20,6
+
+[State ]
+type=GameMakeAnim
+trigger1=Time=0
+trigger1=!SysVar(0)
+value=60+(sysvar(1)>5)+(sysvar(1)>14)
+pos=0,0
+under=sysvar(1)<=10
+
+[State ]
+type=VelSet
+trigger1=Time=0
+y=0
+
+[State ]
+type=ChangeAnim
+persistent=0
+triggerall=anim=[5171,5179]
+triggerall=SelfAnimExist(5110+(anim%10))
+trigger1=AnimTime=0
+trigger2=SysVar(0)
+value=5110+(anim%10)
+
+[State ]
+type=ChangeAnim
+persistent=0
+triggerall=Anim!=[5111,5119]
+trigger1=AnimTime=0
+trigger2=SysVar(0)
+value=5110
+
+[State ]
+type=SelfState
+triggerall=!alive
+trigger1=AnimTime=0
+trigger2=SysVar(0)
+trigger3=Anim=[5110,5119]
+value=5150
+
+[State ]
+type=VarSet
+trigger1=SysVar(0)
+trigger1=Time=0
+sysvar(0)=0
+
+[State ]
+type=VelMul
+trigger1=1
+x=0.85
+
+[State ]
+type=ForceFeedback
+trigger1=alive
+trigger1=Time=0
+time=8
+ampl=240
+waveform=sine
+
+[State ]
+type=ForceFeedback
+trigger1=!alive
+trigger1=Time=0
+ampl=200,7,-.467
+time=30
+waveform=sine
+;---------------------------------------------------------------------------
+[Statedef 5120]
+type=L
+movetype=I
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ]
+Type=DestroySelf
+Trigger1=IsHelper
+ignorehitpause=1
+
+[state ]
+type=statetypeset
+trigger1=palno>6
+movetype=A
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=palno<7
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+trigger1=anim!=[5111,5119]
+trigger2=!SelfAnimExist(5120+(anim%10))
+value=5120
+
+[State ]
+type=ChangeAnim
+triggerall=time=0
+trigger1=anim=[5111,5119]
+trigger1=SelfAnimExist(5120+(anim%10))
+value=5120+(anim%10)
+
+[State ]
+type=VelSet
+trigger1=Time=0
+x=0
+
+[State ]
+type=NotHitBy
+trigger1=1
+value=SCA
+time=1
+
+[State ]
+type=HitFallSet
+trigger1=AnimTime=0
+value=1
+
+[State ]
+type=NotHitBy
+trigger1=AnimTime=0
+value=,NT,ST,HT
+time=12
+
+[State ]
+type=SelfState
+trigger1=AnimTime=0
+value=0
+ctrl=1
+;---------------------------------------------------------------------------
+[Statedef 5150]
+type=U
+movetype=U
+physics=U
+hitdefpersist=1
+;----------------------------------------------------------------------------
+;“G—pƒXƒe[ƒg
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;-------------------------------------------------------------------------------
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=!ishelper
+;type=L ;MUGEN 1.1 conversion: second type line (MUGEN uses the first)
+movetype=H
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];stateŠÇ—
+type=varset
+triggerall=!ishelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+ignorehitpause = 1
+
+[State ]
+type=ChangeAnim
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+triggerall=SelfAnimExist(5140)
+trigger1=(anim!=[5111,5119])&&(anim!=[5171,5179])
+trigger2=!SelfAnimExist(5140+(anim%10))
+value=5140
+
+[State ]
+type=ChangeAnim
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=(anim=[5111,5119])||(anim=[5171,5179])
+trigger1=SelfAnimExist(5140+(anim%10))
+value=5140+(anim%10)
+
+[State ]
+type=ChangeAnim
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=MatchOver=1
+trigger1=Anim=[5140,5149]
+trigger1=SelfAnimExist(anim+10)
+value=anim+10
+persistent=0
+
+[State ]
+type=ChangeAnim
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Anim!=[5140,5159]
+trigger1=Anim!=[5110,5119]
+value=5110
+
+[State ]
+type=SprPriority
+triggerall=name="Legendary Super Saiyan"
+Trigger1=!IsHelper
+value=-3
+
+[State ]
+type=VelMul
+triggerall=name="Legendary Super Saiyan"
+Trigger1=!IsHelper
+x=0.85
+
+[State ]
+type=VelSet
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Vel x<.05
+persistent=0
+x=0
+
+[State ]
+type=Veladd
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Pos Y<0
+y=0.4
+ignorehitpause=1
+
+[State ]
+type=Velset
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Pos Y>=0
+y=0
+ignorehitpause=1
+
+[State ]
+type=Posset
+Triggerall=!IsHelper
+triggerall=name="Legendary Super Saiyan"
+trigger1=Pos Y>0
+y=0
+ignorehitpause=1
+
+[State ]
+type=SelfState
+trigger1=!ishelper&&!alive
+trigger1=name!="Legendary Super Saiyan"
+value=5150
+ignorehitpause=1
+;--------------------------------------------------------------
+[State ]
+type=CtrlSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper
+value=0
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(78200)
+statetype=S
+movetype=A
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(80000)||ishelper(80001)
+trigger2=ishelper(78100)
+statetype=S
+movetype=I
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(78000)
+trigger1=numtarget=0
+statetype=C
+movetype=A
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=ReversalDef
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(78000)||ishelper(78001)
+trigger1=numtarget>0
+reversal.attr=,NA
+numhits=0
+priority=7,hit
+pausetime=0,0
+ignorehitpause=1
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(78000)
+trigger1=numtarget>0
+statetype=C
+movetype=I
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(78001)
+trigger1=numtarget>0
+statetype=C
+movetype=A
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=StateTypeSet
+triggerall=name="Legendary Super Saiyan"
+trigger1=ishelper(1010)
+statetype=S
+movetype=I
+physics=N
+ignorehitpause=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ]
+type=lifeset
+trigger1=ishelper
+trigger1=(root,var(18)&1)||(root,var(18)&16)
+value=1000
+ignorehitpause=1
+
+[State ]
+type=nothitby
+triggerall=ishelper
+triggerall=root,palno=12&&root,var(16)>1000
+triggerall=(root,var(18)&1)||(root,var(18)&16)||(root,var(18)&128)
+trigger1=!ishelper(1010)
+trigger2=ishelper(1010)&&gametime%200=0
+trigger3=(root,var(18)&128)
+trigger3=(enemy,projcontacttime(0)=[1,180])||root,var(9)<200&&enemy,projcontacttime(0)=[1,250]
+value=SCA
+time=1
+ignorehitpause=1
+[State ]
+type=nothitby
+triggerall=ishelper
+triggerall=root,palno=12&&root,var(16)>1000
+triggerall=(root,var(18)&1)||(root,var(18)&16)||(root,var(18)&128)
+trigger1=!ishelper(1010)
+trigger2=ishelper(1010)&&gametime%200=0
+trigger3=(root,var(18)&128)
+trigger3=(enemy,projcontacttime(0)=[1,180])||root,var(9)<200&&enemy,projcontacttime(0)=[1,250]
+value2=SCA
+time=1
+ignorehitpause=1
+
+[State ]
+type=HitOverride
+triggerall=ishelper
+triggerall=root,palno=12&&root,var(16)>1000
+triggerall=(root,var(18)&1)||(root,var(18)&16)
+trigger1=!ishelper(1010)
+trigger2=ishelper(1010)&&gametime%200=0
+attr=SCA,AA,AT,AP
+slot=0
+stateno=5150
+ignorehitpause=1
+[State ]
+type=HitOverride
+triggerall=ishelper
+triggerall=root,palno=12&&root,var(16)>1000
+triggerall=(root,var(18)&1)||(root,var(18)&16)
+trigger1=!ishelper(1010)
+trigger2=ishelper(1010)&&gametime%200=0
+attr=SCA,AA,AT,AP
+slot=1
+stateno=5150
+ignorehitpause=1
+
+[State ]
+Type=DisplayToClipboard
+trigger1=ishelper(80001)
+Text="target:%d,id:%d"
+Params=id%8,var(42)
+IgnoreHitPause=1
+;---------------------------------------------------------------------------
+[Statedef 5200]
+type=A
+movetype=H
+physics=N
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ];stateŠÇ—
+type=varset
+triggerall=!ishelper
+trigger1=sysvar(2)!=stateno
+trigger=time=0
+sysvar(2)=stateno
+
+[State ]
+type=ChangeAnim
+trigger1=Anim=5035
+trigger1=AnimTime=0
+value=5050
+
+[State ]
+type=VelAdd
+trigger1=1
+y=GetHitVar(yaccel)
+
+[State ]
+type=SelfState
+trigger1=Vel Y>0
+trigger1=Pos Y>=10
+value=5201
+;---------------------------------------------------------------------------
+[Statedef 5201]
+type=A
+movetype=H
+physics=A
+anim=5200
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ];stateŠÇ—
+type=varset
+triggerall=!ishelper
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[State ]
+type=Turn
+trigger1=Time=0
+trigger1=p2dist X<-5
+
+[State ]
+type=VelSet
+trigger1=Time=0
+x=-.15
+y=-3.5
+
+[State ]
+type=PosSet
+trigger1=Time=0
+y=0
+
+[State ]
+type=NotHitBy
+trigger1=1
+value=SCA
+time=1
+
+[State ]
+type=PalFX
+trigger1=Time=0
+time=3
+add=128,128,128;256,256,256
+
+[State ]
+type=GameMakeAnim
+trigger1=Time=1
+value=60
+pos=0,0
+under=1
+;---------------------------------------------------------------------------
+[Statedef 5210]
+type=A
+movetype=I
+physics=N
+anim=5210
+ctrl=0
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=!(name="Legendary Super Saiyan"&&sysfvar(4)=gametime+gametime)
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[State ];stateŠÇ—
+type=varset
+triggerall=!ishelper
+trigger1=sysvar(2)!=stateno
+trigger1=time=0
+sysvar(2)=stateno
+
+[State ]
+type=PalFX
+trigger1=Time=0
+time=3
+add=128,128,128;256,256,256
+
+[State ]
+type=PosFreeze
+trigger1=Time=0
+value=4
+
+[State ]
+type=Turn
+trigger1=Time=0
+trigger1=p2dist X<-20
+
+[State ]
+type=VelMul
+trigger1=Time=4
+x=.8
+y=.8
+
+[State ]
+type=VelAdd
+trigger1=Time=4
+y=-4.5
+
+[State ]
+type=VelMul
+trigger1=Time=4
+trigger1=Vel Y>0
+y=.5
+
+[State ]
+type=VelAdd
+trigger1=Time=4
+trigger1=Vel Y>-3
+y=-2
+
+[State ]
+type=VelAdd
+trigger1=Time=4
+trigger1=Vel Y>-2
+y=-1
+
+[State ]
+type=VelAdd
+trigger1=Time=4
+trigger1=Command="holdup"
+y=-2
+
+[State ]
+type=VelAdd
+trigger1=Time=4
+trigger1=Command="holddown"
+y=1.5
+
+[State ]
+type=VelMul
+trigger1=Time=4
+trigger1=Command="holdfwd"
+x=1
+
+[State ]
+type=VelAdd
+trigger1=Time=4
+trigger1=Command="holdback"
+x=-1
+
+[State ]
+type=NotHitBy
+trigger1=Time=0
+value=SCA
+time=15
+
+[State ]
+type=VelAdd
+trigger1=Time>=4
+y=.35
+
+[State ]
+type=ChangeState
+trigger1=Vel Y>0
+trigger1=Pos Y>=0
+value=52
+
+[State ]
+type=ChangeState
+trigger1=Time>=20
+value=2000
+;---------------------------------------------------------------------------
+; Continue?
+[Statedef 5500]
+type=S
+ctrl=0
+anim=5500
+velset=0,0
+
+[State ]
+type=ChangeAnim
+trigger1=time=0
+trigger1=!SelfAnimExist(5500)
+trigger1=SelfAnimExist(5300)
+value=5300
+;---------------------------------------------------------------------------
+;deuxième round
+[Statedef 5900]
+type=S
+movetype=A
+;=============================================================================
+[state ];”»’f
+type=destroyself
+triggerall=ishelper
+triggerall=name!="Legendary Super Saiyan"
+triggerall=numenemy>0
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[1,9]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[1,9]
+ignorehitpause=1
+
+[state ];•sƒ•¨”rœ
+type=Changestate
+triggerall=name!="Legendary Super Saiyan"
+trigger1=enemy,name="Legendary Super Saiyan"
+trigger1=enemy,palno=[7,12]
+trigger2=numenemy=2
+trigger2=enemy(1),name="Legendary Super Saiyan"
+trigger2=enemy(1),palno=[7,12]
+value=ifelse(!ishelper,1000044,149990)
+ignorehitpause=1
+;=============================================================================
+[state ];ƒ‰ƒCƒt•Û‘¶—pƒwƒ‹ƒp[
+type=helper
+triggerall=alive&&!ishelper
+trigger1=roundstate<1
+trigger1=!numhelper(1)
+trigger2=numhelper(1)>0&&var(21)=0
+trigger2=helper(1),var(41)=0
+trigger2=numhelper(1)<59
+name="broly"
+id=1
+stateno=75000
+persistent=1
+pos=0,0
+Helpertype=player
+keyctrl=1
+postype=p1
+ownpal=1
+ignorehitpause=1
+size.xscale=1
+size.yscale=1
+supermovetime=2147483647
+pausemovetime=2147483647
+
+[State ];ƒ‰ƒCƒt•Û‘¶—pƒwƒ‹ƒp[ID’²®
+Type=ChangeState
+triggerall=alive&&!ishelper
+triggerall=roundstate<1
+Trigger1=Var(39):=Var(39)+1||1
+Trigger1=Var(39)<70
+Value=5900
+ignorehitpause=1
+
+[State ]
+type=PowerSet
+trigger1=Time=0
+trigger1=palno>6
+value=10000-(var(10)=1)*2000
+
+[State ]
+type=varset
+trigger1=alive&&!ishelper
+trigger1=(var(56)&16)
+sysvar(2)=stateno
+ignorehitpause=1
+
+[State ]
+type=varset
+trigger1=alive&&!ishelper
+trigger1=!(var(56)&16)
+sysvar(2)=0
+ignorehitpause=1
+
+[state ]
+type=null
+triggerall=!ishelper
+trigger1=palno<3
+trigger1=var(10):=0
+ignorehitpause=1
+
+[state ]
+Type=VarSet
+trigger1=var(10)=1||var(10)=2||palno=12
+Trigger1=RoundNo>1
+var(5)=1
+ignorehitpause=1
+
+[state ]
+Type=VarSet
+trigger1=var(10)=2||palno=12
+Trigger1=RoundNo>1
+var(20)=1
+ignorehitpause=1
+
+[state ];animŠÇ—,•ª‚¯‚½‚Ù‚¤‚ªˆÀ’è‚·‚éH
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=!ishelper
+trigger1=!(var(20)=1||palno=12)
+trigger2=ishelper(70000)
+trigger2=!(root,var(20)=1||root,palno=12)
+sysvar(3)=0
+ignorehitpause=1
+[state ];animŠÇ—
+type=varset
+triggerall=!ishelper||ishelper(70000)
+trigger1=!ishelper
+trigger1=var(20)=1||palno=12
+trigger2=ishelper(70000)
+trigger2=root,var(20)=1||root,palno=12
+sysvar(3)=90001
+ignorehitpause=1
+
+[state ]
+type=changeanim
+trigger1=anim!=sysvar(3)
+trigger2=animelemno(0)=1
+value=sysvar(3)
+elem=2
+ignorehitpause=1
+
+[State ]
+Type=PlaySnd
+trigger1=(var(56)&16)
+trigger1=sysvar(4)=5
+Value=0,38
+
+[state ]
+type=AssertSpecial
+triggerall=(var(56)&16)
+trigger1=sysvar(4)=[0,139]
+trigger2=sysvar(4)=140
+trigger2=var(56):=var(56)-(var(56)&16)
+flag=intro
+
+[State ]
+type=AssertSpecial
+trigger1=(Time<150)&&(RoundNo=1)
+flag=Intro
+flag2=NoBarDisplay
+ignorehitpause=1
+
+[State ]
+type=ChangeState
+trigger1=palno=12
+trigger1=(var(56)&512)
+value=198
+ignorehitpause=1
+
+[State ]
+type=ChangeState
+trigger1=MatchNo=1&&RoundNo=1
+value=190
+ignorehitpause=1
