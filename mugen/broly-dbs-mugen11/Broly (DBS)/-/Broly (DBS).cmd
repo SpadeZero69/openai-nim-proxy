@@ -429,7 +429,7 @@ type = ChangeState
 value = 3000
 triggerall = teammode = single && power >= 2500 && statetype != A && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "ultimate"
-trigger2 = AIlevel && (p2bodydist X <= 40) && P2statetype != A && random < (AIlevel * 100)*3
+trigger2 = AIlevel && ((p2bodydist X <= 40 || var(55))) && P2statetype != A && random < (AIlevel * 100)*3
 
 ;---------------------------------------------------------------------------
 
@@ -438,7 +438,7 @@ type = ChangeState
 value = 1600
 triggerall = power >= 500 && statetype != A && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "special_1"
-trigger2 = AIlevel && (p2bodydist X <= 30) && (p2bodydist Y < 20) && P2statetype != L && random < (AIlevel * 100)/2
+trigger2 = AIlevel && ((p2bodydist X <= 30 || var(55))) && ((p2bodydist Y < 20 || var(55))) && P2statetype != L && random < (AIlevel * 100)/2
 
 ;---------------------------------------------------------------------------
 
@@ -447,7 +447,7 @@ type = ChangeState
 value = 1700
 triggerall = power >= 1000 && statetype != A && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "special_2"
-trigger2 = AIlevel && (p2bodydist X <= 30) && (p2bodydist Y < 20) && P2statetype != L && random < (AIlevel * 100)
+trigger2 = AIlevel && ((p2bodydist X <= 30 || var(55))) && ((p2bodydist Y < 20 || var(55))) && P2statetype != L && random < (AIlevel * 100)
 
 ;---------------------------------------------------------------------------
 
@@ -456,7 +456,7 @@ type = ChangeState
 value = 1800
 triggerall = power >= 1000 && statetype != A && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "special_3"
-trigger2 = AIlevel && (p2bodydist X <= 40) && (p2bodydist Y < 20) && random < (AIlevel * 100)
+trigger2 = AIlevel && ((p2bodydist X <= 40 || var(55))) && ((p2bodydist Y < 20 || var(55))) && random < (AIlevel * 100)
 
 ;---------------------------------------------------------------------------
 
@@ -465,7 +465,7 @@ type = ChangeState
 value = 1500
 triggerall = power >= 1000 && statetype != A && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "special_4"
-trigger2 = AIlevel && (p2bodydist X <= 40) && (p2bodydist Y < 20) && random < (AIlevel * 100)
+trigger2 = AIlevel && ((p2bodydist X <= 40 || var(55))) && ((p2bodydist Y < 20 || var(55))) && random < (AIlevel * 100)
 
 ;---------------------------------------------------------------------------
 
@@ -483,7 +483,7 @@ type = ChangeState
 value = 1300
 triggerall = power >= 1000 && statetype != A && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "special_6"
-trigger2 = AIlevel && random < (AIlevel * 100)/2  && P2statetype != L && (p2bodydist X < 90 || (p2bodydist X > 90 && (p2bodydist Y > 30)))
+trigger2 = AIlevel && random < (AIlevel * 100)/2  && P2statetype != L && ((p2bodydist X < 90 || var(55)) || (p2bodydist X > 90 && (p2bodydist Y > 30)))
 
 ;---------------------------------------------------------------------------
 
@@ -492,7 +492,7 @@ type = ChangeState
 value = 200
 triggerall = statetype = S &&  statetype != A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "a" && command != "holddown"
-trigger2 = AIlevel && p2bodydist X < 50 && P2movetype != H && (p2bodydist Y < 40) && P2statetype != L && random < (AIlevel * 100)*2
+trigger2 = AIlevel && (p2bodydist X < 50 || var(55)) && P2movetype != H && ((p2bodydist Y < 40 || var(55))) && P2statetype != L && random < (AIlevel * 100)*2
 
 ;---------------------------------------------------------------------------
 
@@ -501,7 +501,7 @@ type = ChangeState
 value = 300
 triggerall = statetype = S &&  statetype != A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "b" && command != "holddown"
-trigger2 = AIlevel && p2bodydist X < 50 && P2movetype != H && (p2bodydist Y < 40) && P2statetype != L && random < (AIlevel * 100)*2
+trigger2 = AIlevel && (p2bodydist X < 50 || var(55)) && P2movetype != H && ((p2bodydist Y < 40 || var(55))) && P2statetype != L && random < (AIlevel * 100)*2
 
 ;---------------------------------------------------------------------------
 
@@ -510,7 +510,7 @@ type = ChangeState
 value = 400
 triggerall = power >= 100 && statetype = S && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "c" && command != "holddown"
-trigger2 = AIlevel && p2bodydist X >= 100 && random < (AIlevel * 100)/4 && (p2bodydist Y < 40)
+trigger2 = AIlevel && p2bodydist X >= 100 && random < (AIlevel * 100)/4 && ((p2bodydist Y < 40 || var(55)))
 
 ;---------------------------------------------------------------------------
 
@@ -595,7 +595,7 @@ type = ChangeState
 value = 1400
 triggerall = power >= 500 && prevstateno != 1400 && statetype != A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "a" && command = "holddown" && statetype = C
-trigger2 = AIlevel && p2bodydist X <= 30 && (p2bodydist Y <= 20) && P2statetype != L && random < (AIlevel * 100)*2
+trigger2 = AIlevel && (p2bodydist X <= 30 || var(55)) && ((p2bodydist Y <= 20 || var(55))) && P2statetype != L && random < (AIlevel * 100)*2
 
 ;---------------------------------------------------------------------------
 
@@ -604,7 +604,7 @@ type = ChangeState
 value = 1400
 triggerall = power >= 500 && statetype = A && prevstateno != 1400 && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "a" && command = "holddown"
-trigger2 = AIlevel && p2bodydist X <= 30 && (p2bodydist Y <= 20) && P2statetype != L && random < (AIlevel * 100)
+trigger2 = AIlevel && (p2bodydist X <= 30 || var(55)) && ((p2bodydist Y <= 20 || var(55))) && P2statetype != L && random < (AIlevel * 100)
 
 ;---------------------------------------------------------------------------
 
@@ -613,7 +613,7 @@ type = ChangeState
 value = 350
 triggerall = statetype != A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "b" && command = "holddown" && statetype = C
-trigger2 = AIlevel && p2bodydist X < 90 && P2statetype != A && random < (AIlevel * 100)/2 && P2statetype != L
+trigger2 = AIlevel && (p2bodydist X < 90 || var(55)) && P2statetype != A && random < (AIlevel * 100)/2 && P2statetype != L
 
 ;---------------------------------------------------------------------------
 
@@ -622,7 +622,7 @@ type = ChangeState
 value = 230
 triggerall = statetype = A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "a" && command != "holddown"
-trigger2 = AIlevel && p2bodydist X < 40 && p2bodydist Y < 10 && random < (AIlevel * 100)
+trigger2 = AIlevel && (p2bodydist X < 40 || var(55)) && (p2bodydist Y < 10 || var(55)) && random < (AIlevel * 100)
 
 ;---------------------------------------------------------------------------
 
@@ -631,7 +631,7 @@ type = ChangeState
 value = 240
 triggerall = statetype = A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "b" && command != "holddown"
-trigger2 = AIlevel && p2bodydist X < 40  && p2bodydist Y < 10 && random < (AIlevel * 100)
+trigger2 = AIlevel && (p2bodydist X < 40 || var(55))  && (p2bodydist Y < 10 || var(55)) && random < (AIlevel * 100)
 
 ;---------------------------------------------------------------------------
 
@@ -640,7 +640,7 @@ type = ChangeState
 value = 620
 triggerall = statetype = A && movetype != H && (roundstate=2) && (alive) && ctrl
 trigger1 = !AIlevel && command = "c" && command != "holddown"
-trigger2 = AIlevel && p2bodydist X < 40 && p2bodydist Y < 10 && random < (AIlevel * 100)/2
+trigger2 = AIlevel && (p2bodydist X < 40 || var(55)) && (p2bodydist Y < 10 || var(55)) && random < (AIlevel * 100)/2
 
 ;---------------------------------------------------------------------------
 
@@ -649,7 +649,7 @@ type = ChangeState
 value = 610
 triggerall = power >= 250 && statetype = A && Pos Y < -50 && movetype != H && (roundstate=2) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = !AIlevel && command = "b" && command = "holddown"
-trigger2 = AIlevel && p2bodydist X > 60 && p2bodydist X < 160 && P2statetype != A && random < (AIlevel * 100)/2
+trigger2 = AIlevel && p2bodydist X > 60 && (p2bodydist X < 160 || var(55)) && P2statetype != A && random < (AIlevel * 100)/2
 
 ;---------------------------------------------------------------------------
 
@@ -658,7 +658,7 @@ type = ChangeState
 value = 1100
 triggerall = power >= 750 && statetype = A && movetype != H && (roundstate=2) && (prevstateno != 1100) && (alive) && (ctrl||numhelper(9999)>0)
 trigger1 = command = "c" && command = "holddown"
-trigger2 = AIlevel && random < (AIlevel * 100)/2 && p2bodydist X <= 90 && p2movetype != A
+trigger2 = AIlevel && random < (AIlevel * 100)/2 && (p2bodydist X <= 90 || var(55)) && p2movetype != A
 
 ;---------------------------------------------------------------------------
 
@@ -756,11 +756,57 @@ ignorehitpause = 1
 value = fvar(19)
 
 
-[State 0, VarSet]
-type = Varadd
-trigger1 = (GameTime % 600) = 0
-v = 52    ;fv = 10
-value = 1
+;---------------------------------------------------------------------------
+; MATCH CLOCK (changed). The scaling level var(52) goes up by 1 every second
+; of fighting (it was every 10 seconds): 1 at the start, 61 at one minute,
+; 121 at two minutes, with no limit. Fighting time is the time in
+; RoundState 2, pauses included; it carries over between rounds.
+;   var(53): GameTime + 1 at the last tick (0 = not set yet)
+;   var(54): clock levels given so far
+;   var(55): 1 from one minute of fighting on (ONE-MINUTE MODE below)
+;   var(56): fighting time in ticks (60 ticks = 1 second)
+[State -2, Match clock: fighting time]
+type = VarAdd
+trigger1 = !IsHelper && RoundState = 2 && var(53) > 0
+v = 56
+value = GameTime + 1 - var(53)
+ignorehitpause = 1
+
+[State -2, Match clock: last tick]
+type = VarSet
+trigger1 = !IsHelper
+var(53) = GameTime + 1
+ignorehitpause = 1
+
+[State -2, Match clock: level up]
+type = VarAdd
+trigger1 = !IsHelper && var(56) / 60 + 1 > var(54)
+v = 52
+value = var(56) / 60 + 1 - var(54)
+ignorehitpause = 1
+
+[State -2, Match clock: levels given]
+type = VarSet
+trigger1 = !IsHelper && var(56) / 60 + 1 > var(54)
+var(54) = var(56) / 60 + 1
+ignorehitpause = 1
+
+;---------------------------------------------------------------------------
+; ONE-MINUTE MODE (added). From one minute of fighting on, the attacks of
+; Broly and his helpers hit anywhere on the screen and can't be avoided:
+; - every HitDef has a copy that takes over from then on. Its attr has no
+;   state type (S, C or A), so NotHitBy invincibility, HitOverride parries
+;   and ReversalDef counters never match it; it has no guardflag, so it
+;   can't be blocked; and hitflag = MAFD hits opponents standing, crouching,
+;   in the air, falling or lying down.
+; - at the end of every attack state the animation is swapped for a copy
+;   (action number + 20000) whose attack boxes cover the whole screen.
+; - the AI attacks from any distance.
+; To change when it starts, change the 3600 below (60 ticks = 1 second).
+[State -2, One-minute mode: on]
+type = VarSet
+trigger1 = !IsHelper && var(55) = 0 && var(56) >= 3600
+var(55) = 1
 ignorehitpause = 1
 
 [State -2, Combo]
@@ -789,10 +835,10 @@ ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 ; REGENERATION (added). Broly heals all the time during a round, faster the
-; longer the match goes on, with no limit. It uses the infinite-scaling
-; level var(52) (+1 every 10 seconds of the match, kept between rounds):
-; per second he heals level x 2/1000 of his max life, so 0.2% at the start,
-; 1.4% after a minute, 6.2% after five minutes, and so on.
+; longer the match goes on, with no limit. It uses the scaling level var(52)
+; (+1 every second of the match, kept between rounds): per second he heals
+; level x 2/1000 of his max life, so 0.2% at the start, 12.2% at one
+; minute, 24.2% at two minutes, and so on.
 ; To change the speed, change the 2 at the start of "value" below
 ; (bigger = faster, 0 = no regeneration).
 [State -2, Regeneration: build up]

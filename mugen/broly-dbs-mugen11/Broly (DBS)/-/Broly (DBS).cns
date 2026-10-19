@@ -1325,12 +1325,39 @@ value = 5,1
 
 [State 200]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Medium
 guardflag = MA
 hitflag = MAF
+priority = 3, Hit
+pausetime = 8, 15
+sparkno = -1
+guard.sparkno = -1
+hitsound = s1,36
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 5
+ground.hittime  = 30
+ground.velocity = -4
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -1.4,-3
+air.hittime = 30
+EnvShake.Time=15
+EnvShake.Ampl=-8
+
+[State 200, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Medium
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit
 pausetime = 8, 15
 sparkno = -1
@@ -1404,6 +1431,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 200, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -1586,12 +1621,44 @@ ignorehitpause = 1
 
 [State 210]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
 animtype  = Medium
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 guardflag = MA
+pausetime = 20,0
+sparkno = -1
+guard.sparkno = -1
+hitsound   = S1,8
+guardsound = S4,1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -2,-6
+air.velocity = -2,-6
+Fall = 1
+p2stateno = 6215
+EnvShake.Time=10
+EnvShake.Ampl=-6
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+
+[State 210, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+triggerall = !movecontact
+trigger1 = 1
+attr = , NA
+hitflag = MAFD
+animtype  = Medium
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+;guardflag = MA   ; removed: can't be blocked
 pausetime = 20,0
 sparkno = -1
 guard.sparkno = -1
@@ -1626,6 +1693,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 210, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -1874,7 +1949,7 @@ ignorehitpause = 1
 [State 220]
 type = VelSet
 trigger1 = time < 27
-trigger1 = anim = 221
+trigger1 = anim % 20000 = 221
 trigger1 = movehit = 0
 x = 6.5
 y = -8
@@ -1887,7 +1962,7 @@ value = -((Atan(Vel Y/ Vel X)) * (180.0/PI)) - 15
 
 [State 220]
 type = AngleDraw
-trigger1 = anim = 221
+trigger1 = anim % 20000 = 221
 value = fvar(10)
 ignorehitpause = 1
 
@@ -2005,12 +2080,40 @@ y = -2
 
 [State 220]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = time = 0
 attr = A, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Hard
 guardflag = MA
 hitflag = MAF
+priority = 3, Hit
+pausetime = 25, 25
+sparkno = -1
+guard.sparkno = -1
+hitsound = S1, 39
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 5
+ground.hittime  = 12
+ground.velocity = -2,-3
+airguard.velocity = -1,-1
+air.type = Low
+air.velocity = -2,-3
+air.hittime = 12
+p2stateno = 6225
+EnvShake.Time=10
+EnvShake.Ampl=-6
+
+[State 220, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Hard
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit
 pausetime = 25, 25
 sparkno = -1
@@ -2072,7 +2175,7 @@ ignorehitpause = 1
 
 [State 220]
 type = AngleDraw
-trigger1 = time >= 27 || (anim!=221&&movehit)
+trigger1 = time >= 27 || (anim % 20000!=221&&movehit)
 value = 0
 ignorehitpause = 1
 
@@ -2113,6 +2216,14 @@ trigger1 = movecontact
 trigger2 = time >= 27
 value = 50
 ctrl = 0
+
+[State 220, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -2166,12 +2277,39 @@ y = -2
 
 [State 230]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = time = 0
 attr = A, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Heavy
 guardflag = MA
 hitflag = MAF
+priority = 3, Hit
+pausetime = 15,15
+sparkno = -1
+sparkxy = -15, -28
+hitsound = s1,36
+guardsound = 6, 0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 15
+ground.velocity = -3,0
+airguard.velocity = -1.9,-.8
+air.type = High
+air.velocity = -3,-2
+air.hittime = 15
+EnvShake.Time=6
+EnvShake.Ampl=-6
+
+[State 230, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Heavy
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit
 pausetime = 15,15
 sparkno = -1
@@ -2254,6 +2392,14 @@ trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
 
+[State 230, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 240]
@@ -2299,12 +2445,39 @@ y = -2
 
 [State 240]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = time = 0
 attr = A, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Heavy
 guardflag = MA
 hitflag = MAF
+priority = 3, Hit
+pausetime = 15,15
+sparkno = -1
+sparkxy = -15, -28
+hitsound = s1,39
+guardsound = 6, 0
+ground.type = High
+ground.slidetime = 5
+ground.hittime  = 15
+ground.velocity = -3,0
+airguard.velocity = -1.9,-.8
+air.type = High
+air.velocity = -3,-2
+air.hittime = 15
+EnvShake.Time=6
+EnvShake.Ampl=-6
+
+[State 240, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Heavy
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit
 pausetime = 15,15
 sparkno = -1
@@ -2378,6 +2551,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
+[State 240, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -2457,12 +2638,39 @@ value = 5,1
 
 [State 300]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Medium
 guardflag = MA
 hitflag = MAF
+priority = 3, Hit
+pausetime = 8, 8
+sparkno = -1
+guard.sparkno = -1
+hitsound = s1,36
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 10
+ground.hittime  = 30
+ground.velocity = -4
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -1.4,-3
+air.hittime = 30
+EnvShake.Time=15
+EnvShake.Ampl=-8
+
+[State 300, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Medium
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit
 pausetime = 8, 8
 sparkno = -1
@@ -2537,6 +2745,14 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+[State 300, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 310]
@@ -2569,11 +2785,40 @@ ignorehitpause=1
 
 [State 310]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Hard
 guardflag = MA
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 8, 8
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 15
+ground.hittime  = 30
+ground.velocity = -2,-3
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -2,-3
+air.hittime = 30
+fall = 1
+fall.recover = 0
+EnvShake.Time=15
+EnvShake.Ampl=-8
+
+[State 310, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Hard
+;guardflag = MA   ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit
 pausetime = 8, 8
@@ -2838,6 +3083,14 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+[State 310, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 320]
@@ -2880,11 +3133,40 @@ ignorehitpause=1
 
 [State 320]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Hard
 guardflag = MA
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 8, 8
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 15
+ground.hittime  = 30
+ground.velocity = -2,-5
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -2,-5
+air.hittime = 30
+fall = 1
+fall.recover = 0
+EnvShake.Time=15
+EnvShake.Ampl=-8
+
+[State 320, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Hard
+;guardflag = MA   ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit
 pausetime = 8, 8
@@ -3155,6 +3437,14 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+[State 320, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 330]
@@ -3197,11 +3487,40 @@ ignorehitpause=1
 
 [State 330]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Hard
 guardflag = MA
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 8, 8
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 30
+ground.hittime  = 30
+ground.velocity = -2, -4
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -2,-4
+air.hittime = 30
+fall = 1
+fall.recover = 0
+EnvShake.Time=15
+EnvShake.Ampl=-8
+
+[State 330, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Hard
+;guardflag = MA   ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit
 pausetime = 8, 8
@@ -3472,6 +3791,14 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+[State 330, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 340]
@@ -3514,11 +3841,40 @@ ignorehitpause=1
 
 [State 340]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 70, enemy,lifemax / 140
 animtype = Hard
 guardflag = MA
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 8, 8
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 0
+ground.hittime  = 45
+ground.velocity = -2,-5
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -2,-5
+air.hittime = 45
+fall = 1
+fall.recover = 0
+EnvShake.Time=15
+EnvShake.Ampl=-8
+
+[State 340, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 70, enemy,lifemax / 140
+animtype = Hard
+;guardflag = MA   ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit
 pausetime = 8, 8
@@ -3789,6 +4145,14 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+[State 340, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 350]
@@ -3918,11 +4282,38 @@ angle = 45
 
 [State 350]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = Time = 0
 attr = S, NA
 damage = enemy,lifemax / 45, enemy,lifemax / 90
 animtype = Light
 guardflag = M
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 10, 10
+hitsound = 5, 0
+sparkno = -1
+guard.sparkno = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 0
+ground.hittime  = 30
+ground.velocity = -3,-6
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -3,-6
+air.hittime = 30
+fall = 1
+fall.recover = 0
+
+[State 350, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Time = 0
+attr = , NA
+damage = enemy,lifemax / 45, enemy,lifemax / 90
+animtype = Light
+;guardflag = M   ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit
 pausetime = 10, 10
@@ -4006,6 +4397,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 350, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -4548,12 +4947,47 @@ x = 12
 
 [State 410]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact
 attr = A, NP			
 damage = enemy,lifemax / 95, enemy,lifemax / 200			
 animtype = Medium			
 guardflag = MA			
 hitflag = MAF		
+priority = 7, Hit			
+pausetime = 0, 8			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1, 8			
+guardsound = S5, 10			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 15
+ground.velocity = ifelse(root, var(1) < 5, -2, -3), ifelse(root, var(1) < 5, 0, -6)
+airguard.velocity = -2,-2
+air.type = High 		
+air.velocity = -1.4,-3
+air.hittime = 12
+fall = ifelse(root, var(1) < 5, 0, 1)
+fall.recover = 0
+getpower = 0,0
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+Envshake.time=5
+
+[State 410, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact
+attr = , NP			
+damage = enemy,lifemax / 95, enemy,lifemax / 200			
+animtype = Medium			
+;guardflag = MA			   ; removed: can't be blocked
+hitflag = MAFD
 priority = 7, Hit			
 pausetime = 0, 8			
 sparkno = -1	
@@ -4592,6 +5026,14 @@ trigger1 = time = 300 || movecontact
 trigger2 = frontedgebodydist < -15
 trigger3 = pos y > 0
 value = 415
+
+[State 410, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -5317,12 +5759,40 @@ trans = sub
 
 [State 600]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = time = 0
 attr = A, NA			
 damage = enemy,lifemax / 45, enemy,lifemax / 90		
 animtype = Heavy			
 guardflag = MA			
 hitflag = MAF			
+priority = 3, Hit			
+pausetime = 12,12			
+sparkno = -1				
+sparkxy = -15, -28		
+hitsound = S1, 31			
+guardsound = 6, 0			
+ground.type = High	
+ground.slidetime = 5		
+ground.hittime  = 12		
+ground.velocity = -1.5,16		
+airguard.velocity = -1.9,-.8	
+air.type = High		
+air.velocity = -1.5,16		
+air.hittime = 12			
+fall = 1
+EnvShake.Time=20
+EnvShake.Ampl=-10
+
+[State 600, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = time = 0
+attr = , NA			
+damage = enemy,lifemax / 45, enemy,lifemax / 90		
+animtype = Heavy			
+;guardflag = MA			   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit			
 pausetime = 12,12			
 sparkno = -1				
@@ -5389,6 +5859,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
+[State 600, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -5560,6 +6038,7 @@ trigger1 = animelem = 4
 
 [State 610]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact && animelem = 3 && enemynear,statetype = A
 attr = A, NA
 damage = 0,0
@@ -5581,13 +6060,63 @@ air.hittime = 5
 fall = 1
 p2stateno = 6100
 
+[State 610, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact && animelem = 3 && enemynear,statetype = A
+attr = , NA
+damage = 0,0
+animtype = Light
+;guardflag =    ; removed: can't be blocked
+hitflag = MAFD
+priority = 3, Hit
+sparkno = -1
+numhits = 0
+guard.sparkno = -1
+ground.type = Low
+ground.slidetime = 0
+ground.hittime  = 5
+ground.velocity = 0,0
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = 0,0
+air.hittime = 5
+fall = 1
+p2stateno = 6100
+
 [State 610]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact && animelem = 4
 attr = A, NA
 damage = cond(prevstateno=340,enemy,lifemax / 45,enemy,lifemax / 20), cond(prevstateno=340,enemy,lifemax / 95, enemy,lifemax / 40)
 animtype = Light
 guardflag = 
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 15, 10
+hitsound = 5, 0
+sparkno = -1
+guard.sparkno = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 0
+ground.hittime  = 3
+ground.velocity = -3,-6
+airguard.velocity = -1.9,-.8
+air.type = Low
+air.velocity = -3,-6
+air.hittime = 3
+fall = 1
+
+[State 610, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact && animelem = 4
+attr = , NA
+damage = cond(prevstateno=340,enemy,lifemax / 45,enemy,lifemax / 20), cond(prevstateno=340,enemy,lifemax / 95, enemy,lifemax / 40)
+animtype = Light
+;guardflag =    ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit
 pausetime = 15, 10
@@ -5670,6 +6199,14 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
+[State 610, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 620]
@@ -5710,12 +6247,40 @@ value = fvar(19)
 
 [State 620]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = time = 0
 attr = A, NA			
 damage = enemy,lifemax / 70, enemy,lifemax / 140			
 animtype = Heavy			
 guardflag = MA			
 hitflag = MAFD	
+priority = 3, Hit			
+pausetime = 5,0			
+sparkno = -1				
+sparkxy = -15, -28		
+hitsound = S1, 31			
+guardsound = 6, 0			
+ground.type = High	
+ground.slidetime = 5		
+ground.hittime  = 12		
+ground.velocity = -10,-2		
+airguard.velocity = -1.9,-.8	
+air.type = High		
+air.velocity = -10,-2		
+air.hittime = 12			
+fall = 1
+p1stateno = 621
+p2stateno = 6620
+
+[State 620, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = time = 0
+attr = , NA			
+damage = enemy,lifemax / 70, enemy,lifemax / 140			
+animtype = Heavy			
+;guardflag = MA			   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3, Hit			
 pausetime = 5,0			
 sparkno = -1				
@@ -5744,6 +6309,14 @@ y = 0
 type = ChangeState
 trigger1 = Animtime = 0
 value = 50
+
+[State 620, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -5803,11 +6376,39 @@ value = fvar(19)
 
 [State 621]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact
 attr = A, NT
 damage = enemy,lifemax / 70, enemy,lifemax / 140		
 animtype = Heavy	
 guardflag = MA	
+hitflag = MAFD
+priority = 3, Hit			
+pausetime = 5,0		
+sparkno = -1	
+guard.sparkno = -1
+hitsound = -1		
+guardsound = 6, 0		
+ground.type = High	
+ground.slidetime = 5		
+ground.hittime  = 30	
+ground.velocity = -7,-6		
+airguard.velocity = -1.9,-.8	
+air.type = High		
+air.velocity = -7,-6		
+air.hittime = 30	
+fall = 1
+fall.recover = 0
+numhits = 0
+
+[State 621, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact
+attr = , NT
+damage = enemy,lifemax / 70, enemy,lifemax / 140		
+animtype = Heavy	
+;guardflag = MA	   ; removed: can't be blocked
 hitflag = MAFD
 priority = 3, Hit			
 pausetime = 5,0		
@@ -5897,6 +6498,14 @@ type = ChangeState
 trigger1 = Animtime = 0
 value = 50
 
+[State 621, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 
 [Statedef 625]
@@ -5912,7 +6521,7 @@ sprpriority = 2
 [State 625]
 type = Explod
 triggerall = numexplod(625) = 0
-trigger1 = anim = 622
+trigger1 = anim % 20000 = 622
 anim = 7019
 ID = 625
 pos = 10,-28
@@ -5930,7 +6539,7 @@ sprpriority = 5
 [State 625]
 type = Explod
 triggerall = numexplod(625) = 1
-trigger1 = anim = 622
+trigger1 = anim % 20000 = 622
 anim = 7047
 ID = 625
 pos = 10,-28
@@ -5950,7 +6559,7 @@ remappal = 3,cond(var(59)=4, 6, cond(var(59)=5, 7, cond(var(59)=6, 4, 1)))
 
 [State 625]
 type = RemoveExplod
-triggerall = anim = 622
+triggerall = anim % 20000 = 622
 trigger1 = animelem = 2
 id = 625
 ignorehitpause = 1
@@ -5993,7 +6602,7 @@ ignorehitpause = 1
 
 [State 625]
 type = VelSet
-trigger1 = anim = 622
+trigger1 = anim % 20000 = 622
 trigger1 = movehit = 0
 x = 16
 y = -3
@@ -6006,15 +6615,50 @@ value = -((Atan(Vel Y/ Vel X)) * (180.0/PI)) - 15
 
 [State 625]
 type = AngleDraw
-trigger1 = anim = 622
+trigger1 = anim % 20000 = 622
 value = fvar(10)
 ignorehitpause = 1
 
 [State 625]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 triggerall = NumTarget
 trigger1 = !movecontact
 attr = A, NT
+damage = enemy,lifemax / 45, enemy,lifemax / 90
+animtype = Light
+;guardflag = MA
+hitflag = MAFD
+priority = 3, Hit
+pausetime = 30, 15
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = 6, 0
+ground.type = Low
+ground.slidetime = 5
+ground.hittime  = 12
+ground.velocity = -10,-9
+airguard.velocity = -1,-1
+air.type = Low
+air.velocity = -10,-9
+air.hittime = 12
+EnvShake.Time=30
+EnvShake.Ampl=-15
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+p2stateno = 6625
+
+[State 625, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+triggerall = NumTarget
+trigger1 = !movecontact
+attr = , NT
 damage = enemy,lifemax / 45, enemy,lifemax / 90
 animtype = Light
 ;guardflag = MA
@@ -6113,6 +6757,14 @@ trigger1 = movecontact
 trigger2 = time >= 27
 value = 50
 ctrl = 1
+
+[State 625, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -6472,10 +7124,34 @@ ctrl=0
 
 [State 750]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !time
 attr = A, NA
 damage = enemy,lifemax / 95, enemy,lifemax / 200
 guardflag = MA
+pausetime = 10,20
+sparkno = -1
+guard.sparkno = -1
+hitsound = s1,38
+guardsound = s104,0
+ground.type = high
+ground.slidetime = 5
+ground.hittime = 10
+ground.velocity = -.5,-3
+air.velocity = -.5,-3
+envshake.time = 10
+envshake.ampl = -4
+envshake.freq = 25
+getpower = 100,50
+
+[State 750, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !time
+attr = , NA
+hitflag = MAFD
+damage = enemy,lifemax / 95, enemy,lifemax / 200
+;guardflag = MA   ; removed: can't be blocked
 pausetime = 10,20
 sparkno = -1
 guard.sparkno = -1
@@ -6541,6 +7217,14 @@ trigger2 = frontedgebodydist<5
 trigger3 = moveguarded
 value = 751
 ctrl = 0
+
+[State 750, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -7539,12 +8223,48 @@ flag = noshadow
 
 [State 1050]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1=time%5=0
 attr = SCA, SA		
 damage = enemy,lifemax / 115, enemy,lifemax / 235			
 animtype = Heavy			
 guardflag = MA			
 hitflag = MAFD			
+priority = 7, Hit			
+pausetime = 0, 3			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1,8		
+guardsound = -1			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 10
+ground.velocity = -4, -1
+airguard.velocity = -2,-2
+air.type = High 		
+air.velocity = -4, -1
+air.hittime = 10
+envshake.time=5
+envshake.ampl=-4
+envshake.freq=40
+fall=time>35
+getpower = 0,0
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+
+[State 1050, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1=time%5=0
+attr = , SA		
+damage = enemy,lifemax / 115, enemy,lifemax / 235			
+animtype = Heavy			
+;guardflag = MA			   ; removed: can't be blocked
+hitflag = MAFD
 priority = 7, Hit			
 pausetime = 0, 3			
 sparkno = -1	
@@ -7634,6 +8354,14 @@ value = 9999
 type = DestroySelf
 trigger1 = time > 71
 trigger2 = root,movetype = H
+
+[State 1050, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -7960,12 +8688,45 @@ id = 7047
 
 [State 1150]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 triggerall = time > 20
 trigger1 = (time%3 = 0)
 attr = SCA, SP
 damage = enemy,lifemax / 50, enemy,lifemax / 130
 animtype = Heavy
 guardflag =
+hitflag = MAFD
+priority = 10, Hit
+pausetime = 0, 0
+sparkno = -1
+guard.sparkno = -1
+hitsound = S1,8
+guardsound = -1
+ground.type = High
+ground.slidetime = 10
+ground.hittime  = 15
+ground.velocity = 0,0
+airguard.velocity = -2,-2
+air.type = High
+air.velocity = 0,0
+air.hittime = 10
+numhits = 1
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+
+[State 1150, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+triggerall = time > 20
+trigger1 = (time%3 = 0)
+attr = , SP
+damage = enemy,lifemax / 50, enemy,lifemax / 130
+animtype = Heavy
+;guardflag =   ; removed: can't be blocked
 hitflag = MAFD
 priority = 10, Hit
 pausetime = 0, 0
@@ -8124,6 +8885,14 @@ removeongethit = 0
 type = DestroySelf
 trigger1= Pos Y > 15 && time > 20
 trigger2 = root,movetype = H
+
+[State 1150, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -8828,11 +9597,44 @@ id = 1250
 
 [State 1250]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !time
 attr = S, SP
 damage = cond(root,p2bodydist X > 50, enemy,lifemax / 40, enemy,lifemax / 80),cond(root,p2bodydist X > 50, enemy,lifemax / 70, enemy,lifemax / 140)
 animtype = Heavy
 guardflag = ;MA
+hitflag = MAFD
+priority = 7, Hit	
+pausetime = 0, 8	
+sparkno = -1
+guard.sparkno = -1	
+hitsound = S1, 8	
+guardsound = 6, 0	
+numhits = 0
+ground.type = High	
+ground.slidetime = 5	
+ground.hittime  = 30
+ground.velocity = cond(facing,-2,2), -3
+airguard.velocity = -2,-2
+air.type = High 		
+air.velocity =cond(facing,-2,2),-3
+air.hittime = 30
+fall = 1
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+
+[State 1250, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !time
+attr = , SP
+damage = cond(root,p2bodydist X > 50, enemy,lifemax / 40, enemy,lifemax / 80),cond(root,p2bodydist X > 50, enemy,lifemax / 70, enemy,lifemax / 140)
+animtype = Heavy
+;guardflag = ;MA   ; removed: can't be blocked
 hitflag = MAFD
 priority = 7, Hit	
 pausetime = 0, 8	
@@ -8870,6 +9672,14 @@ value = 1276
 [State 1250]
 type = DestroySelf
 trigger1 = time > 100
+
+[State 1250, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -8943,6 +9753,7 @@ id = 1275
 
 [State 1275]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = time = 0
 attr = S, SP	
 damage = enemy,lifemax / 28, enemy,lifemax / 56	
@@ -8950,6 +9761,38 @@ damage = 50, 25
 animtype = Heavy			
 guardflag =			
 hitflag = MAFD		
+priority = 7, Hit			
+pausetime = 0, 8			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1, 8			
+guardsound = 6, 0			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 15
+ground.velocity = -2, -3
+airguard.velocity = -2,-2
+air.type = High 		
+air.velocity = -2,-3
+air.hittime = 12
+fall = 1
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+
+[State 1275, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = time = 0
+attr = , SP	
+damage = enemy,lifemax / 28, enemy,lifemax / 56	
+damage = 50, 25		
+animtype = Heavy			
+;guardflag =			   ; removed: can't be blocked
+hitflag = MAFD
 priority = 7, Hit			
 pausetime = 0, 8			
 sparkno = -1	
@@ -8981,6 +9824,14 @@ value = 415
 type = Changestate
 trigger1 = pos y > -80
 value = 1276
+
+[State 1275, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -9281,6 +10132,7 @@ trans = sub
 
 [State 1300]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !time
 attr = SCA, ST
 damage=0,0		
@@ -9307,11 +10159,48 @@ numhits = 0
 p1stateno = 1301
 p2stateno = 6325
 
+[State 1300, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !time
+attr = , ST
+damage=0,0		
+animtype = Heavy			
+;guardflag = 			   ; removed: can't be blocked
+hitflag = MAFD
+priority = 7, Hit			
+pausetime = 0, 0			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1,9	
+guardsound = -1			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 12
+ground.velocity =  0, 0
+airguard.velocity =  0, 0
+air.type = High 		
+air.velocity = 0, 0
+air.hittime = 12
+fall.recover = 0
+getpower = 0,0
+numhits = 0
+p1stateno = 1301
+p2stateno = 6325
+
 [State 1300]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1300, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -9385,12 +10274,38 @@ pos = 25,0
 
 [State 1301]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = animelem = 3
 attr = A, SP
 animtype  = Hard
 damage = enemy,lifemax / 9, enemy,lifemax / 18
 Hitflag = MAFD
 guardflag = MA
+pausetime = 0,10
+sparkno = -1
+guard.sparkno = -1
+hitsound   = -1
+guardsound = S4,1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -4,-8
+air.velocity = -4,-8
+Fall = 1
+Fall.recover = 0
+Getpower = 0,0
+EnvShake.Time=20
+EnvShake.Ampl=-10
+
+[State 1301, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = animelem = 3
+attr = , SP
+animtype  = Hard
+damage = enemy,lifemax / 9, enemy,lifemax / 18
+hitflag = MAFD
+;guardflag = MA   ; removed: can't be blocked
 pausetime = 0,10
 sparkno = -1
 guard.sparkno = -1
@@ -9521,6 +10436,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 1302
 ctrl = 1
+
+[State 1301, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -9681,13 +10604,13 @@ ignorehitpause = 0
 
 [State 1350]
 type = BindToRoot
-trigger1 = root, anim = 1301 && root,animelem = 1
+trigger1 = root, anim % 20000 = 1301 && root,animelem = 1
 pos = 23, -23
 ignorehitpause = 0
 
 [State 1350]
 type = BindToRoot
-trigger1 = root, anim = 1301 && root,animelem = 2
+trigger1 = root, anim % 20000 = 1301 && root,animelem = 2
 pos = 28, -26
 ignorehitpause = 0
 
@@ -9707,7 +10630,7 @@ type = RemoveExplod
 trigger1= root,movetype = H
 trigger2 = movehit
 trigger3 = root,animelem = 4
-trigger4 = root, anim = 1301 && root,animelem = 3
+trigger4 = root, anim % 20000 = 1301 && root,animelem = 3
 id = 7045
 
 [State 1350]
@@ -9715,7 +10638,7 @@ type = RemoveExplod
 trigger1= root,movetype = H
 trigger2 = movehit
 trigger3 = root,animelem = 4
-trigger4 = root, anim = 1301 && root,animelem = 3
+trigger4 = root, anim % 20000 = 1301 && root,animelem = 3
 id = 7046
 
 [State 1350]
@@ -9723,7 +10646,7 @@ type = RemoveExplod
 trigger1= root,movetype = H
 trigger2 = movehit
 trigger3 = root,animelem = 4
-trigger4 = root, anim = 1301 && root,animelem = 3
+trigger4 = root, anim % 20000 = 1301 && root,animelem = 3
 id = 7056
 
 [State 1350]
@@ -9731,14 +10654,14 @@ type = RemoveExplod
 trigger1= root,movetype = H
 trigger2 = movehit
 trigger3 = root,animelem = 4
-trigger4 = root, anim = 1301 && root,animelem = 3
+trigger4 = root, anim % 20000 = 1301 && root,animelem = 3
 id = 7047
 
 [State 1350]
 type = DestroySelf
 trigger1= root,movetype = H
 trigger2 = root,animelem = 4
-trigger3 = root, anim = 1301 && root,animelem = 3
+trigger3 = root, anim % 20000 = 1301 && root,animelem = 3
 
 ;---------------------------------------------------------------------------
 
@@ -9906,6 +10829,7 @@ y = -3
 
 [State 1375]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !time
 attr = SCA, ST	
 damage = enemy,lifemax / 9, enemy,lifemax / 18		
@@ -9939,12 +10863,56 @@ PalFX.color = 256
 EnvShake.Time=20
 EnvShake.Ampl=-10
 
+[State 1375, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !time
+attr = , ST	
+damage = enemy,lifemax / 9, enemy,lifemax / 18		
+animtype = Heavy			
+;guardflag = MA			   ; removed: can't be blocked
+hitflag = MAFD
+priority = 7, Hit			
+pausetime = 0, 0			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S5,13		
+guardsound = -1			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 12
+ground.velocity = -3,-8
+airguard.velocity = -2,-2
+air.type = High 		
+air.velocity = -3,-8
+air.hittime = 12
+fall = 1
+fall.recover = 0
+getpower = 0,0
+numhits = cond(hitcount < 20,1,0)
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+EnvShake.Time=20
+EnvShake.Ampl=-10
+
 [State 1375]
 type = ChangeState
 trigger1 = movehit
 trigger2 = time > 200
 value = 1376
 ctrl = 0
+
+[State 1375, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -10452,12 +11420,41 @@ trans = sub
 
 [State 1400]
 type=HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1= !movecontact
 attr = S,SA
 damage = enemy,lifemax / 28, enemy,lifemax / 56
 animtype = Heavy
 guardflag = MA
 Hitflag = MAFD
+priority = 3,Hit
+pausetime = 12,12
+sparkno = -1
+guard.sparkno = -1
+sparkxy = 0,0
+hitsound = -1
+guardsound = S1,9
+ground.type = High
+ground.slidetime = 5
+ground.hittime = 45
+ground.velocity = -6,-4
+air.velocity = -6,-4
+air.type = High
+air.hittime = 12
+Fall = 1
+Fall.Recover = 0
+EnvShake.Time = 8
+EnvShake.Ampl = -6
+
+[State 1400, one-minute mode: unavoidable copy of the HitDef above]
+type=HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1= !movecontact
+attr = ,SA
+damage = enemy,lifemax / 28, enemy,lifemax / 56
+animtype = Heavy
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3,Hit
 pausetime = 12,12
 sparkno = -1
@@ -10495,6 +11492,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
+[State 1400, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -10603,6 +11608,7 @@ sprpriority = 2
 
 [State 1500]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !time
 attr = SCA, ST			
 damage=0,0		
@@ -10629,11 +11635,48 @@ numhits = 0
 p1stateno = 1501
 p2stateno = 6525
 
+[State 1500, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !time
+attr = , ST			
+damage=0,0		
+animtype = Heavy			
+;guardflag = 			   ; removed: can't be blocked
+hitflag = MAFD
+priority = 7, Hit			
+pausetime = 0, 0			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1,9	
+guardsound = -1			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 12
+ground.velocity =  0, 0
+airguard.velocity =  0, 0
+air.type = High 		
+air.velocity = 0, 0
+air.hittime = 12
+fall.recover = 0
+getpower = 0,0
+numhits = 0
+p1stateno = 1501
+p2stateno = 6525
+
 [State 1500]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1500, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -10943,6 +11986,7 @@ time = 3
 
 [State 1501]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact
 attr = A, SP
 animtype  = Hard
@@ -10965,11 +12009,44 @@ Fall.recover = 0
 Getpower = 0,0
 p2stateno = 6530
 
+[State 1501, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact
+attr = , SP
+animtype  = Hard
+damage = enemy,lifemax / 18, enemy,lifemax / 36
+hitflag = MAFD
+;guardflag = MA   ; removed: can't be blocked
+pausetime = 0,0
+sparkno = -1
+guard.sparkno = -1
+hitsound   = -1
+guardsound = S4,1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -12,-9
+air.velocity = -12,-9
+air.hittime  = 15
+Fall = 1
+Fall.recover = 0
+Getpower = 0,0
+p2stateno = 6530
+
 [State 1501]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 50
 ctrl = 1
+
+[State 1501, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -11304,12 +12381,40 @@ x = 20
 
 [State 1601]
 type=HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1= !movecontact
 attr = S,SA
 damage = enemy,lifemax / 14, enemy,lifemax / 28
 animtype = Heavy
 guardflag = MA
 Hitflag = MAFD
+priority = 3,Hit
+pausetime = 15,15
+sparkno = -1
+guard.sparkno = -1
+hitsound = S1, 31
+guardsound = S5, 10
+ground.type = High
+ground.slidetime = 5
+ground.hittime = 45
+ground.velocity = -8,-5
+air.velocity = -8,-5
+air.type = High
+air.hittime = 12
+Fall = 1
+Fall.Recover = 0
+EnvShake.Time = 15
+EnvShake.Ampl = -15
+
+[State 1601, one-minute mode: unavoidable copy of the HitDef above]
+type=HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1= !movecontact
+attr = ,SA
+damage = enemy,lifemax / 14, enemy,lifemax / 28
+animtype = Heavy
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3,Hit
 pausetime = 15,15
 sparkno = -1
@@ -11376,6 +12481,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1601, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -11580,12 +12693,40 @@ x = 30
 
 [State 1602]
 type=HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1= !movecontact
 attr = S,SA
 damage = enemy,lifemax / 9, enemy,lifemax / 18
 animtype = Heavy
 guardflag =
 Hitflag = MAFD
+priority = 3,Hit
+pausetime = 20,20
+sparkno = -1
+guard.sparkno = -1
+hitsound = S1, 31
+guardsound = S5, 10
+ground.type = High
+ground.slidetime = 5
+ground.hittime = 45
+ground.velocity = -8,-5
+air.velocity = -8,-5
+air.type = High
+air.hittime = 12
+Fall = 1
+Fall.Recover = 0
+EnvShake.Time = 15
+EnvShake.Ampl = -15
+
+[State 1602, one-minute mode: unavoidable copy of the HitDef above]
+type=HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1= !movecontact
+attr = ,SA
+damage = enemy,lifemax / 9, enemy,lifemax / 18
+animtype = Heavy
+;guardflag =   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3,Hit
 pausetime = 20,20
 sparkno = -1
@@ -11660,6 +12801,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1602, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -11932,6 +13081,7 @@ id = 7701
 
 [State 1700]
 type=HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1= !movecontact
 attr = S,SA
 damage = enemy,lifemax / 14, enemy,lifemax / 28
@@ -11958,9 +13108,38 @@ EnvShake.Ampl = -10
 p1stateno = 1701
 p2stateno = 6700
 
+[State 1700, one-minute mode: unavoidable copy of the HitDef above]
+type=HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1= !movecontact
+attr = ,SA
+damage = enemy,lifemax / 14, enemy,lifemax / 28
+animtype = Heavy
+;guardflag =    ; removed: can't be blocked
+hitflag = MAFD
+priority = 3,Hit
+pausetime = 0,15
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1
+guardsound = S5, 10
+ground.type = High
+ground.slidetime = 5
+ground.hittime = 45
+ground.velocity = 0, -9
+air.velocity = 0, -9
+air.type = High
+air.hittime = 12
+Fall = 1
+Fall.Recover = 0
+EnvShake.Time = 8
+EnvShake.Ampl = -10
+p1stateno = 1701
+p2stateno = 6700
+
 [State 1700]
 type = ChangeAnim
-trigger1 = anim = 1700 && animelem!=7 && movehit
+trigger1 = anim % 20000 = 1700 && animelem!=7 && movehit
 value = 1700
 elem = 7
 ignorehitpause = 1
@@ -12007,6 +13186,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1700, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -12145,12 +13332,38 @@ id = 7701
 
 [State 1701]
 type=HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1= time = 31
 attr = S,SA
 damage = enemy,lifemax / 14, enemy,lifemax / 28
 animtype = Heavy
 guardflag = MA
 Hitflag = MAFD
+priority = 3,Hit
+pausetime = 5,15
+sparkno = -1
+guard.sparkno = -1
+hitsound = -1;S1, 8
+guardsound = S5, 10
+ground.type = High
+ground.slidetime = 0
+ground.hittime = 45
+ground.velocity = 0,-9
+air.velocity = 0,-9
+air.type = High
+air.hittime = 12
+Fall = 1
+Fall.Recover = 0
+
+[State 1701, one-minute mode: unavoidable copy of the HitDef above]
+type=HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1= time = 31
+attr = ,SA
+damage = enemy,lifemax / 14, enemy,lifemax / 28
+animtype = Heavy
+;guardflag = MA   ; removed: can't be blocked
+hitflag = MAFD
 priority = 3,Hit
 pausetime = 5,15
 sparkno = -1
@@ -12216,6 +13429,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1701, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -12897,6 +14118,7 @@ sprpriority = 2
 
 [State 1800]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !time
 attr = SCA, ST			
 damage=0,0		
@@ -12923,11 +14145,48 @@ numhits = 0
 p1stateno = 1801
 p2stateno = 6800
 
+[State 1800, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !time
+attr = , ST			
+damage=0,0		
+animtype = Heavy			
+;guardflag = 			   ; removed: can't be blocked
+hitflag = MAFD
+priority = 7, Hit			
+pausetime = 0, 0			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1,9	
+guardsound = -1			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 12
+ground.velocity =  0, 0
+airguard.velocity =  0, 0
+air.type = High 		
+air.velocity = 0, 0
+air.hittime = 12
+fall.recover = 0
+getpower = 0,0
+numhits = 0
+p1stateno = 1801
+p2stateno = 6800
+
 [State 1800]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1800, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -13334,12 +14593,38 @@ y = 0
 
 [State 1801]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact
 attr = A, SP
 animtype  = Hard
 damage = enemy,lifemax / 18, enemy,lifemax / 36
 Hitflag = MAFD
 guardflag = MA
+pausetime = 0,0
+sparkno = -1
+guard.sparkno = -1
+hitsound   = -1
+guardsound = S4,1
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -12,-9
+air.velocity = -12,-9
+air.hittime  = 15
+Fall = 1
+Fall.recover = 0
+Getpower = 0,0
+p2stateno = 6530
+
+[State 1801, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact
+attr = , SP
+animtype  = Hard
+damage = enemy,lifemax / 18, enemy,lifemax / 36
+hitflag = MAFD
+;guardflag = MA   ; removed: can't be blocked
 pausetime = 0,0
 sparkno = -1
 guard.sparkno = -1
@@ -13365,6 +14650,14 @@ type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
+
+[State 1801, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -13546,12 +14839,47 @@ removeongethit = 0
 
 [State 2000]
 type = HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact
 attr = A, NP			
 damage = enemy,lifemax / 95, enemy,lifemax / 200
 animtype = Medium			
 guardflag =			
 hitflag = MAF		
+priority = 7, Hit			
+pausetime = 0, 45			
+sparkno = -1	
+guard.sparkno = -1			
+hitsound = S1, 8			
+guardsound = S5, 10			
+ground.type = High		
+ground.slidetime = 5		
+ground.hittime  = 15
+ground.velocity = -2, 0
+airguard.velocity = -2,-2
+air.type = High 		
+air.velocity = -1.4,-3
+air.hittime = 12
+fall = 0
+fall.recover = 0
+getpower = 0,0
+PalFX.time = 30
+PalFX.add = -200,-200,-200
+PalFX.mul = 256,256,256
+PalFX.sinadd = 50,50,50,50
+PalFX.invertall = 0
+PalFX.color = 256
+Envshake.time=5
+
+[State 2000, one-minute mode: unavoidable copy of the HitDef above]
+type = HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact
+attr = , NP			
+damage = enemy,lifemax / 95, enemy,lifemax / 200
+animtype = Medium			
+;guardflag =			   ; removed: can't be blocked
+hitflag = MAFD
 priority = 7, Hit			
 pausetime = 0, 45			
 sparkno = -1	
@@ -13596,6 +14924,14 @@ trigger1 = !time && facing = facing && (root, p2bodydist X < 60) && enemynear, b
 [State 2000]
 type = DestroySelf
 trigger1 = animtime = 0 || movetype=H
+
+[State 2000, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
@@ -13881,6 +15217,7 @@ x = 3
 
 [State 3000]
 type=HitDef
+triggerall = !cond(IsHelper, (root,var(55)), var(55))
 trigger1 = !movecontact
 attr = SCA, HA
 damage = enemy,lifemax / 14, enemy,lifemax / 28
@@ -13907,9 +15244,38 @@ EnvShake.Ampl= -8
 p1stateno = 3001
 p2stateno = 6900
 
+[State 3000, one-minute mode: unavoidable copy of the HitDef above]
+type=HitDef
+triggerall = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = !movecontact
+attr = , HA
+damage = enemy,lifemax / 14, enemy,lifemax / 28
+animtype = Heavy
+;guardflag =    ; removed: can't be blocked
+hitflag = MAFD
+priority = 3,Hit
+pausetime = 30,0
+sparkno = -1
+guard.sparkno = -1
+hitsound = s1,30
+guardsound = S5, 10
+ground.type = High
+ground.slidetime = 5
+ground.hittime = 100
+ground.velocity = -9, -3
+air.velocity = -9, -3
+air.type = High
+air.hittime = 12
+Fall = 0
+Fall.Recover = 0
+EnvShake.Time= 15
+EnvShake.Ampl= -8
+p1stateno = 3001
+p2stateno = 6900
+
 [State 3000]
 type = ChangeAnim
-trigger1 = anim = 1700 && animelem!=7 && movehit
+trigger1 = anim % 20000 = 1700 && animelem!=7 && movehit
 value = 1700
 elem = 7
 ignorehitpause = 1
@@ -14017,6 +15383,14 @@ type = ChangeState
 trigger1 = time > 90
 value = 0
 ctrl = 1
+
+[State 3000, one-minute mode: full-screen attack boxes]
+type = ChangeAnim
+trigger1 = cond(IsHelper, (root,var(55)), var(55))
+trigger1 = Anim >= 0 && Anim < 20000 && SelfAnimExist(Anim + 20000)
+value = Anim + 20000
+elem = AnimElemNo(0)
+ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 
