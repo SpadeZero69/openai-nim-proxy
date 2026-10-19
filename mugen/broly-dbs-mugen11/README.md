@@ -26,12 +26,21 @@ it already gave (`var(54)`), so the extra levels from state 1200 stay.
 
 - Damage: `AttackMulSet` = `fvar(19)` (Statedef -2, and in the helper
   states that make attacks).
-- Durability: `DefenceMulSet` = `fvar(19)` (damage taken divided by it),
-  and the armor helper 60001 absorbs `fvar(19)` hits before he flinches.
-- Regeneration (added): Statedef -2 adds `2 * var(52) * LifeMax / 60000`
+- Durability: `DefenceMulSet` = `2 * fvar(19)` (damage taken divided by
+  it; it was `fvar(19)`, so durability now grows twice as fast).
+- Hyper armor: while the armor helper 60001 holds, Broly is NotHitBy and
+  the invisible helper, which copies his animation and so his hurt boxes,
+  takes the hits through a HitOverride. Each hit adds 1 to `var(13)` and
+  passes `damage / (2 * fvar(19))` to Broly as a LifeAdd, which his
+  DefenceMulSet divides again. The armor breaks when `var(13)` passes
+  `2 * fvar(19)` (it was `fvar(19)`), so it holds 2 more hits per level;
+  `var(13)` goes back to 0 after the hit that breaks it.
+- Regeneration (added): Statedef -2 adds `4 * var(52) * LifeMax / 60000`
   life per tick to an accumulator (`fvar(38)`) during `RoundState = 2`
-  and heals the whole part, so he heals level x 0.2% of his max life per
-  second (12.2% at one minute). The 2 is the tuning value.
+  and heals the whole part, so he heals level x 0.4% of his max life per
+  second (24.4% at one minute). The 4 is the tuning value (it was 2).
+  MUGEN 1.1 has no controller that raises the maximum life during a
+  match, so his life bar keeps its size.
 
 ## One-minute mode
 
@@ -118,8 +127,8 @@ helper (2000) had no multiplier (it gets `parent,fvar(19)`).
   stays at 30.
 - `Broly (DBS) - Move List (MUGEN 1.1).txt`: move list for PC keyboard
   players (buttons, chains, specials, costs, the scaling table).
-- Regeneration, damage-scaling fixes, the faster level and the one-minute
-  mode (see above).
+- Regeneration, damage-scaling fixes, the faster level, the doubled
+  durability and armor, and the one-minute mode (see above).
 
 Unchanged: the button layout (it already uses all seven MUGEN buttons),
 sprites, sounds, palettes and the AI apart from the 15800 fix and the

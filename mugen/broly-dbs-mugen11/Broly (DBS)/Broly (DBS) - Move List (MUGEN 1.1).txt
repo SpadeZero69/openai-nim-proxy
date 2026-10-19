@@ -159,25 +159,29 @@
  starting at 1, so it is 61 after one minute. It never stops and it
  carries over from round to round. With every level:
    - Damage: his attacks hit harder (x level).
-   - Durability: he takes less damage (damage divided by the level), and
-     his armor absorbs one more hit before he flinches.
-   - Regeneration: he heals faster, by 0.2% of his max life per second
+   - Durability: he takes less damage (damage divided by twice the
+     level).
+   - Hyper armor: while it holds, hits don't make him flinch and do
+     almost no damage. It holds two more hits for every level, so it
+     gets stronger every second.
+   - Regeneration: he heals faster, by 0.4% of his max life per second
      for each level. He heals all the time during a round.
  While he is transformed, damage, durability and armor are 8 times
  higher still (regeneration stays the same).
 
    Fighting time  Level   Damage   Damage taken   Armor hits   Healing
-   start             1      x1      full             1        0.2% a second
-   30 seconds       31      x31     1/31            31        6.2% a second
-   1 minute         61      x61     1/61            61       12.2% a second
-   2 minutes       121      x121    1/121          121       24.2% a second
-   5 minutes       301      x301    1/301          301       60.2% a second
+   start             1      x1      1/2              2        0.4% a second
+   30 seconds       31      x31     1/62            62       12.4% a second
+   1 minute         61      x61     1/122          122       24.4% a second
+   2 minutes       121      x121    1/242          242       48.4% a second
+   5 minutes       301      x301    1/602          602      120.4% a second
 
  His attacks also take away a share of the opponent's maximum life, so
  they hurt every opponent the same. When the computer controls him, he
  doesn't block while the armor is up.
- Original "infinite scaling" edit by coldskin1; the regeneration and the
- faster level were added in this version.
+ Original "infinite scaling" edit by coldskin1; the regeneration, the
+ faster level and the doubled durability and armor were added in this
+ version.
 
 --------------------------------------------------------------------------
  AFTER ONE MINUTE: NOTHING STOPS HIS ATTACKS

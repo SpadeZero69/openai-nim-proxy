@@ -18034,7 +18034,7 @@ ignorehitpause=1
 
 [State 6000, NotHitBy]
 type = NotHitBy
-trigger1 = parent, var(13)>parent,fvar(19)&&parent,var(52)
+trigger1 = parent, var(13)>2*(parent,fvar(19))&&parent,var(52)
 value = SCA
 ignorehitpause = 1
 
@@ -18069,9 +18069,9 @@ var(13)=1
 ignorehitpause=1
 [State 6005, PVS]
 type = ParentVarSet
-triggerall=parent, var(13)<=parent,fvar(19)&&parent,var(52)
+triggerall=parent, var(13)<=2*(parent,fvar(19))&&parent,var(52)
 trigger1=1
-var(42)=floor(GetHitVar(damage)/(parent,fvar(19)))
+var(42)=floor(GetHitVar(damage)/(2*(parent,fvar(19))))
 ignorehitpause=1
 
 [State 6005, Change]

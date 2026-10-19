@@ -678,7 +678,7 @@ trigger2 = AIlevel && random < (AIlevel * 100)/2 && p2bodydist X >= 80 && cond(n
 type = NotHitBy
 triggerall=(stateno!=[120,155])
 triggerall=stateno!=[5000,5150]
-triggerall=movetype!=H&&var(13)<fvar(19)&&var(52)
+triggerall=movetype!=H&&var(13)<2*fvar(19)&&var(52)
 trigger1 = var(52)
 trigger1=time
 value=  SCA,AA,NA,SA,HA,AP,NP,SP,HP,AT,NT,ST,HT
@@ -688,7 +688,7 @@ IgnoreHitPause = 1
 [State 0, AssertSpecial]
 type = AssertSpecial
 trigger1 = ailevel
-trigger1 = var(13)<fvar(19)&&var(52)
+trigger1 = var(13)<2*fvar(19)&&var(52)
 trigger1 = var(52)
 flag = nostandguard
 flag2 = noairguard
@@ -716,7 +716,7 @@ var(13)=0
 [State -2, VarSet]
 type=VarSet
 trigger1=var(42)
-trigger2=var(13)=fvar(19)&&var(52)
+trigger2=var(13)=2*fvar(19)&&var(52)
 var(6)=0
 
 [State -2, juggle]
@@ -747,13 +747,16 @@ trigger1 = movetype = H
 flag = noko
 ignorehitpause = 1
 
+; DURABILITY (changed): damage taken is divided by 2 * fvar(19) (twice the
+; scaling multiplier), and the armor helper 60001 holds 2 * fvar(19) hits
+; before it breaks, so both grow twice as fast as the level.
 [State 0, DefenceMulSet]
 type = DefenceMulSet
 trigger1 = fvar(19)
 onhit = 0
 multype = 1
 ignorehitpause = 1
-value = fvar(19)
+value = 2 * fvar(19)
 
 
 ;---------------------------------------------------------------------------
@@ -836,17 +839,17 @@ ignorehitpause = 1
 ;---------------------------------------------------------------------------
 ; REGENERATION (added). Broly heals all the time during a round, faster the
 ; longer the match goes on, with no limit. It uses the scaling level var(52)
-; (+1 every second of the match, kept between rounds): per second he heals
-; level x 2/1000 of his max life, so 0.2% at the start, 12.2% at one
-; minute, 24.2% at two minutes, and so on.
-; To change the speed, change the 2 at the start of "value" below
+; (+1 every second of fighting, kept between rounds): per second he heals
+; level x 4/1000 of his max life, so 0.4% at the start, 24.4% at one
+; minute, 48.4% at two minutes, and so on.
+; To change the speed, change the 4 at the start of "value" below
 ; (bigger = faster, 0 = no regeneration).
 [State -2, Regeneration: build up]
 type = VarAdd
 trigger1 = !IsHelper
 trigger1 = (RoundState = 2) && Alive && (Life < LifeMax)
 fv = 38
-value = 2 * var(52) * (LifeMax / 60000.0)
+value = 4 * var(52) * (LifeMax / 60000.0)
 ignorehitpause = 1
 
 [State -2, Regeneration: heal]
